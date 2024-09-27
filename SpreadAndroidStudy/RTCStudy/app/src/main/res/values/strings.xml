@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">RTCStudy</string>
+    <string name="hello_rtc">Hello RTC</string>
+    <string name="hello_world">Hello World</string>
+</resources>

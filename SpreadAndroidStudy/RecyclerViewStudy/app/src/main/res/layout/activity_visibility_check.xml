@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".itemactivity.VisibilityCheckActivity">
+
+    <com.spread.common.visible.CalTextView
+        android:id="@+id/visi_1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="top|start"
+        android:text="View 1"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:textColor="@color/black"
+        android:background="@color/yellow" />
+
+    <com.spread.common.visible.CalTextView
+        android:id="@+id/visi_2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="top|end"
+        android:text="View 2"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:textColor="@color/black"
+        android:background="@color/yellow" />
+
+    <com.spread.common.visible.CalTextView
+        android:id="@+id/visi_3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:text="View 3"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:textColor="@color/black"
+        android:background="@color/yellow" />
+
+    <com.spread.common.visible.CalTextView
+        android:id="@+id/visi_4"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="bottom|start"
+        android:text="View 4"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:textColor="@color/black"
+        android:background="@color/yellow" />
+
+    <com.spread.common.visible.CalTextView
+        android:id="@+id/visi_5"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="bottom|end"
+        android:text="View 5"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:textColor="@color/black"
+        android:background="@color/yellow" />
+
+
+</FrameLayout>

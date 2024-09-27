@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@drawable/fresco_icon"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.FrescoDisplayDemo"
+        tools:targetApi="31">
+        <activity
+            android:name=".demos.GrayScaleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".demos.RetryAndFailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".demos.JPEGImgActivity"
+            android:exported="false" />
+        <activity
+            android:name=".demos.AutoSizeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".demos.ModifyImgActivity"
+            android:exported="false" />
+        <activity
+            android:name=".demos.BlurAndRotateActivity"
+            android:exported="false" /> <!-- <provider -->
+        <!-- android:authorities="com.example.frescodisplaydemo.fileprovider" -->
+        <!-- android:name="androidx.core.content.FileProvider" -->
+        <!-- android:grantUriPermissions="true" -->
+        <!-- android:exported="false" -->
+        <!-- > -->
+        <!-- <meta-data -->
+        <!-- android:name="android.support.FILE_PROVIDER_PATHS" -->
+        <!-- > -->
+        <!-- </meta-data> -->
+        <!-- </provider> -->
+        <activity
+            android:name=".demos.MultiAndMultiPlexImgActivity"
+            android:exported="false" />
+        <activity
+            android:name=".demos.GifActivity"
+            android:exported="false" />
+        <activity
+            android:name=".demos.MultipleScaleTypeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".demos.CircleAndCornerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".demos.ShowProgressBarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

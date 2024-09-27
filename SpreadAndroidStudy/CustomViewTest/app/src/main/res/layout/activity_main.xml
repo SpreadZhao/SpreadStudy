@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/simple_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Simple views" />
+
+    <Button
+        android:id="@+id/trouble_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Trouble Views" />
+
+    <Button
+        android:id="@+id/view_pager_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ViewPager" />
+
+    <Button
+        android:id="@+id/view_pager2_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ViewPager2" />
+
+    <Button
+        android:id="@+id/pager_snap_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PagerSnap" />
+
+    <Button
+        android:id="@+id/hook_do_frame_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hook DoFrame" />
+
+    <Button
+        android:id="@+id/gesture_layout_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gesture" />
+</LinearLayout>
