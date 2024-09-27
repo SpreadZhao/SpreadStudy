@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">NativeStudy</string>
+    <string name="simple_class_name">Simple Class Name</string>
+    <string name="simple_timer">Simple Timer</string>
+    <string name="main_drawer_open">open</string>
+    <string name="main_drawer_close">close</string>
+    <string name="arm_neon">Oboe</string>
+</resources>

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">CardEmulatorStudy</string>
+    <string name="servicedesc">description of service</string>
+    <string name="aiddescription">description of aid-group</string>
+</resources>
