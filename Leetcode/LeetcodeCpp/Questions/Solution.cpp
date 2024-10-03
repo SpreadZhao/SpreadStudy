@@ -4,6 +4,7 @@
 #include "Solution.h"
 
 #include <cstring>
+#include <limits.h>
 #include <set>
 
 #include "../Util/UnionFind.h"
@@ -37,21 +38,21 @@ string Solution::addBinary(string a, string b) {
         res.insert(res.begin(), 1);
     }
     stringstream ss;
-    for (int re : res) {
+    for (int re: res) {
         ss << re;
     }
     return ss.str();
 }
 
-vector<vector<string>> Solution::accountsMerge(vector<vector<string>>& accounts) {
+vector<vector<string> > Solution::accountsMerge(vector<vector<string> > &accounts) {
     map<string, int> emailToIndex;
     map<string, string> emailToName;
     int emailsCount = 0;
-    for (auto& account : accounts) {
-        string& name = account[0];
+    for (auto &account: accounts) {
+        string &name = account[0];
         int size = account.size();
         for (int i = 1; i < size; i++) {
-            string& email = account[i];
+            string &email = account[i];
             if (!emailToIndex.count(email)) {
                 emailToIndex[email] = emailsCount++;
                 emailToName[email] = name;
@@ -59,30 +60,30 @@ vector<vector<string>> Solution::accountsMerge(vector<vector<string>>& accounts)
         }
     }
     UnionFind uf(emailsCount);
-    for (auto& account : accounts) {
-        string& firstEmail = account[1];
+    for (auto &account: accounts) {
+        string &firstEmail = account[1];
         int firstIndex = emailToIndex[firstEmail];
         int size = account.size();
         for (int i = 2; i < size; i++) {
-            string& nextEmail = account[i];
+            string &nextEmail = account[i];
             int nextIndex = emailToIndex[nextEmail];
             uf.unionSet(firstIndex, nextIndex);
         }
     }
-    map<int, vector<string>> indexToEmails;
-    for (auto& [email, _] : emailToIndex) {
+    map<int, vector<string> > indexToEmails;
+    for (auto &[email, _]: emailToIndex) {
         int index = uf.find(emailToIndex[email]);
-        vector<string>& account = indexToEmails[index];
+        vector<string> &account = indexToEmails[index];
         account.emplace_back(email);
         indexToEmails[index] = account;
     }
-    vector<vector<string>> merged;
-    for (auto& [_, emails] : indexToEmails) {
+    vector<vector<string> > merged;
+    for (auto &[_, emails]: indexToEmails) {
         sort(emails.begin(), emails.end());
-        string& name = emailToName[emails[0]];
+        string &name = emailToName[emails[0]];
         vector<string> account;
         account.emplace_back(name);
-        for (auto& email : emails) {
+        for (auto &email: emails) {
             account.emplace_back(email);
         }
         merged.emplace_back(account);
@@ -187,7 +188,7 @@ bool Solution::canPlaceFlowers2(vector<int> &flowerbed, int n) {
     return flowerCount >= n;
 }
 
-int Solution::makeConnected(int n, vector<vector<int>>& connections) {
+int Solution::makeConnected(int n, vector<vector<int> > &connections) {
     if (connections.size() < n - 1) {
         return -1;
     }
@@ -195,7 +196,7 @@ int Solution::makeConnected(int n, vector<vector<int>>& connections) {
     return response.islandNum - 1;
 }
 
-int Solution::maxArea(vector<int>& height) {
+int Solution::maxArea(vector<int> &height) {
     int i = 0, j = height.size() - 1;
     int maxVolume = 0;
     while (i < j) {
@@ -217,37 +218,37 @@ bool contains(vector<int> &nums, int target) {
     return res != nums.end();
 }
 
-vector<vector<int>> Solution::findDifference(vector<int>& nums1, vector<int>& nums2) {
+vector<vector<int> > Solution::findDifference(vector<int> &nums1, vector<int> &nums2) {
     vector<int> list1;
     vector<int> list2;
-    for (auto num : nums1) {
+    for (auto num: nums1) {
         if (!contains(nums2, num) && !contains(list1, num)) {
             list1.emplace_back(num);
         }
     }
-    for (auto num : nums2) {
+    for (auto num: nums2) {
         if (!contains(nums1, num) && !contains(list2, num)) {
             list2.emplace_back(num);
         }
     }
-    return vector<vector<int>> {list1, list2};
+    return vector<vector<int> >{list1, list2};
 }
 
-vector<vector<int>> Solution::findDifference2(vector<int>& nums1, vector<int>& nums2) {
+vector<vector<int> > Solution::findDifference2(vector<int> &nums1, vector<int> &nums2) {
     unordered_set<int> set1, set2;
-    for (int num : nums1) {
+    for (int num: nums1) {
         set1.insert(num);
     }
-    for (int num : nums2) {
+    for (int num: nums2) {
         set2.insert(num);
     }
-    vector<vector<int>> res(2);
-    for (int num : set1) {
+    vector<vector<int> > res(2);
+    for (int num: set1) {
         if (!set2.count(num)) {
             res[0].push_back(num);
         }
     }
-    for (int num : set2) {
+    for (int num: set2) {
         if (!set1.count(num)) {
             res[1].push_back(num);
         }
@@ -275,18 +276,19 @@ int Solution::numWays(vector<string> &words, string target) {
     memset(columnToCount, 0, sizeof(columnToCount));
     // iterator over the columns, calculating the count of every character.
     for (int j = 0; j < k; ++j) {
-        for (auto str : words) {
+        for (auto str: words) {
             columnToCount[str[j] - 'a'][j]++;
         }
     }
     // CommonUtil::printMetric(&columnToCount[0][0], ALPHABET, k);
     const size_t m = target.size();
-    vector<vector<int>> dp(m + 1, vector<int>(k + 1, 0));
+    vector<vector<int> > dp(m + 1, vector<int>(k + 1, 0));
     dp[0][0] = 1;
     for (int i = 0; i <= m; i++) {
         for (int j = 0; j < k; j++) {
             if (i < m) {
-                dp[i + 1][j + 1] += static_cast<int>(static_cast<long>(columnToCount[target[i] - 'a'][j]) * dp[i][j] % MOD);
+                dp[i + 1][j + 1] += static_cast<int>(
+                    static_cast<long>(columnToCount[target[i] - 'a'][j]) * dp[i][j] % MOD);
             }
             dp[i][j + 1] += dp[i][j] % MOD;
         }
@@ -299,7 +301,7 @@ vector<bool> Solution::kidsWithCandies(vector<int> &candies, int extraCandies) {
     vector<bool> res;
     if (maxCandies != candies.end()) {
         const int maxCandiesCount = *maxCandies;
-        for (const auto candie : candies) {
+        for (const auto candie: candies) {
             res.emplace_back(candie + extraCandies > maxCandiesCount);
         }
     }
@@ -315,7 +317,7 @@ int Solution::lengthOfLIS(vector<int> &nums) {
     for (int i = 1; i < size; i++) {
         dp[i] = 1;
         for (int j = 0; j < i; j++) {
-            if(nums[i] > nums[j]) {
+            if (nums[i] > nums[j]) {
                 dp[i] = std::max(dp[i], dp[j] + 1);
             }
         }
@@ -325,8 +327,8 @@ int Solution::lengthOfLIS(vector<int> &nums) {
 }
 
 static const vector<string> digitsToLetters = {
-    "",         // 0
-    "",         // 1
+    "", // 0
+    "", // 1
     "abc",
     "def",
     "ghi",
@@ -334,7 +336,7 @@ static const vector<string> digitsToLetters = {
     "mno",
     "pqrs",
     "tuv",
-    "wxyz"      // 9
+    "wxyz" // 9
 };
 
 void putCh(vector<string> &res, string digits, string letters, int digitIndex) {
@@ -342,7 +344,7 @@ void putCh(vector<string> &res, string digits, string letters, int digitIndex) {
         res.emplace_back(letters);
         return;
     }
-    for (auto ch : digitsToLetters[digits[digitIndex] - '0']) {
+    for (auto ch: digitsToLetters[digits[digitIndex] - '0']) {
         putCh(res, digits, letters + ch, digitIndex + 1);
     }
 }
@@ -356,12 +358,12 @@ vector<string> Solution::letterCombinations(string digits) {
     return letters;
 }
 
-vector<vector<int>> Solution::levelOrder(TreeNode *root) {
-    vector<vector<int>> res;
+vector<vector<int> > Solution::levelOrder(TreeNode *root) {
+    vector<vector<int> > res;
     if (root == nullptr) {
         return res;
     }
-    queue<TreeNode*> nodes;
+    queue<TreeNode *> nodes;
     nodes.push(root);
     while (!nodes.empty()) {
         int currLevelSize = nodes.size();
@@ -377,7 +379,7 @@ vector<vector<int>> Solution::levelOrder(TreeNode *root) {
     return res;
 }
 
-ListNode * Solution::getIntersectionNode(ListNode *headA, ListNode *headB) {
+ListNode *Solution::getIntersectionNode(ListNode *headA, ListNode *headB) {
     if (headA == nullptr || headB == nullptr) {
         return nullptr;
     }
@@ -402,7 +404,7 @@ ListNode * Solution::getIntersectionNode(ListNode *headA, ListNode *headB) {
     return p1;
 }
 
-ListNode * Solution::getIntersectionNode2(ListNode *headA, ListNode *headB) {
+ListNode *Solution::getIntersectionNode2(ListNode *headA, ListNode *headB) {
     if (headA == nullptr || headB == nullptr) {
         return nullptr;
     }
@@ -496,7 +498,7 @@ int Solution::lengthOfLongestSubstring(string s) {
         return 2;
     }
     int i = 0, j = 1, temp = 1, res = 1;
-    map<char, bool>showed;
+    map<char, bool> showed;
     showed[s[0]] = true;
     while (j < s.size()) {
         if (showed[s[j]]) {
@@ -520,7 +522,7 @@ int Solution::lengthOfLongestSubstring(string s) {
 }
 
 int Solution::lengthOfLongestSubstring2(string s) {
-    map<char, int>showAt;
+    map<char, int> showAt;
     int i = 0, j = 0, res = 0;
     while (j < s.size()) {
         char ch = s[j];
@@ -534,10 +536,10 @@ int Solution::lengthOfLongestSubstring2(string s) {
     return res;
 }
 
-TreeNode * Solution::lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode *q) {
+TreeNode *Solution::lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode *q) {
     TreeNode *curr = root;
     int target = p->val;
-    set<TreeNode *>route;
+    set<TreeNode *> route;
     while (curr->val != target) {
         route.insert(curr);
         if (curr->val < target) {
@@ -567,7 +569,7 @@ TreeNode * Solution::lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode 
     return prev;
 }
 
-TreeNode * Solution::lowestCommonAncestor2(TreeNode *root, TreeNode *p, TreeNode *q) {
+TreeNode *Solution::lowestCommonAncestor2(TreeNode *root, TreeNode *p, TreeNode *q) {
     TreeNode *curr = root;
     while (true) {
         if (curr->val < p->val && curr->val < q->val) {
@@ -597,7 +599,7 @@ int Solution::maxDepth2(TreeNode *root) {
     if (root == nullptr) {
         return 0;
     }
-    queue<TreeNode*> q;
+    queue<TreeNode *> q;
     q.push(root);
     int depth = 0;
     while (!q.empty()) {
@@ -617,5 +619,40 @@ int Solution::maxDepth2(TreeNode *root) {
     return depth;
 }
 
+int Solution::minimizeArrayValueError(vector<int> &nums) {
+    int minMax = nums[0];
+    for (int i = 1; i < nums.size(); i++) {
+        if (nums[i] > minMax) {
+            int sum = nums[i] + nums[i - 1];
+            if (sum % 2 == 0) {
+                nums[i - 1] = sum / 2;
+                nums[i] = sum / 2;
+            } else {
+                nums[i - 1] = sum / 2;
+                nums[i] = sum / 2 + 1;
+            }
+            if (i == 1) {
+                minMax = nums[i];
+            } else if (nums[i] > minMax) {
+                minMax = nums[i];
+            }
+        }
+    }
+    return minMax;
+}
 
-
+int Solution::minimizeArrayValue(vector<int> &nums) {
+    long minMax = nums[0];
+    long sum = minMax;
+    for (int i = 1; i < nums.size(); i++) {
+        sum += nums[i];
+        long avg;
+        if (sum % (i + 1) == 0) {
+            avg = sum / (i + 1);
+        } else {
+            avg = sum / (i + 1) + 1;
+        }
+        minMax = max(minMax, avg);
+    }
+    return static_cast<int>(minMax);
+}

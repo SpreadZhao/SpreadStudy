@@ -157,6 +157,11 @@ void MaxDepth() {
     cout << Solution::maxDepth2(root) << endl;
 }
 
+void MinimizeMaximum() {
+    vector<int> nums = {3, 7, 1, 6};
+    cout << Solution::minimizeArrayValue(nums);
+}
+
 int main() {
     // AddBinary();
     //    AccountsMerge();
@@ -174,6 +179,7 @@ int main() {
     // LongestPalindromicSubstring();
     // LengthOfLongestSubstring();
     // LowestCommonAncestor();
-    MaxDepth();
+    // MaxDepth();
+    MinimizeMaximum();
     return 0;
 }

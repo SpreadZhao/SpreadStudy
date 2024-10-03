@@ -54,6 +54,9 @@ public:
     // https://leetcode.cn/problems/maximum-depth-of-binary-tree/description/
     static int maxDepth(TreeNode *root);
     static int maxDepth2(TreeNode *root);
+    // https://leetcode.cn/problems/minimize-maximum-of-array/description/
+    static int minimizeArrayValueError(vector<int> &nums);
+    static int minimizeArrayValue(vector<int> &nums);
 };
 
 #endif //LEETCODECPP_SOLUTION_H
