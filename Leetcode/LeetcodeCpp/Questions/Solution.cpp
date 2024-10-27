@@ -656,3 +656,33 @@ int Solution::minimizeArrayValue(vector<int> &nums) {
     }
     return static_cast<int>(minMax);
 }
+
+static void dfs_minScore(int &minDis, vector<bool> &visited, int curr, unordered_map<int, vector<pair<int, int>>> edgeMap) {
+    visited[curr - 1] = true;
+    for (auto neighbor : edgeMap[curr]) {
+        const auto other = neighbor.first;
+        const auto distance = neighbor.second;
+        if (distance < minDis) {
+            minDis = distance;
+        }
+        if (!visited[other - 1]) {
+            dfs_minScore(minDis, visited, other, edgeMap);
+        }
+    }
+}
+
+int Solution::minScore(int n, vector<vector<int> > &roads) {
+    // build map for edges
+    unordered_map<int, vector<pair<int, int>>> edgeMap;
+    for (auto road: roads) {
+        const int node1 = road[0];
+        const int node2 = road[1];
+        const int distance = road[2];
+        edgeMap[node1].emplace_back(node2, distance);
+        edgeMap[node2].emplace_back(node1, distance);
+    }
+    int minDistance = INT_MAX;
+    vector<bool> visited(n, false);
+    dfs_minScore(minDistance, visited, 1, edgeMap);
+    return minDistance;
+}

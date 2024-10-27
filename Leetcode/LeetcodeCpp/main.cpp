@@ -162,6 +162,17 @@ void MinimizeMaximum() {
     cout << Solution::minimizeArrayValue(nums);
 }
 
+void MinScore() {
+    vector<vector<int>> roads = {
+        {1, 2, 9},
+        {2, 3, 6},
+        {2, 4, 5},
+        {1, 4, 7}
+    };
+    int n = 4;
+    cout << Solution::minScore(n, roads);
+}
+
 int main() {
     // AddBinary();
     //    AccountsMerge();
@@ -180,6 +191,7 @@ int main() {
     // LengthOfLongestSubstring();
     // LowestCommonAncestor();
     // MaxDepth();
-    MinimizeMaximum();
+    // MinimizeMaximum();
+    MinScore();
     return 0;
 }
