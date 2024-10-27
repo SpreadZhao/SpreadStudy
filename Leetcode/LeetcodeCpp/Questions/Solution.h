@@ -57,6 +57,8 @@ public:
     // https://leetcode.cn/problems/minimize-maximum-of-array/description/
     static int minimizeArrayValueError(vector<int> &nums);
     static int minimizeArrayValue(vector<int> &nums);
+    // https://leetcode.cn/problems/minimum-score-of-a-path-between-two-cities/description/
+    static int minScore(int n, vector<vector<int>> &roads);
 };
 
 #endif //LEETCODECPP_SOLUTION_H
