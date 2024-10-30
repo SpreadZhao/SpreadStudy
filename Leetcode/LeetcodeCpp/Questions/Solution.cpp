@@ -686,3 +686,29 @@ int Solution::minScore(int n, vector<vector<int> > &roads) {
     dfs_minScore(minDistance, visited, 1, edgeMap);
     return minDistance;
 }
+
+int Solution::partitionString(string s) {
+    bool appear[26] = {};
+    int count = 0;
+    for (int i = 0; i < s.length(); i++) {
+        const char ch = s[i];
+        if (appear[ch - 'a']) {
+            count++;
+            memset(appear, 0, sizeof(appear));
+        }
+        appear[ch - 'a'] = true;
+    }
+    return ++count;
+}
+
+int Solution::partitionString2(string s) {
+    int count = 0, merge = 0;
+    for (const auto ch : s) {
+        if ((merge & (1 << ch - 'a')) != 0) {
+            count++;
+            merge = 0;
+        }
+        merge |= (1 << ch - 'a');
+    }
+    return ++count;
+}

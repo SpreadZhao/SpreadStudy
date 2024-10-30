@@ -59,6 +59,9 @@ public:
     static int minimizeArrayValue(vector<int> &nums);
     // https://leetcode.cn/problems/minimum-score-of-a-path-between-two-cities/description/
     static int minScore(int n, vector<vector<int>> &roads);
+    // https://leetcode.cn/problems/optimal-partition-of-string/description/
+    static int partitionString(string s);
+    static int partitionString2(string s);
 };
 
 #endif //LEETCODECPP_SOLUTION_H
