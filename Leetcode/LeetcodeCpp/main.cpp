@@ -173,6 +173,12 @@ void MinScore() {
     cout << Solution::minScore(n, roads);
 }
 
+void PartitionString() {
+    string s = "abacaba";
+    string s2 = "ssssss";
+    cout << Solution::partitionString2(s2);
+}
+
 int main() {
     // AddBinary();
     //    AccountsMerge();
@@ -192,6 +198,7 @@ int main() {
     // LowestCommonAncestor();
     // MaxDepth();
     // MinimizeMaximum();
-    MinScore();
+    // MinScore();
+    PartitionString();
     return 0;
 }
