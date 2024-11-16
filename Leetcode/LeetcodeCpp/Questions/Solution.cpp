@@ -712,3 +712,42 @@ int Solution::partitionString2(string s) {
     }
     return ++count;
 }
+
+bool Solution::isPalindrome(int x) {
+    if (x < 0) {
+        return false;
+    }
+    if (x == 0) {
+        return true;
+    }
+    string s = to_string(x);
+    int i = 0, j = s.length() - 1;
+    while (i <= j) {
+        if (i == j) {
+            return true;
+        }
+        if (s[i] != s[j]) {
+            return false;
+        }
+        i++;
+        j--;
+    }
+    return true;
+}
+
+bool Solution::isPalindrome2(int x) {
+    if (x < 0) {
+        return false;
+    }
+    if (x == 0) {
+        return true;
+    }
+    long y = 0;
+    int xx = x;
+    while (xx > 0) {
+        const int curr = xx % 10;
+        y = y * 10 + curr;
+        xx /= 10;
+    }
+    return y == x;
+}

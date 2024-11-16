@@ -62,6 +62,9 @@ public:
     // https://leetcode.cn/problems/optimal-partition-of-string/description/
     static int partitionString(string s);
     static int partitionString2(string s);
+    // https://leetcode.cn/problems/palindrome-number/description/
+    static bool isPalindrome(int x);
+    static bool isPalindrome2(int x);
 };
 
 #endif //LEETCODECPP_SOLUTION_H
