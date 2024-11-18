@@ -179,6 +179,18 @@ void PartitionString() {
     cout << Solution::partitionString2(s2);
 }
 
+void Permutation() {
+    vector<int> nums = {1, 2, 3};
+    vector<int> nums2 = {0, 1};
+    auto permutation = Solution::permute(nums);
+    CommonUtil::printMetric(permutation);
+}
+
+void Reverse() {
+    int num = 123;
+    cout << Solution::reverse(num) << endl;
+}
+
 int main() {
     // AddBinary();
     //    AccountsMerge();
@@ -199,6 +211,8 @@ int main() {
     // MaxDepth();
     // MinimizeMaximum();
     // MinScore();
-    PartitionString();
+    // PartitionString();
+    // Permutation();
+    Reverse();
     return 0;
 }

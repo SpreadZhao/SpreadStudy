@@ -65,6 +65,10 @@ public:
     // https://leetcode.cn/problems/palindrome-number/description/
     static bool isPalindrome(int x);
     static bool isPalindrome2(int x);
+    // https://leetcode.cn/problems/permutations/description/ance
+    static vector<vector<int>> permute(vector<int> &nums);
+    // https://leetcode.cn/problems/reverse-integer/description/
+    static int reverse(int x);
 };
 
 #endif //LEETCODECPP_SOLUTION_H

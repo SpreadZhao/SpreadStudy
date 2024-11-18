@@ -751,3 +751,42 @@ bool Solution::isPalindrome2(int x) {
     }
     return y == x;
 }
+
+void pickOne(vector<vector<int>> &result, vector<int> &curr, vector<int> &nums, int num) {
+    if (!contains(curr, num)) {
+        curr.push_back(num);
+    }
+    if (curr.size() == nums.size()) {
+        result.push_back(curr);
+        return;
+    }
+    for (auto n : nums) {
+        if (!contains(curr, n)) {
+            pickOne(result, curr, nums, n);
+        }
+    }
+}
+
+vector<vector<int>> Solution::permute(vector<int> &nums) {
+    vector<vector<int>> result;
+    vector<int> curr;
+    for (auto num : nums) {
+        pickOne(result, curr, nums, num);
+    }
+    return result;
+}
+
+int Solution::reverse(int x) {
+    int reversed = 0;
+    int xx = x;
+    constexpr int BOUNDARY_P = INT_MAX / 10;
+    constexpr int BOUNDARY_N = INT_MIN / 10;
+    while (xx != 0) {
+        const int curr = xx % 10;
+        if (reversed > BOUNDARY_P || reversed == BOUNDARY_P && curr > 7) return 0;
+        if (reversed < BOUNDARY_N || reversed == BOUNDARY_N && curr < -8) return 0;
+        reversed = reversed * 10 + curr;
+        xx /= 10;
+    }
+    return reversed;
+}
