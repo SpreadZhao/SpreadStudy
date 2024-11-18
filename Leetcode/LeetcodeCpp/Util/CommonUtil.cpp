@@ -83,6 +83,19 @@ void CommonUtil::printVectorString(const vector<string> &vec) {
     }
 }
 
+void CommonUtil::printMetric(const vector<vector<int>>& metric) {
+    for (auto vec : metric) {
+        cout << "[";
+        for (int i = 0; i < vec.size(); i++) {
+            if (i != vec.size() - 1) {
+                cout << vec[i] << ", ";
+            } else {
+                cout << vec[i] << "]" << endl;
+            }
+        }
+    }
+}
+
 TreeNode *CommonUtil::buildTreeByDepth(const int nodes[], const int size) {
     TreeNode *nodesP[size + 1];
     for (int i = 1; i < size + 1; i++) {

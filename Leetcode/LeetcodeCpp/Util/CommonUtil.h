@@ -34,6 +34,7 @@ public:
     static void traverseTreeByDepth(const TreeNode *root);
     static void printMetric(const int *metric, size_t line, size_t column);
     static void printVectorString(const vector<string> &vec);
+    static void printMetric(const vector<vector<int>>& metric);
 };
 
 
