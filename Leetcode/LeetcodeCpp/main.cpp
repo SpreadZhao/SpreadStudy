@@ -191,6 +191,25 @@ void Reverse() {
     cout << Solution::reverse(num) << endl;
 }
 
+void ReverseList() {
+    vector<int> nums = {1, 2, 3, 4, 5};
+    ListNode *head = CommonUtil::newList(nums);
+    cout << "before: ";
+    CommonUtil::printLinkedList(head);
+    cout << "after: ";
+    CommonUtil::printLinkedList(Solution::reverseList(head));
+}
+
+void ReverseBetween() {
+    vector<int> nums = {1, 2, 3, 4, 5};
+    vector<int> nums2 = {3, 5};
+    ListNode *head = CommonUtil::newList(nums2);
+    cout << "before: ";
+    CommonUtil::printLinkedList(head);
+    cout << "after: ";
+    CommonUtil::printLinkedList(Solution::reverseBetween(head, 1, 2));
+}
+
 int main() {
     // AddBinary();
     //    AccountsMerge();
@@ -213,6 +232,8 @@ int main() {
     // MinScore();
     // PartitionString();
     // Permutation();
-    Reverse();
+    // Reverse();
+    // ReverseList();
+    ReverseBetween();
     return 0;
 }

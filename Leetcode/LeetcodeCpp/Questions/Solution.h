@@ -69,6 +69,11 @@ public:
     static vector<vector<int>> permute(vector<int> &nums);
     // https://leetcode.cn/problems/reverse-integer/description/
     static int reverse(int x);
+    // https://leetcode.cn/problems/reverse-linked-list/description/
+    static ListNode *reverseList(ListNode *head);
+    static ListNode *reverseList2(ListNode *head);
+    // https://leetcode.cn/problems/reverse-linked-list-ii/description/
+    static ListNode *reverseBetween(ListNode *head, int left, int right);
 };
 
 #endif //LEETCODECPP_SOLUTION_H
