@@ -5,9 +5,9 @@
 
 bool CommonUtil::isEven(int n) { return n % 2 == 0; }
 
-map<int, vector<int>> buildMapForEdges(const vector<vector<int>> &edges) {
-    map<int, vector<int>> m;
-    for (auto &edge : edges) {
+map<int, vector<int> > buildMapForEdges(const vector<vector<int> > &edges) {
+    map<int, vector<int> > m;
+    for (auto &edge: edges) {
         int a = edge[0];
         int b = edge[1];
         if (!m.count(a)) {
@@ -22,7 +22,7 @@ map<int, vector<int>> buildMapForEdges(const vector<vector<int>> &edges) {
     return m;
 }
 
-void dfsCore(int start, const map<int, vector<int>>& edgesMap, bool visited[]) {
+void dfsCore(int start, const map<int, vector<int> > &edgesMap, bool visited[]) {
     if (visited[start]) {
         return;
     }
@@ -30,14 +30,14 @@ void dfsCore(int start, const map<int, vector<int>>& edgesMap, bool visited[]) {
     if (!edgesMap.count(start)) {
         return;
     }
-    for (const auto neighbor : edgesMap.at(start)) {
+    for (const auto neighbor: edgesMap.at(start)) {
         if (!visited[neighbor]) {
             dfsCore(neighbor, edgesMap, visited);
         }
     }
 }
 
-CommonUtil::DFSResponse CommonUtil::dfs(const int n, const vector<vector<int>>& edges) {
+CommonUtil::DFSResponse CommonUtil::dfs(const int n, const vector<vector<int> > &edges) {
     DFSResponse response;
     bool visited[n];
     fill_n(visited, n, false);
@@ -53,7 +53,7 @@ CommonUtil::DFSResponse CommonUtil::dfs(const int n, const vector<vector<int>>& 
 }
 
 void CommonUtil::traverseTreeByDepth(const TreeNode *root) {
-    queue<const TreeNode*> nodes;
+    queue<const TreeNode *> nodes;
     nodes.push(root);
     while (!nodes.empty()) {
         const TreeNode *node = nodes.front();
@@ -78,13 +78,13 @@ void CommonUtil::printMetric(const int *metric, const size_t line, const size_t 
 }
 
 void CommonUtil::printVectorString(const vector<string> &vec) {
-    for (const auto& str : vec) {
+    for (const auto &str: vec) {
         cout << str << endl;
     }
 }
 
-void CommonUtil::printMetric(const vector<vector<int>>& metric) {
-    for (auto vec : metric) {
+void CommonUtil::printMetric(const vector<vector<int> > &metric) {
+    for (auto vec: metric) {
         cout << "[";
         for (int i = 0; i < vec.size(); i++) {
             if (i != vec.size() - 1) {
@@ -94,6 +94,30 @@ void CommonUtil::printMetric(const vector<vector<int>>& metric) {
             }
         }
     }
+}
+
+ListNode *CommonUtil::newList(const vector<int> &nums) {
+    if (nums.empty()) {
+        return nullptr;
+    }
+    auto *head = new ListNode(nums[0]);
+    auto *tail = head;
+    for (int i = 1; i < nums.size(); i++) {
+        const int value = nums[i];
+        auto node = new ListNode(value);
+        tail->next = node;
+        tail = node;
+    }
+    return head;
+}
+
+void CommonUtil::printLinkedList(ListNode *head) {
+    cout << "[";
+    while (head != nullptr) {
+        cout << head->val << ", ";
+        head = head->next;
+    }
+    cout << "]" << endl;
 }
 
 TreeNode *CommonUtil::buildTreeByDepth(const int nodes[], const int size) {
@@ -117,5 +141,3 @@ TreeNode *CommonUtil::buildTreeByDepth(const int nodes[], const int size) {
     }
     return nodesP[1];
 }
-
-

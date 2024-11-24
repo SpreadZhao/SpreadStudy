@@ -7,6 +7,8 @@
 
 #include "../common.h"
 
+#define REPEAT(X) for (int i = 0; i < (X); i++)
+
 struct TreeNode {
     int val;
     TreeNode *left;
@@ -19,7 +21,9 @@ struct TreeNode {
 struct ListNode {
     int val;
     ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
     explicit ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
 class CommonUtil {
@@ -35,6 +39,8 @@ public:
     static void printMetric(const int *metric, size_t line, size_t column);
     static void printVectorString(const vector<string> &vec);
     static void printMetric(const vector<vector<int>>& metric);
+    static ListNode *newList(const vector<int> &nums);
+    static void printLinkedList(ListNode *head);
 };
 
 

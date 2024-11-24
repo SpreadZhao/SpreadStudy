@@ -657,9 +657,10 @@ int Solution::minimizeArrayValue(vector<int> &nums) {
     return static_cast<int>(minMax);
 }
 
-static void dfs_minScore(int &minDis, vector<bool> &visited, int curr, unordered_map<int, vector<pair<int, int>>> edgeMap) {
+static void dfs_minScore(int &minDis, vector<bool> &visited, int curr,
+                         unordered_map<int, vector<pair<int, int> > > edgeMap) {
     visited[curr - 1] = true;
-    for (auto neighbor : edgeMap[curr]) {
+    for (auto neighbor: edgeMap[curr]) {
         const auto other = neighbor.first;
         const auto distance = neighbor.second;
         if (distance < minDis) {
@@ -673,7 +674,7 @@ static void dfs_minScore(int &minDis, vector<bool> &visited, int curr, unordered
 
 int Solution::minScore(int n, vector<vector<int> > &roads) {
     // build map for edges
-    unordered_map<int, vector<pair<int, int>>> edgeMap;
+    unordered_map<int, vector<pair<int, int> > > edgeMap;
     for (auto road: roads) {
         const int node1 = road[0];
         const int node2 = road[1];
@@ -703,7 +704,7 @@ int Solution::partitionString(string s) {
 
 int Solution::partitionString2(string s) {
     int count = 0, merge = 0;
-    for (const auto ch : s) {
+    for (const auto ch: s) {
         if ((merge & (1 << ch - 'a')) != 0) {
             count++;
             merge = 0;
@@ -752,7 +753,7 @@ bool Solution::isPalindrome2(int x) {
     return y == x;
 }
 
-void pickOne(vector<vector<int>> &result, vector<int> &curr, vector<int> &nums, int num) {
+void pickOne(vector<vector<int> > &result, vector<int> &curr, vector<int> &nums, int num) {
     if (!contains(curr, num)) {
         curr.push_back(num);
     }
@@ -760,17 +761,17 @@ void pickOne(vector<vector<int>> &result, vector<int> &curr, vector<int> &nums, 
         result.push_back(curr);
         return;
     }
-    for (auto n : nums) {
+    for (auto n: nums) {
         if (!contains(curr, n)) {
             pickOne(result, curr, nums, n);
         }
     }
 }
 
-vector<vector<int>> Solution::permute(vector<int> &nums) {
-    vector<vector<int>> result;
+vector<vector<int> > Solution::permute(vector<int> &nums) {
+    vector<vector<int> > result;
     vector<int> curr;
-    for (auto num : nums) {
+    for (auto num: nums) {
         pickOne(result, curr, nums, num);
     }
     return result;
@@ -789,4 +790,63 @@ int Solution::reverse(int x) {
         xx /= 10;
     }
     return reversed;
+}
+
+ListNode *Solution::reverseList(ListNode *head) {
+    if (head == nullptr) {
+        return head;
+    }
+    auto *newHead = new ListNode(head->val);
+    ListNode *p = head->next;
+    while (p != nullptr) {
+        const int value = p->val;
+        auto *node = new ListNode(value);
+        node->next = newHead;
+        newHead = node;
+        p = p->next;
+    }
+    return newHead;
+}
+
+ListNode *Solution::reverseList2(ListNode *head) {
+    ListNode *prev = nullptr;
+    ListNode *curr = head;
+    while (curr != nullptr) {
+        ListNode *next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    return prev;
+}
+
+ListNode *Solution::reverseBetween(ListNode *head, int left, int right) {
+    if (head == nullptr || left == right) {
+        return head;
+    }
+    // TODO: Why it can be const?
+    ListNode *leftNode = head;
+    ListNode *leftPrev = nullptr;
+    REPEAT(left - 1) {
+        if (i == left - 2) {
+            leftPrev = leftNode;
+        }
+        leftNode = leftNode->next;
+    }
+    ListNode *prev = leftNode;
+    ListNode *curr = prev->next;
+    REPEAT(right - left) {
+        ListNode *next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    if (leftPrev != nullptr) {
+        leftPrev->next = prev;
+    }
+    leftNode->next = curr;
+    if (leftNode == head) {
+        return prev;
+    }
+    return head;
 }
