@@ -74,6 +74,8 @@ public:
     static ListNode *reverseList2(ListNode *head);
     // https://leetcode.cn/problems/reverse-linked-list-ii/description/
     static ListNode *reverseBetween(ListNode *head, int left, int right);
+    // https://leetcode.cn/problems/search-insert-position/description/
+    static int searchInsert(vector<int> &nums, int target);
 };
 
 #endif //LEETCODECPP_SOLUTION_H
