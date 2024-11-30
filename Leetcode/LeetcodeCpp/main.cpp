@@ -210,6 +210,11 @@ void ReverseBetween() {
     CommonUtil::printLinkedList(Solution::reverseBetween(head, 1, 2));
 }
 
+void SearchInsert() {
+    vector<int> nums = {1, 3, 5, 6};
+    cout << Solution::searchInsert(nums, 7);
+}
+
 int main() {
     // AddBinary();
     //    AccountsMerge();
@@ -234,6 +239,7 @@ int main() {
     // Permutation();
     // Reverse();
     // ReverseList();
-    ReverseBetween();
+    // ReverseBetween();
+    SearchInsert();
     return 0;
 }

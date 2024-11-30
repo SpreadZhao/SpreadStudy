@@ -850,3 +850,25 @@ ListNode *Solution::reverseBetween(ListNode *head, int left, int right) {
     }
     return head;
 }
+
+int Solution::searchInsert(vector<int> &nums, int target) {
+    int i = 0, j = nums.size() - 1;
+    while (i < j) {
+        const int mid = (i + j) / 2;
+        const int midValue = nums[mid];
+        if (midValue == target) {
+            return mid;
+        }
+        if (midValue < target) {
+            // right part of
+            i = mid + 1;
+        } else if (midValue > target) {
+            j = mid - 1;
+        }
+    }
+    if (nums[i] < target) {
+        return i + 1;
+    }
+    // equal or larger
+    return i;
+}
