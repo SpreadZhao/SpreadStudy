@@ -323,7 +323,40 @@ int Solution::lengthOfLIS(vector<int> &nums) {
         }
         res = std::max(res, dp[i]);
     }
-    return dp[size - 1];
+    cout << endl;
+    return res;
+}
+
+int Solution::lengthOfLIS2(vector<int> &nums) {
+    int len = 1, n = nums.size();
+    if (n == 0) {
+        return 0;
+    }
+    int d[n + 1];
+    memset(d, 0, sizeof(d));
+    d[len] = nums[0];
+    for (int i = 1; i < n; i++) {
+        if (nums[i] > d[len]) {
+            d[++len] = nums[i];
+        } else {
+            int l = 1, r = len, pos = 0;
+            while (l <= r) {
+                int mid = (l + r) >> 1;
+                if (d[mid] < nums[i]) {
+                    pos = mid;
+                    l = mid + 1;
+                } else {
+                    r = mid - 1;
+                }
+            }
+            d[pos + 1] = nums[i];
+        }
+    }
+    for (int i = 0; i < n + 1; i++) {
+        cout << "d[" << i << "] = " << d[i] << ", ";
+    }
+    cout << endl;
+    return len;
 }
 
 static const vector<string> digitsToLetters = {
@@ -872,3 +905,77 @@ int Solution::searchInsert(vector<int> &nums, int target) {
     // equal or larger
     return i;
 }
+
+string getElem(string path, int start) {
+    if (start >= path.size()) return "";
+    int nextSlashIndex = path.find('/', start);
+    string elem = path.substr(start, nextSlashIndex - start);
+    return elem;
+}
+
+string Solution::simplifyPath(string path) {
+    if (path == "/") return path;
+    int i = 1;
+    string res;
+    while (true) {
+        if (path[i] == '/') {
+            i++;
+            continue;
+        }
+        string elem = getElem(path, i);
+        if (elem.empty()) {
+            break;
+        }
+        if (elem == ".") {
+            i++;
+            continue;
+        }
+        if (elem == "..") {
+            int lastSlashIndex = res.find_last_of('/');
+            res = res.substr(0, lastSlashIndex);
+        } else {
+            res += "/" + elem;
+        }
+        i += elem.size();
+    }
+    if (res.empty()) {
+        res = "/";
+    }
+    return res;
+}
+
+string Solution::simplifyPath2(string path) {
+    auto split = [](const string &s, char delim) -> vector<string> {
+        vector<string> res;
+        string cur;
+        for (char ch : s) {
+            if (ch == delim) {
+                res.push_back(cur);
+                cur.clear();
+            } else {
+                cur += ch;
+            }
+        }
+        res.push_back(cur);
+        return res;
+    };
+    vector<string> names = split(path, '/');
+    vector<string> stack;
+    for (string &name : names) {
+        if (name == ".." && !stack.empty()) {
+            stack.pop_back();
+        } else if (!name.empty() && name != "." && name != "..") {
+            stack.push_back(name);
+        }
+    }
+    string res;
+    if (stack.empty()) {
+        res = "/";
+    } else {
+        for (string &name : stack) {
+            res += "/" + name;
+        }
+    }
+    return res;
+}
+
