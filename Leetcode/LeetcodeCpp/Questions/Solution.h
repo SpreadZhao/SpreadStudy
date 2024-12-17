@@ -32,6 +32,7 @@ public:
     static vector<bool> kidsWithCandies(vector<int> &candies, int extraCandies);
     // https://leetcode.cn/problems/longest-increasing-subsequence/description/
     static int lengthOfLIS(vector<int> &nums);
+    static int lengthOfLIS2(vector<int> &nums);
     // https://leetcode.cn/problems/letter-combinations-of-a-phone-number/
     static vector<string> letterCombinations(string digits);
     // https://leetcode.cn/problems/binary-tree-level-order-traversal/description/
@@ -76,6 +77,9 @@ public:
     static ListNode *reverseBetween(ListNode *head, int left, int right);
     // https://leetcode.cn/problems/search-insert-position/description/
     static int searchInsert(vector<int> &nums, int target);
+    // https://leetcode.cn/problems/simplify-path/description/
+    static string simplifyPath(string path);
+    static string simplifyPath2(string path);
 };
 
 #endif //LEETCODECPP_SOLUTION_H
