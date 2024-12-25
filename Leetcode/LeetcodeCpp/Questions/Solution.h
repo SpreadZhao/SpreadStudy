@@ -80,6 +80,8 @@ public:
     // https://leetcode.cn/problems/simplify-path/description/
     static string simplifyPath(string path);
     static string simplifyPath2(string path);
+    // https://leetcode.cn/problems/single-element-in-a-sorted-array/description/
+    static int singleNonDuplicate(vector<int> &nums);
 };
 
 #endif //LEETCODECPP_SOLUTION_H
