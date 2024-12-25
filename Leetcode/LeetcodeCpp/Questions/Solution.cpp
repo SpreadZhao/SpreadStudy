@@ -948,7 +948,7 @@ string Solution::simplifyPath2(string path) {
     auto split = [](const string &s, char delim) -> vector<string> {
         vector<string> res;
         string cur;
-        for (char ch : s) {
+        for (char ch: s) {
             if (ch == delim) {
                 res.push_back(cur);
                 cur.clear();
@@ -961,7 +961,7 @@ string Solution::simplifyPath2(string path) {
     };
     vector<string> names = split(path, '/');
     vector<string> stack;
-    for (string &name : names) {
+    for (string &name: names) {
         if (name == ".." && !stack.empty()) {
             stack.pop_back();
         } else if (!name.empty() && name != "." && name != "..") {
@@ -972,10 +972,40 @@ string Solution::simplifyPath2(string path) {
     if (stack.empty()) {
         res = "/";
     } else {
-        for (string &name : stack) {
+        for (string &name: stack) {
             res += "/" + name;
         }
     }
     return res;
 }
 
+int Solution::singleNonDuplicate(vector<int> &nums) {
+    int low = 0, high = nums.size() - 1;
+    while (low <= high) {
+        int mid = (low + high) / 2;
+        if (mid == 0 || mid == nums.size() - 1) {
+            // overflow
+            return nums[mid];
+        }
+        if (nums[mid] == nums[mid - 1]) {
+            if (mid % 2 == 0) {
+                // target is in low - mid
+                high = mid;
+            } else {
+                // target is in (mid + 1) - high
+                low = mid + 1;
+            }
+        } else if (nums[mid] == nums[mid + 1]) {
+            if (mid % 2 == 0) {
+                // target is in mid - high
+                low = mid;
+            } else {
+                // target is in low - (mid - 1)
+                high = mid - 1;
+            }
+        } else {
+            return nums[mid];
+        }
+    }
+    return nums[low];
+}

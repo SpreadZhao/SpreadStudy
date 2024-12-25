@@ -163,7 +163,7 @@ void MinimizeMaximum() {
 }
 
 void MinScore() {
-    vector<vector<int>> roads = {
+    vector<vector<int> > roads = {
         {1, 2, 9},
         {2, 3, 6},
         {2, 4, 5},
@@ -220,6 +220,11 @@ void SimplifyPath() {
     cout << Solution::simplifyPath2(path) << endl;
 }
 
+void SingleNonDuplicate() {
+    vector<int> nums = {1};
+    cout << Solution::singleNonDuplicate(nums) << endl;
+}
+
 int main() {
     // AddBinary();
     //    AccountsMerge();
@@ -246,6 +251,7 @@ int main() {
     // ReverseList();
     // ReverseBetween();
     // SearchInsert();
-    SimplifyPath();
+    // SimplifyPath();
+    SingleNonDuplicate();
     return 0;
 }
