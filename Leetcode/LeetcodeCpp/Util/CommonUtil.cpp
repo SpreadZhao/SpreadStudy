@@ -68,6 +68,15 @@ void CommonUtil::traverseTreeByDepth(const TreeNode *root) {
     }
 }
 
+void CommonUtil::traverseTreeInOrder(const TreeNode *root) {
+    if (root == nullptr) {
+        return;
+    }
+    if (root->left != nullptr) traverseTreeInOrder(root->left);
+    cout << root->val << " ";
+    if (root->right != nullptr) traverseTreeInOrder(root->right);
+}
+
 void CommonUtil::printMetric(const int *metric, const size_t line, const size_t column) {
     for (int i = 0; i < line; i++) {
         for (int j = 0; j < column; j++) {

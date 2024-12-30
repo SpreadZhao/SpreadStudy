@@ -225,6 +225,11 @@ void SingleNonDuplicate() {
     cout << Solution::singleNonDuplicate(nums) << endl;
 }
 
+void SortedListToBLT() {
+    auto *list = CommonUtil::newList(vector<int>{-10, -3, 0, 5, 9});
+    CommonUtil::traverseTreeInOrder(Solution::sortedListToBST(list));
+}
+
 int main() {
     // AddBinary();
     //    AccountsMerge();
@@ -252,6 +257,7 @@ int main() {
     // ReverseBetween();
     // SearchInsert();
     // SimplifyPath();
-    SingleNonDuplicate();
+    // SingleNonDuplicate();
+    SortedListToBLT();
     return 0;
 }

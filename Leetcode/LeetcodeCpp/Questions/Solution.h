@@ -82,6 +82,9 @@ public:
     static string simplifyPath2(string path);
     // https://leetcode.cn/problems/single-element-in-a-sorted-array/description/
     static int singleNonDuplicate(vector<int> &nums);
+    // https://leetcode.cn/problems/convert-sorted-list-to-binary-search-tree/description/
+    static TreeNode *sortedListToBST(ListNode *head);
+    static TreeNode *sortedListToBST2(ListNode *head);
 };
 
 #endif //LEETCODECPP_SOLUTION_H
