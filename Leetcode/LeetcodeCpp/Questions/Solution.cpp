@@ -1009,3 +1009,58 @@ int Solution::singleNonDuplicate(vector<int> &nums) {
     }
     return nums[low];
 }
+
+static TreeNode *cutRecursively(const vector<int> &nums, int low, int high) {
+    if (low == high) {
+        return new TreeNode(nums[low]);
+    }
+    if (low > high) {
+        return nullptr;
+    }
+    int mid = (low + high) / 2;
+    auto *curr = new TreeNode(nums[mid]);
+    curr->left = cutRecursively(nums, low, mid - 1);
+    curr->right = cutRecursively(nums, mid + 1, high);
+    return curr;
+}
+
+TreeNode *Solution::sortedListToBST(ListNode *head) {
+    if (head == nullptr) {
+        return nullptr;
+    }
+    const auto *curr = head;
+    vector<int> nums;
+    while (curr) {
+        nums.push_back(curr->val);
+        curr = curr->next;
+    }
+    return cutRecursively(nums, 0, nums.size() - 1);
+}
+
+static ListNode *getMedian(ListNode *low, ListNode *high) {
+    ListNode *fast = low;
+    ListNode *slow = low;
+    while (fast != high && fast->next != high) {
+        fast = fast->next->next;
+        slow = slow->next;
+    }
+    return slow;
+}
+
+static TreeNode *cutRecursive2(ListNode *low, ListNode *high) {
+    if (low == high) {
+        return nullptr;
+    }
+    ListNode *mid = getMedian(low, high);
+    TreeNode *root = new TreeNode(mid->val);
+    root->left = cutRecursive2(low, mid);
+    root->right = cutRecursive2(mid->next, high);
+    return root;
+}
+
+TreeNode *Solution::sortedListToBST2(ListNode *head) {
+    if (head == nullptr) {
+        return nullptr;
+    }
+    return cutRecursive2(head, nullptr);
+}
