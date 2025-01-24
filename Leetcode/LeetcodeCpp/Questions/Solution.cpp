@@ -1149,3 +1149,48 @@ vector<int> Solution::successfulPairs3(vector<int> &spells, vector<int> &potions
     }
     return res;
 }
+
+vector<int> Solution::spiralOrder(vector<vector<int>> &matrix) {
+    vector<int> res;
+    int i = 0, j = 0, k = 0;
+    int count = 0;
+    const size_t m = matrix.size(), n = matrix[0].size();
+    if (matrix.empty()) {
+        return res;
+    }
+    const size_t total = matrix.size() * matrix[0].size();
+    while (true) {
+        i = k, j = k;
+        while (j < n - k) {
+            res.push_back(matrix[i][j]);
+            ++count;
+            ++j;
+            if (count == total) { return res; }
+        }
+        --j;
+        ++i;
+        while (i < m - k) {
+            res.push_back(matrix[i][j]);
+            ++count;
+            ++i;
+            if (count == total) { return res; }
+        }
+        --i;
+        --j;
+        while (j >= k) {
+            res.push_back(matrix[i][j]);
+            ++count;
+            --j;
+            if (count == total) { return res; }
+        }
+        ++j;
+        --i;
+        while (i > k) {
+            res.push_back(matrix[i][j]);
+            ++count;
+            --i;
+            if (count == total) { return res; }
+        }
+        ++k;
+    }
+}

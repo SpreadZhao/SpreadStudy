@@ -249,6 +249,15 @@ void SuccessfulPairs() {
     CommonUtil::printVectorInt(Solution::successfulPairs3(spells5, potions5, success5));
 }
 
+void SpiralMatrix() {
+    vector<vector<int>> matrix = {
+        {1, 2, 3, 4},
+        {5, 6, 7, 8},
+        {9, 10, 11, 12}
+    };
+    CommonUtil::printVectorInt(Solution::spiralOrder(matrix));
+}
+
 int main() {
     // AddBinary();
     //    AccountsMerge();
@@ -278,6 +287,7 @@ int main() {
     // SimplifyPath();
     // SingleNonDuplicate();
     // SortedListToBLT();
-    SuccessfulPairs();
+    // SuccessfulPairs();
+    SpiralMatrix();
     return 0;
 }
