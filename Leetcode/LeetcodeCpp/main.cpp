@@ -230,6 +230,25 @@ void SortedListToBLT() {
     CommonUtil::traverseTreeInOrder(Solution::sortedListToBST(list));
 }
 
+void SuccessfulPairs() {
+    auto spells = vector<int> {3, 1, 2};
+    auto potions = vector<int> {8, 5, 8};
+    auto spells2 = vector<int> {5, 1, 3};
+    auto potions2 = vector<int> {1, 2, 3, 4, 5};
+    auto spells3 = vector<int> {15, 8, 19};
+    auto potions3 = vector<int> {38, 36, 23};
+    auto spells4 = vector<int> {38, 11};
+    auto potions4 = vector<int> {3, 20};
+    auto spells5 = vector<int> {9, 39};
+    auto potions5 = vector<int> {35, 40, 22, 37, 29, 22};
+    long long success = 16;
+    long long success2 = 7;
+    long long success3 = 328;
+    long long success4 = 1065;
+    long long success5 = 320;
+    CommonUtil::printVectorInt(Solution::successfulPairs3(spells5, potions5, success5));
+}
+
 int main() {
     // AddBinary();
     //    AccountsMerge();
@@ -258,6 +277,7 @@ int main() {
     // SearchInsert();
     // SimplifyPath();
     // SingleNonDuplicate();
-    SortedListToBLT();
+    // SortedListToBLT();
+    SuccessfulPairs();
     return 0;
 }

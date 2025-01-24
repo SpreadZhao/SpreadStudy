@@ -1064,3 +1064,88 @@ TreeNode *Solution::sortedListToBST2(ListNode *head) {
     }
     return cutRecursive2(head, nullptr);
 }
+
+vector<int> Solution::successfulPairs(vector<int> &spells, vector<int> &potions, long long success) {
+    vector<int> res;
+    for (auto spell: spells) {
+        int count = 0;
+        for (auto potion: potions) {
+            long long product = static_cast<long long>(spell) * potion;
+            if (product >= success) {
+                ++count;
+            }
+        }
+        res.push_back(count);
+    }
+    return res;
+}
+
+vector<int> Solution::successfulPairs2(vector<int> &spells, vector<int> &potions, long long success) {
+    vector<int> res;
+    sort(potions.begin(), potions.end());
+    for (auto spell: spells) {
+        int count = 0;
+        for (int i = 0; i < potions.size(); i++) {
+            int potion = potions[i];
+            long long product = static_cast<long long>(spell) * potion;
+            if (product >= success) {
+                count += potions.size() - i;
+                break;
+            }
+        }
+        res.push_back(count);
+    }
+    return res;
+}
+
+vector<int> Solution::successfulPairs3(vector<int> &spells, vector<int> &potions, long long success) {
+    vector<int> res;
+    sort(potions.begin(), potions.end());
+    for (auto spell: spells) {
+        int low = 0, high = potions.size() - 1;
+        bool set = false;
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            if (low == high && (mid == 0 || mid == potions.size() - 1)) {
+                break;
+            }
+            long long thisProduct = static_cast<long long>(spell) * potions[mid];
+            long long nextProduct = static_cast<long long>(spell) * potions[mid + 1];
+            if (thisProduct < success) {
+                if (nextProduct >= success) {
+                    res.push_back(potions.size() - mid - 1);
+                    set = true;
+                    break;
+                }
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+        if (!set) {
+            if (low == high) {
+                long long product = static_cast<long long>(spell) * potions[low];
+                if (product >= success) {
+                    res.push_back(potions.size() - low);
+                } else {
+                    res.push_back(potions.size() - low - 1);
+                }
+            } else {
+                // low > high
+                if (high < 0) {
+                    high = 0;
+                }
+                if (low > potions.size() - 1) {
+                    high = potions.size() - 1;
+                }
+                long long product = static_cast<long long>(spell) * potions[high];
+                if (product >= success) {
+                    res.push_back(potions.size() - high);
+                } else {
+                    res.push_back(potions.size() - high - 1);
+                }
+            }
+        }
+    }
+    return res;
+}
