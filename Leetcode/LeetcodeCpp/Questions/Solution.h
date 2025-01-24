@@ -89,6 +89,8 @@ public:
     static vector<int> successfulPairs(vector<int> &spells, vector<int> &potions, long long success);
     static vector<int> successfulPairs2(vector<int> &spells, vector<int> &potions, long long success);
     static vector<int> successfulPairs3(vector<int> &spells, vector<int> &potions, long long success);
+    // https://leetcode.cn/problems/spiral-matrix/description/
+    static vector<int> spiralOrder(vector<vector<int>> &matrix);
 };
 
 #endif //LEETCODECPP_SOLUTION_H
