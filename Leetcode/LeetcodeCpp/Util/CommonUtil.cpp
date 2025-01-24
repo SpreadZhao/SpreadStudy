@@ -129,6 +129,13 @@ void CommonUtil::printLinkedList(ListNode *head) {
     cout << "]" << endl;
 }
 
+void CommonUtil::printVectorInt(const vector<int> &vec) {
+    for (auto num: vec) {
+        cout << num << ", ";
+    }
+    cout << endl;
+}
+
 TreeNode *CommonUtil::buildTreeByDepth(const int nodes[], const int size) {
     TreeNode *nodesP[size + 1];
     for (int i = 1; i < size + 1; i++) {

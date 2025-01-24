@@ -40,8 +40,9 @@ public:
     static void printMetric(const int *metric, size_t line, size_t column);
     static void printVectorString(const vector<string> &vec);
     static void printMetric(const vector<vector<int>>& metric);
-    static ListNode *newList(const vector<int> &nums);
     static void printLinkedList(ListNode *head);
+    static void printVectorInt(const vector<int> &vec);
+    static ListNode *newList(const vector<int> &nums);
 };
 
 

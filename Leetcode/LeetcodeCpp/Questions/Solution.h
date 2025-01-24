@@ -85,6 +85,10 @@ public:
     // https://leetcode.cn/problems/convert-sorted-list-to-binary-search-tree/description/
     static TreeNode *sortedListToBST(ListNode *head);
     static TreeNode *sortedListToBST2(ListNode *head);
+    // https://leetcode.cn/problems/successful-pairs-of-spells-and-potions/description/
+    static vector<int> successfulPairs(vector<int> &spells, vector<int> &potions, long long success);
+    static vector<int> successfulPairs2(vector<int> &spells, vector<int> &potions, long long success);
+    static vector<int> successfulPairs3(vector<int> &spells, vector<int> &potions, long long success);
 };
 
 #endif //LEETCODECPP_SOLUTION_H
