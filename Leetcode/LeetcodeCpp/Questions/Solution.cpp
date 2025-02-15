@@ -1194,3 +1194,116 @@ vector<int> Solution::spiralOrder(vector<vector<int>> &matrix) {
         ++k;
     }
 }
+
+static int next(const vector<int> &nums, int curr) {
+    if (curr >= nums.size() - 1) {
+        return curr + 1;
+    }
+    int next = curr + 1;
+    while (next < nums.size() && nums[next] == nums[curr]) {
+        ++next;
+    }
+    return next;
+}
+
+vector<vector<int>> Solution::threeSum(vector<int> &nums) {
+    // timeover
+    vector<vector<int>> res;
+    sort(nums.begin(), nums.end());
+    for (int i = 0; i < nums.size() - 2; i++) {
+        for (int j = i + 1; j < nums.size() - 1; j = next(nums, j)) {
+            for (int k = j + 1; k < nums.size(); k = next(nums, k)) {
+                const int sum = nums[i] + nums[j] + nums[k];
+                if (sum > 0) {
+                    break;
+                }
+                if (sum == 0) {
+                    res.push_back({nums[i], nums[j], nums[k]});
+                    break;
+                }
+            }
+        }
+    }
+    return res;
+}
+
+vector<vector<int> > Solution::threeSum2(vector<int> &nums) {
+    // error
+    vector<vector<int>> res;
+    sort(nums.begin(), nums.end());
+    for (int i = 0; i < nums.size() - 2; i = next(nums, i)) {
+        int j = i + 1, k = nums.size() - 1;
+        while (j < k) {
+            const int sum = nums[i] + nums[j] + nums[k];
+            if (sum == 0) {
+                res.push_back({nums[i], nums[j], nums[k]});
+                j++;
+                k--;
+            } else if (sum > 0) {
+                k--;
+            } else {
+                j++;
+            }
+        }
+    }
+    return res;
+}
+
+vector<vector<int>> Solution::threeSum3(vector<int> &nums) {
+    sort(nums.begin(), nums.end());
+    vector<vector<int>> res;
+    for (int i = 0; i < nums.size(); i++) {
+        if (i > 0 && nums[i] == nums[i - 1]) {
+            continue;
+        }
+        int j = i + 1, k = nums.size() - 1;
+        const int target = -nums[i];
+        while (j < k) {
+            const int sum = nums[j] + nums[k];
+            if (sum == target) {
+                res.push_back({nums[i], nums[j], nums[k]});
+                j++;
+                k--;
+                while (j < k && nums[j] == nums[j - 1]) j++;
+                while (j < k && nums[k] == nums[k + 1]) k--;
+            } else if (sum < target) {
+                j++;
+            } else {
+                k--;
+            }
+        }
+    }
+    return res;
+}
+
+vector<int> Solution::twoSum(vector<int> &nums, int target) {
+    vector<vector<int>> nums2 = {};
+    for (int i = 0; i < nums.size(); i++) {
+        nums2.push_back({nums[i], i});
+    }
+    sort(nums2.begin(), nums2.end(),  [](const vector<int> &a, const vector<int> &b) {
+        return a[0] < b[0];
+    });
+    int i = 0, j = nums.size() - 1;
+    while (i < j) {
+        const int sum = nums2[i][0] + nums2[j][0];
+        if (sum == target) {
+            return {nums2[i][1], nums2[j][1]};
+        }
+        if (sum > target) j--;
+        else i++;
+    }
+    return {};
+}
+
+vector<int> Solution::twoSum2(vector<int> &nums, int target) {
+    unordered_map<int, int> numToIndex;
+    for (int i = 0; i < nums.size(); i++) {
+        auto it = numToIndex.find(target - nums[i]);
+        if (it != numToIndex.end()) {
+            return {it->second, i};
+        }
+        numToIndex[nums[i]] = i;
+    }
+    return {};
+}

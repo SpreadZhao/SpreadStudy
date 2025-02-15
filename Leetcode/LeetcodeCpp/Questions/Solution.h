@@ -91,6 +91,13 @@ public:
     static vector<int> successfulPairs3(vector<int> &spells, vector<int> &potions, long long success);
     // https://leetcode.cn/problems/spiral-matrix/description/
     static vector<int> spiralOrder(vector<vector<int>> &matrix);
+    // https://leetcode.cn/problems/3sum/description/
+    static vector<vector<int>> threeSum(vector<int> &nums);
+    static vector<vector<int>> threeSum2(vector<int> &nums);
+    static vector<vector<int>> threeSum3(vector<int> &nums);
+    // https://leetcode.cn/problems/two-sum/description/
+    static vector<int> twoSum(vector<int> &nums, int target);
+    static vector<int> twoSum2(vector<int> &nums, int target);
 };
 
 #endif //LEETCODECPP_SOLUTION_H
