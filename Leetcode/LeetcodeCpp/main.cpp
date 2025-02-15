@@ -258,6 +258,11 @@ void SpiralMatrix() {
     CommonUtil::printVectorInt(Solution::spiralOrder(matrix));
 }
 
+void ThreeSum() {
+    vector<int> nums = {-1, 0, 1, 2, -1, -4};
+    CommonUtil::printMetric(Solution::threeSum(nums));
+}
+
 int main() {
     // AddBinary();
     //    AccountsMerge();
@@ -288,6 +293,7 @@ int main() {
     // SingleNonDuplicate();
     // SortedListToBLT();
     // SuccessfulPairs();
-    SpiralMatrix();
+    // SpiralMatrix();
+    ThreeSum();
     return 0;
 }
