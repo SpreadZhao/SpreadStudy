@@ -98,6 +98,8 @@ public:
     // https://leetcode.cn/problems/two-sum/description/
     static vector<int> twoSum(vector<int> &nums, int target);
     static vector<int> twoSum2(vector<int> &nums, int target);
+    // https://leetcode.cn/problems/3sum-closest/description/
+    static int threeSumCloset(vector<int> &nums, int target);
 };
 
 #endif //LEETCODECPP_SOLUTION_H
