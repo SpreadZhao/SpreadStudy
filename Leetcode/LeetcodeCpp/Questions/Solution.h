@@ -100,6 +100,8 @@ public:
     static vector<int> twoSum2(vector<int> &nums, int target);
     // https://leetcode.cn/problems/3sum-closest/description/
     static int threeSumCloset(vector<int> &nums, int target);
+    // https://leetcode.cn/problems/sum-root-to-leaf-numbers/description/
+    static int sumNumbers(TreeNode *root);
 };
 
 #endif //LEETCODECPP_SOLUTION_H
