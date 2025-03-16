@@ -1338,3 +1338,26 @@ int Solution::threeSumCloset(vector<int> &nums, int target) {
     }
     return res;
 }
+
+static int addThis(int sum, TreeNode *curr) {
+    if (curr == nullptr) {
+        // In case that root is null
+        return sum;
+    }
+    sum = sum * 10 + curr->val;
+    if (curr->left == nullptr && curr->right == nullptr) {
+        return sum;
+    }
+    int res = 0;
+    if (curr->left != nullptr) {
+        res += addThis(sum, curr->left);
+    }
+    if (curr->right != nullptr) {
+        res += addThis(sum, curr->right);
+    }
+    return res;
+}
+
+int Solution::sumNumbers(TreeNode *root) {
+    return addThis(0, root);
+}

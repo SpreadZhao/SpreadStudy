@@ -263,6 +263,12 @@ void ThreeSum() {
     CommonUtil::printMetric(Solution::threeSum(nums));
 }
 
+void SumNumbers() {
+    int nums[] = {4, 9, 0, 5, 1};
+    TreeNode *root = CommonUtil::buildTreeByDepth(nums, 5);
+    cout << Solution::sumNumbers(root) << endl;
+}
+
 int main() {
     // AddBinary();
     //    AccountsMerge();
@@ -294,6 +300,7 @@ int main() {
     // SortedListToBLT();
     // SuccessfulPairs();
     // SpiralMatrix();
-    ThreeSum();
+    // ThreeSum();
+    SumNumbers();
     return 0;
 }
