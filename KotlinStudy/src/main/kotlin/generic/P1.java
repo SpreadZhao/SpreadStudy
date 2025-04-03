@@ -27,9 +27,9 @@ class P<T extends P3> {
         P<P4> b = new P<>();
         P<? extends P3> c = new P<>();
         P<? super P3> d = new P<>();
-        P<? extends P2> e = new P<P2>();
+//        P<? extends P2> e = new P<P2>();
         P<? extends P4> f = new P<>();
-        P<? super P2> g = new P<P2>();
+//        P<? super P2> g = new P<P1>();
         P<? super P4> h = new P<>();
     }
 }
