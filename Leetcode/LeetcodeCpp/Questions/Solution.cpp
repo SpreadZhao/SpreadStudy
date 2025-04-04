@@ -1361,3 +1361,35 @@ static int addThis(int sum, TreeNode *curr) {
 int Solution::sumNumbers(TreeNode *root) {
     return addThis(0, root);
 }
+
+static bool traverse(TreeNode *curr1, TreeNode *curr2) {
+    if (curr1 == nullptr && curr2 == nullptr) {
+        return true;
+    }
+    if (curr1 != nullptr && curr2 == nullptr) {
+        return false;
+    }
+    if (curr1 == nullptr) {
+        return false;
+    }
+    if (curr1->val != curr2->val) {
+        return false;
+    }
+    return traverse(curr1->left, curr2->right) && traverse(curr1->right, curr2->left);
+}
+
+bool Solution::isSymmetric(TreeNode *root) {
+    if (root == nullptr) {
+        return true;
+    }
+    if (root->left == nullptr && root->right == nullptr) {
+        return true;
+    }
+    if (root->left != nullptr && root->right == nullptr) {
+        return false;
+    }
+    if (root->left == nullptr) {
+        return false;
+    }
+    return traverse(root->left, root->right);
+}

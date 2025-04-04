@@ -269,6 +269,13 @@ void SumNumbers() {
     cout << Solution::sumNumbers(root) << endl;
 }
 
+void IsSymmetric() {
+    int nums[] = {1, 2, 2, 3, 4, 4, 3};
+    int nums2[] = {1, 2, 2, -1, 3, -1, 3};
+    TreeNode *root = CommonUtil::buildTreeByDepth(nums2, 7);
+    cout << Solution::isSymmetric(root) << endl;
+}
+
 int main() {
     // AddBinary();
     //    AccountsMerge();
@@ -301,6 +308,7 @@ int main() {
     // SuccessfulPairs();
     // SpiralMatrix();
     // ThreeSum();
-    SumNumbers();
+    // SumNumbers();
+    IsSymmetric();
     return 0;
 }
