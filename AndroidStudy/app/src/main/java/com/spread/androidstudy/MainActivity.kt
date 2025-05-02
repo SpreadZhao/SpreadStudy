@@ -1,6 +1,7 @@
 package com.spread.androidstudy
 
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.enableEdgeToEdge
@@ -52,6 +53,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         drawer = findViewById(R.id.main)
         navView = findViewById(R.id.main_nav)
+        navView.measuredState
+        navView.post {  }
+        Log.d(SpreadStudy.LOG_TAG, "navView width: ${navView.width}")
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.run {
