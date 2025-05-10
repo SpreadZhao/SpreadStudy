@@ -276,6 +276,12 @@ void IsSymmetric() {
     cout << Solution::isSymmetric(root) << endl;
 }
 
+void ImplementTrie() {
+    auto *trie = new Solution::Trie();
+    trie->insert("apple");
+    cout << trie->search("apple") << endl;
+}
+
 int main() {
     // AddBinary();
     //    AccountsMerge();
@@ -309,6 +315,7 @@ int main() {
     // SpiralMatrix();
     // ThreeSum();
     // SumNumbers();
-    IsSymmetric();
+    // IsSymmetric();
+    ImplementTrie();
     return 0;
 }

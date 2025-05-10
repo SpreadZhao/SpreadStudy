@@ -1150,7 +1150,7 @@ vector<int> Solution::successfulPairs3(vector<int> &spells, vector<int> &potions
     return res;
 }
 
-vector<int> Solution::spiralOrder(vector<vector<int>> &matrix) {
+vector<int> Solution::spiralOrder(vector<vector<int> > &matrix) {
     vector<int> res;
     int i = 0, j = 0, k = 0;
     int count = 0;
@@ -1206,9 +1206,9 @@ static int next(const vector<int> &nums, int curr) {
     return next;
 }
 
-vector<vector<int>> Solution::threeSum(vector<int> &nums) {
+vector<vector<int> > Solution::threeSum(vector<int> &nums) {
     // timeover
-    vector<vector<int>> res;
+    vector<vector<int> > res;
     sort(nums.begin(), nums.end());
     for (int i = 0; i < nums.size() - 2; i++) {
         for (int j = i + 1; j < nums.size() - 1; j = next(nums, j)) {
@@ -1229,7 +1229,7 @@ vector<vector<int>> Solution::threeSum(vector<int> &nums) {
 
 vector<vector<int> > Solution::threeSum2(vector<int> &nums) {
     // error
-    vector<vector<int>> res;
+    vector<vector<int> > res;
     sort(nums.begin(), nums.end());
     for (int i = 0; i < nums.size() - 2; i = next(nums, i)) {
         int j = i + 1, k = nums.size() - 1;
@@ -1249,9 +1249,9 @@ vector<vector<int> > Solution::threeSum2(vector<int> &nums) {
     return res;
 }
 
-vector<vector<int>> Solution::threeSum3(vector<int> &nums) {
+vector<vector<int> > Solution::threeSum3(vector<int> &nums) {
     sort(nums.begin(), nums.end());
-    vector<vector<int>> res;
+    vector<vector<int> > res;
     for (int i = 0; i < nums.size(); i++) {
         if (i > 0 && nums[i] == nums[i - 1]) {
             continue;
@@ -1277,11 +1277,11 @@ vector<vector<int>> Solution::threeSum3(vector<int> &nums) {
 }
 
 vector<int> Solution::twoSum(vector<int> &nums, int target) {
-    vector<vector<int>> nums2 = {};
+    vector<vector<int> > nums2 = {};
     for (int i = 0; i < nums.size(); i++) {
         nums2.push_back({nums[i], i});
     }
-    sort(nums2.begin(), nums2.end(),  [](const vector<int> &a, const vector<int> &b) {
+    sort(nums2.begin(), nums2.end(), [](const vector<int> &a, const vector<int> &b) {
         return a[0] < b[0];
     });
     int i = 0, j = nums.size() - 1;
@@ -1392,4 +1392,67 @@ bool Solution::isSymmetric(TreeNode *root) {
         return false;
     }
     return traverse(root->left, root->right);
+}
+
+Solution::Trie::Trie() = default;
+
+void Solution::Trie::insert(string word) {
+    if (word.empty()) {
+        return;
+    }
+    // find root
+    TrieNode *curr = this->roots[word[0] - 'a'];
+    if (curr == nullptr) {
+        curr = new TrieNode();
+        this->roots[word[0] - 'a'] = curr;
+    }
+    // now curr == root
+    for (size_t i = 1; i < word.size(); i++) {
+        char ch = word[i];
+        auto &children = curr->children;
+        if (children.find(ch) == children.end()) {
+            children[ch] = new TrieNode();
+            curr = children[ch];
+        } else {
+            curr = children[ch];
+        }
+    }
+    curr->is_last = true;
+}
+bool Solution::Trie::search(string word) {
+    if (word.empty()) {
+        return false;
+    }
+    TrieNode *curr = this->roots[word[0] - 'a'];
+    if (curr == nullptr) {
+        return false;
+    }
+    for (size_t i = 1; i < word.size(); i++) {
+        char ch = word[i];
+        auto children = curr->children;
+        if (children.find(ch) == children.end()) {
+            return false;
+        }
+        curr = children[ch];
+    }
+    return curr->is_last;
+}
+
+bool Solution::Trie::startsWith(string prefix) {
+    if (prefix.empty()) {
+        return false;
+    }
+    TrieNode *curr = this->roots[prefix[0] - 'a'];
+    if (curr == nullptr) {
+        return false;
+    }
+    for (size_t i = 1; i < prefix.size(); i++) {
+        char ch = prefix[i];
+        auto children = curr->children;
+        if (children.find(ch) == children.end()) {
+            return false;
+        }
+        curr = children[ch];
+    }
+    return true;
 }

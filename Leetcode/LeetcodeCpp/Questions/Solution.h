@@ -104,6 +104,27 @@ public:
     static int sumNumbers(TreeNode *root);
     // https://leetcode.cn/problems/symmetric-tree/description/
     static bool isSymmetric(TreeNode *root);
+
+    // https://leetcode.cn/problems/implement-trie-prefix-tree/description/
+    class Trie {
+    public:
+        Trie();
+
+        void insert(string word);
+
+        bool search(string word);
+
+        bool startsWith(string prefix);
+
+    private:
+        class TrieNode {
+        public:
+            bool is_last = false;
+            map<char, TrieNode *> children;
+        };
+
+        TrieNode *roots[26] { nullptr };
+    };
 };
 
 #endif //LEETCODECPP_SOLUTION_H
