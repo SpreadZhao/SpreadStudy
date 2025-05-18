@@ -22,33 +22,37 @@ map<int, vector<int> > buildMapForEdges(const vector<vector<int> > &edges) {
     return m;
 }
 
-void dfsCore(int start, const map<int, vector<int> > &edgesMap, bool visited[]) {
+void dfsCore(int start, const map<int, vector<int> > &edgesMap, vector<bool> &visited, long long &currIslandNodeCount) {
     if (visited[start]) {
         return;
     }
     visited[start] = true;
+    currIslandNodeCount++;
     if (!edgesMap.count(start)) {
         return;
     }
     for (const auto neighbor: edgesMap.at(start)) {
         if (!visited[neighbor]) {
-            dfsCore(neighbor, edgesMap, visited);
+            dfsCore(neighbor, edgesMap, visited, currIslandNodeCount);
         }
     }
 }
 
 CommonUtil::DFSResponse CommonUtil::dfs(const int n, const vector<vector<int> > &edges) {
     DFSResponse response;
-    bool visited[n];
-    fill_n(visited, n, false);
+    vector<bool> visited(n, false);
     const auto map = buildMapForEdges(edges);
+    vector<long long> islandSizes;
     // dfs from 0 to n-1
     for (int i = 0; i < n; i++) {
         if (!visited[i]) {
             response.islandNum++;
-            dfsCore(i, map, visited);
+            long long nodeCount = 0;
+            dfsCore(i, map, visited, nodeCount);
+            islandSizes.emplace_back(nodeCount);
         }
     }
+    response.islandSizes = islandSizes;
     return response;
 }
 
@@ -156,4 +160,14 @@ TreeNode *CommonUtil::buildTreeByDepth(const int nodes[], const int size) {
         }
     }
     return nodesP[1];
+}
+
+long long CommonUtil::quickPairSum(const vector<long long>& nums) {
+    long long sum = 0;
+    long long squaredSum = 0;
+    for (const long long num : nums) {
+        sum += num;
+        squaredSum += num * num;
+    }
+    return (sum * sum - squaredSum) / 2;
 }

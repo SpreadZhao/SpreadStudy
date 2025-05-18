@@ -282,6 +282,16 @@ void ImplementTrie() {
     cout << trie->search("apple") << endl;
 }
 
+void CountPairs() {
+    int n = 3;
+    vector<vector<int>> edges = {
+        {0, 1},
+        {0, 2},
+        {1, 2}
+    };
+    cout << Solution::countPairs(n, edges);
+}
+
 int main() {
     // AddBinary();
     //    AccountsMerge();
@@ -316,6 +326,7 @@ int main() {
     // ThreeSum();
     // SumNumbers();
     // IsSymmetric();
-    ImplementTrie();
+    // ImplementTrie();
+    CountPairs();
     return 0;
 }

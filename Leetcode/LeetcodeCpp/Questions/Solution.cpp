@@ -1456,3 +1456,21 @@ bool Solution::Trie::startsWith(string prefix) {
     }
     return true;
 }
+
+long long Solution::countPairs(int n, vector<vector<int>>& edges) {
+    const CommonUtil::DFSResponse response = CommonUtil::dfs(n, edges);
+    const vector<long long> islandSizes = response.islandSizes;
+    return CommonUtil::quickPairSum(islandSizes);
+}
+
+
+
+
+
+
+
+
+
+
+
+

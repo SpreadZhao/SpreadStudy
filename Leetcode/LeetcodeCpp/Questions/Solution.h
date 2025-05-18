@@ -125,6 +125,9 @@ public:
 
         TrieNode *roots[26] { nullptr };
     };
+
+    // https://leetcode.cn/problems/count-unreachable-pairs-of-nodes-in-an-undirected-graph/
+    static long long countPairs(int n, vector<vector<int>> &edges);
 };
 
 #endif //LEETCODECPP_SOLUTION_H

@@ -31,6 +31,8 @@ public:
     class DFSResponse {
     public:
         int islandNum = 0;
+        // number of nodes in each island
+        vector<long long> islandSizes;
     };
     static bool isEven(int n);
     static DFSResponse dfs(int n, const vector<vector<int>>& edges);
@@ -43,6 +45,7 @@ public:
     static void printLinkedList(ListNode *head);
     static void printVectorInt(const vector<int> &vec);
     static ListNode *newList(const vector<int> &nums);
+    static long long quickPairSum(const vector<long long> &nums);
 };
 
 
