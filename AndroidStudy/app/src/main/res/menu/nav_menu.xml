@@ -5,4 +5,8 @@
         android:id="@+id/menu_item_livedata"
         android:title="LiveData" />
 
+    <item
+        android:id="@+id/menu_item_twice_xy_bug"
+        android:title="Twice XY Bug" />
+
 </menu>

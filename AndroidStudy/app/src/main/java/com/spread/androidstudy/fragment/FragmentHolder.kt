@@ -20,6 +20,7 @@ class FragmentHolder {
 
     private fun newFragment(id: Int) = when (id) {
         R.id.menu_item_livedata -> LiveDataFragment()
+        R.id.menu_item_twice_xy_bug -> TwiceXYBugFragment()
         else -> null
     }
 
