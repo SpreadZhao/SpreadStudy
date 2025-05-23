@@ -7,5 +7,5 @@ fn main() {
     // guessing_game::guessing_game();
     // variables::variables();
     // ownership::ownership();
-    references::reference();
+    // references::reference();
 }
