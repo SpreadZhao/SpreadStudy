@@ -1,4 +1,5 @@
 #include <iostream>
+
 #include "Questions/Solution.h"
 
 Solution solution;
@@ -11,14 +12,14 @@ void AddBinary() {
 }
 
 void AccountsMerge() {
-    vector<vector<string> > vec = {
-        {"John", "johnsmith@mail.com", "john_newyork@mail.com"},
-        {"John", "johnsmith@mail.com", "john00@mail.com"},
-        {"Mary", "mary@mail.com"},
-        {"John", "johnnybravo@mail.com"}
+    vector<vector<string>> vec = {
+        { "John", "johnsmith@mail.com", "john_newyork@mail.com" },
+        { "John", "johnsmith@mail.com", "john00@mail.com" },
+        { "Mary", "mary@mail.com" },
+        { "John", "johnnybravo@mail.com" }
     };
-    vector<vector<string> > res = Solution::accountsMerge(vec);
-    for (const auto &row: res) {
+    vector<vector<string>> res = Solution::accountsMerge(vec);
+    for (const auto &row : res) {
         for (int i = 0; i < row.size(); i++) {
             if (i == 0) {
                 cout << row[i] << ": ";
@@ -31,47 +32,43 @@ void AccountsMerge() {
 }
 
 void BoatsToSavePeople() {
-    vector<int> people = {3, 5, 3, 4};
+    vector<int> people = { 3, 5, 3, 4 };
     int limit = 5;
     cout << Solution::numRescueBoats(people, limit);
 }
 
 void CanPlaceFlowers() {
-    vector<int> flowerbed = {1, 0, 0, 0, 1};
+    vector<int> flowerbed = { 1, 0, 0, 0, 1 };
     int n = 1;
     cout << Solution::canPlaceFlowers2(flowerbed, n);
 }
 
 void MakeConnected() {
     int n = 4;
-    vector<vector<int> > connections = {
-        {0, 1},
-        {0, 2},
-        {1, 2}
-    };
+    vector<vector<int>> connections = { { 0, 1 }, { 0, 2 }, { 1, 2 } };
     cout << Solution::makeConnected(n, connections);
 }
 
 void MaxArea() {
-    vector<int> height = {1, 8, 6, 2, 5, 4, 8, 3, 7};
+    vector<int> height = { 1, 8, 6, 2, 5, 4, 8, 3, 7 };
     cout << Solution::maxArea(height);
 }
 
 void FindDifference() {
-    vector<int> nums1 = {1, 2, 3};
-    vector<int> nums2 = {2, 4, 6};
+    vector<int> nums1 = { 1, 2, 3 };
+    vector<int> nums2 = { 2, 4, 6 };
     auto res = Solution::findDifference(nums1, nums2);
-    for (auto num: res[0]) {
+    for (auto num : res[0]) {
         cout << num << " ";
     }
     cout << endl;
-    for (auto num: res[1]) {
+    for (auto num : res[1]) {
         cout << num << " ";
     }
 }
 
 void InvertTree() {
-    int nodes[] = {4, 2, 7, 1, 3, 6, 9};
+    int nodes[] = { 4, 2, 7, 1, 3, 6, 9 };
     TreeNode *root = CommonUtil::buildTreeByDepth(nodes, 7);
     cout << "my tree: ";
     CommonUtil::traverseTreeByDepth(root);
@@ -82,17 +79,15 @@ void InvertTree() {
 }
 
 void NumWays() {
-    vector<string> words = {
-        "acca", "bbbb", "caca"
-    };
+    vector<string> words = { "acca", "bbbb", "caca" };
     string target = "aba";
     cout << Solution::numWays(words, target);
 }
 
 void LengthOfLIS() {
-    vector<int> nums = {10, 9, 2, 5, 3, 7, 101, 18};
-    vector<int> nums2 = {0, 1, 0, 3, 2, 3};
-    vector<int> nums3 = {1, 3, 6, 7, 9, 4, 10, 5, 6};
+    vector<int> nums = { 10, 9, 2, 5, 3, 7, 101, 18 };
+    vector<int> nums2 = { 0, 1, 0, 3, 2, 3 };
+    vector<int> nums3 = { 1, 3, 6, 7, 9, 4, 10, 5, 6 };
     cout << Solution::lengthOfLIS2(nums3);
 }
 
@@ -102,7 +97,7 @@ void LetterCombination() {
 }
 
 void LevelOrder() {
-    int nodes[] = {3, 9, 20, -1, -1, 15, 7};
+    int nodes[] = { 3, 9, 20, -1, -1, 15, 7 };
     TreeNode *root = CommonUtil::buildTreeByDepth(nodes, 7);
     cout << "my tree: ";
     CommonUtil::traverseTreeByDepth(root);
@@ -134,16 +129,19 @@ void LengthOfLongestSubstring() {
 }
 
 void LowestCommonAncestor() {
-    int nodes[] = {6, 2, 8, 0, 4, 7, 9, -1, -1, 3, 5};
-    TreeNode *root = CommonUtil::buildTreeByDepth(nodes, sizeof(nodes) / sizeof(nodes[0]));
+    int nodes[] = { 6, 2, 8, 0, 4, 7, 9, -1, -1, 3, 5 };
+    TreeNode *root =
+        CommonUtil::buildTreeByDepth(nodes, sizeof(nodes) / sizeof(nodes[0]));
     auto *p = new TreeNode(2);
     auto *q = new TreeNode(4);
-    int nodes2[] = {2, 1};
-    TreeNode *root2 = CommonUtil::buildTreeByDepth(nodes2, sizeof(nodes2) / sizeof(nodes2[0]));
+    int nodes2[] = { 2, 1 };
+    TreeNode *root2 = CommonUtil::buildTreeByDepth(
+        nodes2, sizeof(nodes2) / sizeof(nodes2[0]));
     auto *p2 = new TreeNode(1);
     auto *q2 = new TreeNode(2);
-    int nodes3[] = {5, 3, 6, 2, 4, -1, -1, 1};
-    TreeNode *root3 = CommonUtil::buildTreeByDepth(nodes3, sizeof(nodes3) / sizeof(nodes3[0]));
+    int nodes3[] = { 5, 3, 6, 2, 4, -1, -1, 1 };
+    TreeNode *root3 = CommonUtil::buildTreeByDepth(
+        nodes3, sizeof(nodes3) / sizeof(nodes3[0]));
     auto *p3 = new TreeNode(1);
     auto *q3 = new TreeNode(3);
     cout << Solution::lowestCommonAncestor(root, p, q)->val << endl;
@@ -152,22 +150,20 @@ void LowestCommonAncestor() {
 }
 
 void MaxDepth() {
-    int nodes[] = {3, 9, 20, -1, -1, 15, 7};
-    TreeNode *root = CommonUtil::buildTreeByDepth(nodes, sizeof(nodes) / sizeof(nodes[0]));
+    int nodes[] = { 3, 9, 20, -1, -1, 15, 7 };
+    TreeNode *root =
+        CommonUtil::buildTreeByDepth(nodes, sizeof(nodes) / sizeof(nodes[0]));
     cout << Solution::maxDepth2(root) << endl;
 }
 
 void MinimizeMaximum() {
-    vector<int> nums = {3, 7, 1, 6};
+    vector<int> nums = { 3, 7, 1, 6 };
     cout << Solution::minimizeArrayValue(nums);
 }
 
 void MinScore() {
-    vector<vector<int> > roads = {
-        {1, 2, 9},
-        {2, 3, 6},
-        {2, 4, 5},
-        {1, 4, 7}
+    vector<vector<int>> roads = {
+        { 1, 2, 9 }, { 2, 3, 6 }, { 2, 4, 5 }, { 1, 4, 7 }
     };
     int n = 4;
     cout << Solution::minScore(n, roads);
@@ -180,8 +176,8 @@ void PartitionString() {
 }
 
 void Permutation() {
-    vector<int> nums = {1, 2, 3};
-    vector<int> nums2 = {0, 1};
+    vector<int> nums = { 1, 2, 3 };
+    vector<int> nums2 = { 0, 1 };
     auto permutation = Solution::permute(nums);
     CommonUtil::printMetric(permutation);
 }
@@ -192,7 +188,7 @@ void Reverse() {
 }
 
 void ReverseList() {
-    vector<int> nums = {1, 2, 3, 4, 5};
+    vector<int> nums = { 1, 2, 3, 4, 5 };
     ListNode *head = CommonUtil::newList(nums);
     cout << "before: ";
     CommonUtil::printLinkedList(head);
@@ -201,8 +197,8 @@ void ReverseList() {
 }
 
 void ReverseBetween() {
-    vector<int> nums = {1, 2, 3, 4, 5};
-    vector<int> nums2 = {3, 5};
+    vector<int> nums = { 1, 2, 3, 4, 5 };
+    vector<int> nums2 = { 3, 5 };
     ListNode *head = CommonUtil::newList(nums2);
     cout << "before: ";
     CommonUtil::printLinkedList(head);
@@ -211,7 +207,7 @@ void ReverseBetween() {
 }
 
 void SearchInsert() {
-    vector<int> nums = {1, 3, 5, 6};
+    vector<int> nums = { 1, 3, 5, 6 };
     cout << Solution::searchInsert(nums, 7);
 }
 
@@ -221,57 +217,56 @@ void SimplifyPath() {
 }
 
 void SingleNonDuplicate() {
-    vector<int> nums = {1};
+    vector<int> nums = { 1 };
     cout << Solution::singleNonDuplicate(nums) << endl;
 }
 
 void SortedListToBLT() {
-    auto *list = CommonUtil::newList(vector<int>{-10, -3, 0, 5, 9});
+    auto *list = CommonUtil::newList(vector<int>{ -10, -3, 0, 5, 9 });
     CommonUtil::traverseTreeInOrder(Solution::sortedListToBST(list));
 }
 
 void SuccessfulPairs() {
-    auto spells = vector<int> {3, 1, 2};
-    auto potions = vector<int> {8, 5, 8};
-    auto spells2 = vector<int> {5, 1, 3};
-    auto potions2 = vector<int> {1, 2, 3, 4, 5};
-    auto spells3 = vector<int> {15, 8, 19};
-    auto potions3 = vector<int> {38, 36, 23};
-    auto spells4 = vector<int> {38, 11};
-    auto potions4 = vector<int> {3, 20};
-    auto spells5 = vector<int> {9, 39};
-    auto potions5 = vector<int> {35, 40, 22, 37, 29, 22};
+    auto spells = vector<int>{ 3, 1, 2 };
+    auto potions = vector<int>{ 8, 5, 8 };
+    auto spells2 = vector<int>{ 5, 1, 3 };
+    auto potions2 = vector<int>{ 1, 2, 3, 4, 5 };
+    auto spells3 = vector<int>{ 15, 8, 19 };
+    auto potions3 = vector<int>{ 38, 36, 23 };
+    auto spells4 = vector<int>{ 38, 11 };
+    auto potions4 = vector<int>{ 3, 20 };
+    auto spells5 = vector<int>{ 9, 39 };
+    auto potions5 = vector<int>{ 35, 40, 22, 37, 29, 22 };
     long long success = 16;
     long long success2 = 7;
     long long success3 = 328;
     long long success4 = 1065;
     long long success5 = 320;
-    CommonUtil::printVectorInt(Solution::successfulPairs3(spells5, potions5, success5));
+    CommonUtil::printVectorInt(
+        Solution::successfulPairs3(spells5, potions5, success5));
 }
 
 void SpiralMatrix() {
-    vector<vector<int>> matrix = {
-        {1, 2, 3, 4},
-        {5, 6, 7, 8},
-        {9, 10, 11, 12}
-    };
+    vector<vector<int>> matrix = { { 1, 2, 3, 4 },
+                                   { 5, 6, 7, 8 },
+                                   { 9, 10, 11, 12 } };
     CommonUtil::printVectorInt(Solution::spiralOrder(matrix));
 }
 
 void ThreeSum() {
-    vector<int> nums = {-1, 0, 1, 2, -1, -4};
+    vector<int> nums = { -1, 0, 1, 2, -1, -4 };
     CommonUtil::printMetric(Solution::threeSum(nums));
 }
 
 void SumNumbers() {
-    int nums[] = {4, 9, 0, 5, 1};
+    int nums[] = { 4, 9, 0, 5, 1 };
     TreeNode *root = CommonUtil::buildTreeByDepth(nums, 5);
     cout << Solution::sumNumbers(root) << endl;
 }
 
 void IsSymmetric() {
-    int nums[] = {1, 2, 2, 3, 4, 4, 3};
-    int nums2[] = {1, 2, 2, -1, 3, -1, 3};
+    int nums[] = { 1, 2, 2, 3, 4, 4, 3 };
+    int nums2[] = { 1, 2, 2, -1, 3, -1, 3 };
     TreeNode *root = CommonUtil::buildTreeByDepth(nums2, 7);
     cout << Solution::isSymmetric(root) << endl;
 }
@@ -284,11 +279,7 @@ void ImplementTrie() {
 
 void CountPairs() {
     int n = 3;
-    vector<vector<int>> edges = {
-        {0, 1},
-        {0, 2},
-        {1, 2}
-    };
+    vector<vector<int>> edges = { { 0, 1 }, { 0, 2 }, { 1, 2 } };
     cout << Solution::countPairs(n, edges);
 }
 
