@@ -9,4 +9,8 @@
         android:id="@+id/menu_item_twice_xy_bug"
         android:title="Twice XY Bug" />
 
+    <item
+        android:id="@+id/menu_item_bad_rv"
+        android:title="Bad RV" />
+
 </menu>
