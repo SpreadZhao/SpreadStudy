@@ -3,9 +3,11 @@
 //
 #include "Solution.h"
 
-#include <cstring>
 #include <limits.h>
+
+#include <cstring>
 #include <set>
+#include <stack>
 
 #include "../Util/UnionFind.h"
 
@@ -38,17 +40,18 @@ string Solution::addBinary(string a, string b) {
         res.insert(res.begin(), 1);
     }
     stringstream ss;
-    for (int re: res) {
+    for (int re : res) {
         ss << re;
     }
     return ss.str();
 }
 
-vector<vector<string> > Solution::accountsMerge(vector<vector<string> > &accounts) {
+vector<vector<string>> Solution::accountsMerge(
+    vector<vector<string>> &accounts) {
     map<string, int> emailToIndex;
     map<string, string> emailToName;
     int emailsCount = 0;
-    for (auto &account: accounts) {
+    for (auto &account : accounts) {
         string &name = account[0];
         int size = account.size();
         for (int i = 1; i < size; i++) {
@@ -60,7 +63,7 @@ vector<vector<string> > Solution::accountsMerge(vector<vector<string> > &account
         }
     }
     UnionFind uf(emailsCount);
-    for (auto &account: accounts) {
+    for (auto &account : accounts) {
         string &firstEmail = account[1];
         int firstIndex = emailToIndex[firstEmail];
         int size = account.size();
@@ -70,20 +73,20 @@ vector<vector<string> > Solution::accountsMerge(vector<vector<string> > &account
             uf.unionSet(firstIndex, nextIndex);
         }
     }
-    map<int, vector<string> > indexToEmails;
-    for (auto &[email, _]: emailToIndex) {
+    map<int, vector<string>> indexToEmails;
+    for (auto &[email, _] : emailToIndex) {
         int index = uf.find(emailToIndex[email]);
         vector<string> &account = indexToEmails[index];
         account.emplace_back(email);
         indexToEmails[index] = account;
     }
-    vector<vector<string> > merged;
-    for (auto &[_, emails]: indexToEmails) {
+    vector<vector<string>> merged;
+    for (auto &[_, emails] : indexToEmails) {
         sort(emails.begin(), emails.end());
         string &name = emailToName[emails[0]];
         vector<string> account;
         account.emplace_back(name);
-        for (auto &email: emails) {
+        for (auto &email : emails) {
             account.emplace_back(email);
         }
         merged.emplace_back(account);
@@ -188,7 +191,7 @@ bool Solution::canPlaceFlowers2(vector<int> &flowerbed, int n) {
     return flowerCount >= n;
 }
 
-int Solution::makeConnected(int n, vector<vector<int> > &connections) {
+int Solution::makeConnected(int n, vector<vector<int>> &connections) {
     if (connections.size() < n - 1) {
         return -1;
     }
@@ -218,37 +221,39 @@ bool contains(vector<int> &nums, int target) {
     return res != nums.end();
 }
 
-vector<vector<int> > Solution::findDifference(vector<int> &nums1, vector<int> &nums2) {
+vector<vector<int>> Solution::findDifference(vector<int> &nums1,
+                                             vector<int> &nums2) {
     vector<int> list1;
     vector<int> list2;
-    for (auto num: nums1) {
+    for (auto num : nums1) {
         if (!contains(nums2, num) && !contains(list1, num)) {
             list1.emplace_back(num);
         }
     }
-    for (auto num: nums2) {
+    for (auto num : nums2) {
         if (!contains(nums1, num) && !contains(list2, num)) {
             list2.emplace_back(num);
         }
     }
-    return vector<vector<int> >{list1, list2};
+    return vector<vector<int>>{ list1, list2 };
 }
 
-vector<vector<int> > Solution::findDifference2(vector<int> &nums1, vector<int> &nums2) {
+vector<vector<int>> Solution::findDifference2(vector<int> &nums1,
+                                              vector<int> &nums2) {
     unordered_set<int> set1, set2;
-    for (int num: nums1) {
+    for (int num : nums1) {
         set1.insert(num);
     }
-    for (int num: nums2) {
+    for (int num : nums2) {
         set2.insert(num);
     }
-    vector<vector<int> > res(2);
-    for (int num: set1) {
+    vector<vector<int>> res(2);
+    for (int num : set1) {
         if (!set2.count(num)) {
             res[0].push_back(num);
         }
     }
-    for (int num: set2) {
+    for (int num : set2) {
         if (!set1.count(num)) {
             res[1].push_back(num);
         }
@@ -276,19 +281,20 @@ int Solution::numWays(vector<string> &words, string target) {
     memset(columnToCount, 0, sizeof(columnToCount));
     // iterator over the columns, calculating the count of every character.
     for (int j = 0; j < k; ++j) {
-        for (auto str: words) {
+        for (auto str : words) {
             columnToCount[str[j] - 'a'][j]++;
         }
     }
     // CommonUtil::printMetric(&columnToCount[0][0], ALPHABET, k);
     const size_t m = target.size();
-    vector<vector<int> > dp(m + 1, vector<int>(k + 1, 0));
+    vector<vector<int>> dp(m + 1, vector<int>(k + 1, 0));
     dp[0][0] = 1;
     for (int i = 0; i <= m; i++) {
         for (int j = 0; j < k; j++) {
             if (i < m) {
                 dp[i + 1][j + 1] += static_cast<int>(
-                    static_cast<long>(columnToCount[target[i] - 'a'][j]) * dp[i][j] % MOD);
+                    static_cast<long>(columnToCount[target[i] - 'a'][j]) *
+                    dp[i][j] % MOD);
             }
             dp[i][j + 1] += dp[i][j] % MOD;
         }
@@ -301,7 +307,7 @@ vector<bool> Solution::kidsWithCandies(vector<int> &candies, int extraCandies) {
     vector<bool> res;
     if (maxCandies != candies.end()) {
         const int maxCandiesCount = *maxCandies;
-        for (const auto candie: candies) {
+        for (const auto candie : candies) {
             res.emplace_back(candie + extraCandies > maxCandiesCount);
         }
     }
@@ -360,16 +366,10 @@ int Solution::lengthOfLIS2(vector<int> &nums) {
 }
 
 static const vector<string> digitsToLetters = {
-    "", // 0
-    "", // 1
-    "abc",
-    "def",
-    "ghi",
-    "jkl",
-    "mno",
-    "pqrs",
-    "tuv",
-    "wxyz" // 9
+    "",  // 0
+    "",  // 1
+    "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv",
+    "wxyz"  // 9
 };
 
 void putCh(vector<string> &res, string digits, string letters, int digitIndex) {
@@ -377,7 +377,7 @@ void putCh(vector<string> &res, string digits, string letters, int digitIndex) {
         res.emplace_back(letters);
         return;
     }
-    for (auto ch: digitsToLetters[digits[digitIndex] - '0']) {
+    for (auto ch : digitsToLetters[digits[digitIndex] - '0']) {
         putCh(res, digits, letters + ch, digitIndex + 1);
     }
 }
@@ -391,8 +391,8 @@ vector<string> Solution::letterCombinations(string digits) {
     return letters;
 }
 
-vector<vector<int> > Solution::levelOrder(TreeNode *root) {
-    vector<vector<int> > res;
+vector<vector<int>> Solution::levelOrder(TreeNode *root) {
+    vector<vector<int>> res;
     if (root == nullptr) {
         return res;
     }
@@ -405,8 +405,12 @@ vector<vector<int> > Solution::levelOrder(TreeNode *root) {
             auto node = nodes.front();
             nodes.pop();
             res.back().emplace_back(node->val);
-            if (node->left) { nodes.push(node->left); }
-            if (node->right) { nodes.push(node->right); }
+            if (node->left) {
+                nodes.push(node->left);
+            }
+            if (node->right) {
+                nodes.push(node->right);
+            }
         }
     }
     return res;
@@ -569,7 +573,8 @@ int Solution::lengthOfLongestSubstring2(string s) {
     return res;
 }
 
-TreeNode *Solution::lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode *q) {
+TreeNode *Solution::lowestCommonAncestor(TreeNode *root, TreeNode *p,
+                                         TreeNode *q) {
     TreeNode *curr = root;
     int target = p->val;
     set<TreeNode *> route;
@@ -602,7 +607,8 @@ TreeNode *Solution::lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode *
     return prev;
 }
 
-TreeNode *Solution::lowestCommonAncestor2(TreeNode *root, TreeNode *p, TreeNode *q) {
+TreeNode *Solution::lowestCommonAncestor2(TreeNode *root, TreeNode *p,
+                                          TreeNode *q) {
     TreeNode *curr = root;
     while (true) {
         if (curr->val < p->val && curr->val < q->val) {
@@ -691,9 +697,9 @@ int Solution::minimizeArrayValue(vector<int> &nums) {
 }
 
 static void dfs_minScore(int &minDis, vector<bool> &visited, int curr,
-                         unordered_map<int, vector<pair<int, int> > > edgeMap) {
+                         unordered_map<int, vector<pair<int, int>>> edgeMap) {
     visited[curr - 1] = true;
-    for (auto neighbor: edgeMap[curr]) {
+    for (auto neighbor : edgeMap[curr]) {
         const auto other = neighbor.first;
         const auto distance = neighbor.second;
         if (distance < minDis) {
@@ -705,10 +711,10 @@ static void dfs_minScore(int &minDis, vector<bool> &visited, int curr,
     }
 }
 
-int Solution::minScore(int n, vector<vector<int> > &roads) {
+int Solution::minScore(int n, vector<vector<int>> &roads) {
     // build map for edges
-    unordered_map<int, vector<pair<int, int> > > edgeMap;
-    for (auto road: roads) {
+    unordered_map<int, vector<pair<int, int>>> edgeMap;
+    for (auto road : roads) {
         const int node1 = road[0];
         const int node2 = road[1];
         const int distance = road[2];
@@ -737,7 +743,7 @@ int Solution::partitionString(string s) {
 
 int Solution::partitionString2(string s) {
     int count = 0, merge = 0;
-    for (const auto ch: s) {
+    for (const auto ch : s) {
         if ((merge & (1 << ch - 'a')) != 0) {
             count++;
             merge = 0;
@@ -786,7 +792,8 @@ bool Solution::isPalindrome2(int x) {
     return y == x;
 }
 
-void pickOne(vector<vector<int> > &result, vector<int> &curr, vector<int> &nums, int num) {
+void pickOne(vector<vector<int>> &result, vector<int> &curr, vector<int> &nums,
+             int num) {
     if (!contains(curr, num)) {
         curr.push_back(num);
     }
@@ -794,17 +801,17 @@ void pickOne(vector<vector<int> > &result, vector<int> &curr, vector<int> &nums,
         result.push_back(curr);
         return;
     }
-    for (auto n: nums) {
+    for (auto n : nums) {
         if (!contains(curr, n)) {
             pickOne(result, curr, nums, n);
         }
     }
 }
 
-vector<vector<int> > Solution::permute(vector<int> &nums) {
-    vector<vector<int> > result;
+vector<vector<int>> Solution::permute(vector<int> &nums) {
+    vector<vector<int>> result;
     vector<int> curr;
-    for (auto num: nums) {
+    for (auto num : nums) {
         pickOne(result, curr, nums, num);
     }
     return result;
@@ -817,8 +824,10 @@ int Solution::reverse(int x) {
     constexpr int BOUNDARY_N = INT_MIN / 10;
     while (xx != 0) {
         const int curr = xx % 10;
-        if (reversed > BOUNDARY_P || reversed == BOUNDARY_P && curr > 7) return 0;
-        if (reversed < BOUNDARY_N || reversed == BOUNDARY_N && curr < -8) return 0;
+        if (reversed > BOUNDARY_P || reversed == BOUNDARY_P && curr > 7)
+            return 0;
+        if (reversed < BOUNDARY_N || reversed == BOUNDARY_N && curr < -8)
+            return 0;
         reversed = reversed * 10 + curr;
         xx /= 10;
     }
@@ -948,7 +957,7 @@ string Solution::simplifyPath2(string path) {
     auto split = [](const string &s, char delim) -> vector<string> {
         vector<string> res;
         string cur;
-        for (char ch: s) {
+        for (char ch : s) {
             if (ch == delim) {
                 res.push_back(cur);
                 cur.clear();
@@ -961,7 +970,7 @@ string Solution::simplifyPath2(string path) {
     };
     vector<string> names = split(path, '/');
     vector<string> stack;
-    for (string &name: names) {
+    for (string &name : names) {
         if (name == ".." && !stack.empty()) {
             stack.pop_back();
         } else if (!name.empty() && name != "." && name != "..") {
@@ -972,7 +981,7 @@ string Solution::simplifyPath2(string path) {
     if (stack.empty()) {
         res = "/";
     } else {
-        for (string &name: stack) {
+        for (string &name : stack) {
             res += "/" + name;
         }
     }
@@ -1065,11 +1074,12 @@ TreeNode *Solution::sortedListToBST2(ListNode *head) {
     return cutRecursive2(head, nullptr);
 }
 
-vector<int> Solution::successfulPairs(vector<int> &spells, vector<int> &potions, long long success) {
+vector<int> Solution::successfulPairs(vector<int> &spells, vector<int> &potions,
+                                      long long success) {
     vector<int> res;
-    for (auto spell: spells) {
+    for (auto spell : spells) {
         int count = 0;
-        for (auto potion: potions) {
+        for (auto potion : potions) {
             long long product = static_cast<long long>(spell) * potion;
             if (product >= success) {
                 ++count;
@@ -1080,10 +1090,12 @@ vector<int> Solution::successfulPairs(vector<int> &spells, vector<int> &potions,
     return res;
 }
 
-vector<int> Solution::successfulPairs2(vector<int> &spells, vector<int> &potions, long long success) {
+vector<int> Solution::successfulPairs2(vector<int> &spells,
+                                       vector<int> &potions,
+                                       long long success) {
     vector<int> res;
     sort(potions.begin(), potions.end());
-    for (auto spell: spells) {
+    for (auto spell : spells) {
         int count = 0;
         for (int i = 0; i < potions.size(); i++) {
             int potion = potions[i];
@@ -1098,10 +1110,12 @@ vector<int> Solution::successfulPairs2(vector<int> &spells, vector<int> &potions
     return res;
 }
 
-vector<int> Solution::successfulPairs3(vector<int> &spells, vector<int> &potions, long long success) {
+vector<int> Solution::successfulPairs3(vector<int> &spells,
+                                       vector<int> &potions,
+                                       long long success) {
     vector<int> res;
     sort(potions.begin(), potions.end());
-    for (auto spell: spells) {
+    for (auto spell : spells) {
         int low = 0, high = potions.size() - 1;
         bool set = false;
         while (low <= high) {
@@ -1109,8 +1123,10 @@ vector<int> Solution::successfulPairs3(vector<int> &spells, vector<int> &potions
             if (low == high && (mid == 0 || mid == potions.size() - 1)) {
                 break;
             }
-            long long thisProduct = static_cast<long long>(spell) * potions[mid];
-            long long nextProduct = static_cast<long long>(spell) * potions[mid + 1];
+            long long thisProduct =
+                static_cast<long long>(spell) * potions[mid];
+            long long nextProduct =
+                static_cast<long long>(spell) * potions[mid + 1];
             if (thisProduct < success) {
                 if (nextProduct >= success) {
                     res.push_back(potions.size() - mid - 1);
@@ -1124,7 +1140,8 @@ vector<int> Solution::successfulPairs3(vector<int> &spells, vector<int> &potions
         }
         if (!set) {
             if (low == high) {
-                long long product = static_cast<long long>(spell) * potions[low];
+                long long product =
+                    static_cast<long long>(spell) * potions[low];
                 if (product >= success) {
                     res.push_back(potions.size() - low);
                 } else {
@@ -1138,7 +1155,8 @@ vector<int> Solution::successfulPairs3(vector<int> &spells, vector<int> &potions
                 if (low > potions.size() - 1) {
                     high = potions.size() - 1;
                 }
-                long long product = static_cast<long long>(spell) * potions[high];
+                long long product =
+                    static_cast<long long>(spell) * potions[high];
                 if (product >= success) {
                     res.push_back(potions.size() - high);
                 } else {
@@ -1150,7 +1168,7 @@ vector<int> Solution::successfulPairs3(vector<int> &spells, vector<int> &potions
     return res;
 }
 
-vector<int> Solution::spiralOrder(vector<vector<int> > &matrix) {
+vector<int> Solution::spiralOrder(vector<vector<int>> &matrix) {
     vector<int> res;
     int i = 0, j = 0, k = 0;
     int count = 0;
@@ -1165,7 +1183,9 @@ vector<int> Solution::spiralOrder(vector<vector<int> > &matrix) {
             res.push_back(matrix[i][j]);
             ++count;
             ++j;
-            if (count == total) { return res; }
+            if (count == total) {
+                return res;
+            }
         }
         --j;
         ++i;
@@ -1173,7 +1193,9 @@ vector<int> Solution::spiralOrder(vector<vector<int> > &matrix) {
             res.push_back(matrix[i][j]);
             ++count;
             ++i;
-            if (count == total) { return res; }
+            if (count == total) {
+                return res;
+            }
         }
         --i;
         --j;
@@ -1181,7 +1203,9 @@ vector<int> Solution::spiralOrder(vector<vector<int> > &matrix) {
             res.push_back(matrix[i][j]);
             ++count;
             --j;
-            if (count == total) { return res; }
+            if (count == total) {
+                return res;
+            }
         }
         ++j;
         --i;
@@ -1189,7 +1213,9 @@ vector<int> Solution::spiralOrder(vector<vector<int> > &matrix) {
             res.push_back(matrix[i][j]);
             ++count;
             --i;
-            if (count == total) { return res; }
+            if (count == total) {
+                return res;
+            }
         }
         ++k;
     }
@@ -1206,9 +1232,9 @@ static int next(const vector<int> &nums, int curr) {
     return next;
 }
 
-vector<vector<int> > Solution::threeSum(vector<int> &nums) {
+vector<vector<int>> Solution::threeSum(vector<int> &nums) {
     // timeover
-    vector<vector<int> > res;
+    vector<vector<int>> res;
     sort(nums.begin(), nums.end());
     for (int i = 0; i < nums.size() - 2; i++) {
         for (int j = i + 1; j < nums.size() - 1; j = next(nums, j)) {
@@ -1218,7 +1244,7 @@ vector<vector<int> > Solution::threeSum(vector<int> &nums) {
                     break;
                 }
                 if (sum == 0) {
-                    res.push_back({nums[i], nums[j], nums[k]});
+                    res.push_back({ nums[i], nums[j], nums[k] });
                     break;
                 }
             }
@@ -1227,16 +1253,16 @@ vector<vector<int> > Solution::threeSum(vector<int> &nums) {
     return res;
 }
 
-vector<vector<int> > Solution::threeSum2(vector<int> &nums) {
+vector<vector<int>> Solution::threeSum2(vector<int> &nums) {
     // error
-    vector<vector<int> > res;
+    vector<vector<int>> res;
     sort(nums.begin(), nums.end());
     for (int i = 0; i < nums.size() - 2; i = next(nums, i)) {
         int j = i + 1, k = nums.size() - 1;
         while (j < k) {
             const int sum = nums[i] + nums[j] + nums[k];
             if (sum == 0) {
-                res.push_back({nums[i], nums[j], nums[k]});
+                res.push_back({ nums[i], nums[j], nums[k] });
                 j++;
                 k--;
             } else if (sum > 0) {
@@ -1249,9 +1275,9 @@ vector<vector<int> > Solution::threeSum2(vector<int> &nums) {
     return res;
 }
 
-vector<vector<int> > Solution::threeSum3(vector<int> &nums) {
+vector<vector<int>> Solution::threeSum3(vector<int> &nums) {
     sort(nums.begin(), nums.end());
-    vector<vector<int> > res;
+    vector<vector<int>> res;
     for (int i = 0; i < nums.size(); i++) {
         if (i > 0 && nums[i] == nums[i - 1]) {
             continue;
@@ -1261,7 +1287,7 @@ vector<vector<int> > Solution::threeSum3(vector<int> &nums) {
         while (j < k) {
             const int sum = nums[j] + nums[k];
             if (sum == target) {
-                res.push_back({nums[i], nums[j], nums[k]});
+                res.push_back({ nums[i], nums[j], nums[k] });
                 j++;
                 k--;
                 while (j < k && nums[j] == nums[j - 1]) j++;
@@ -1277,21 +1303,23 @@ vector<vector<int> > Solution::threeSum3(vector<int> &nums) {
 }
 
 vector<int> Solution::twoSum(vector<int> &nums, int target) {
-    vector<vector<int> > nums2 = {};
+    vector<vector<int>> nums2 = {};
     for (int i = 0; i < nums.size(); i++) {
-        nums2.push_back({nums[i], i});
+        nums2.push_back({ nums[i], i });
     }
-    sort(nums2.begin(), nums2.end(), [](const vector<int> &a, const vector<int> &b) {
-        return a[0] < b[0];
-    });
+    sort(
+        nums2.begin(), nums2.end(),
+        [](const vector<int> &a, const vector<int> &b) { return a[0] < b[0]; });
     int i = 0, j = nums.size() - 1;
     while (i < j) {
         const int sum = nums2[i][0] + nums2[j][0];
         if (sum == target) {
-            return {nums2[i][1], nums2[j][1]};
+            return { nums2[i][1], nums2[j][1] };
         }
-        if (sum > target) j--;
-        else i++;
+        if (sum > target)
+            j--;
+        else
+            i++;
     }
     return {};
 }
@@ -1301,7 +1329,7 @@ vector<int> Solution::twoSum2(vector<int> &nums, int target) {
     for (int i = 0; i < nums.size(); i++) {
         auto it = numToIndex.find(target - nums[i]);
         if (it != numToIndex.end()) {
-            return {it->second, i};
+            return { it->second, i };
         }
         numToIndex[nums[i]] = i;
     }
@@ -1358,9 +1386,7 @@ static int addThis(int sum, TreeNode *curr) {
     return res;
 }
 
-int Solution::sumNumbers(TreeNode *root) {
-    return addThis(0, root);
-}
+int Solution::sumNumbers(TreeNode *root) { return addThis(0, root); }
 
 static bool traverse(TreeNode *curr1, TreeNode *curr2) {
     if (curr1 == nullptr && curr2 == nullptr) {
@@ -1375,7 +1401,8 @@ static bool traverse(TreeNode *curr1, TreeNode *curr2) {
     if (curr1->val != curr2->val) {
         return false;
     }
-    return traverse(curr1->left, curr2->right) && traverse(curr1->right, curr2->left);
+    return traverse(curr1->left, curr2->right) &&
+           traverse(curr1->right, curr2->left);
 }
 
 bool Solution::isSymmetric(TreeNode *root) {
@@ -1457,20 +1484,49 @@ bool Solution::Trie::startsWith(string prefix) {
     return true;
 }
 
-long long Solution::countPairs(int n, vector<vector<int>>& edges) {
+long long Solution::countPairs(int n, vector<vector<int>> &edges) {
     const CommonUtil::DFSResponse response = CommonUtil::dfs(n, edges);
     const vector<long long> islandSizes = response.islandSizes;
     return CommonUtil::quickPairSum(islandSizes);
 }
 
-
-
-
-
-
-
-
-
-
-
-
+bool Solution::isValid(string s) {
+    stack<char> stack;
+    for (char ch : s) {
+        if (ch == '(' || ch == '[' || ch == '{') {
+            stack.push(ch);
+            continue;
+        }
+        if (stack.empty()) {
+            return false;
+        }
+        char top = stack.top();
+        switch (ch) {
+            case ')': {
+                if (top == '(') {
+                    stack.pop();
+                    continue;
+                } else {
+                    return false;
+                }
+            }
+            case ']': {
+                if (top == '[') {
+                    stack.pop();
+                    continue;
+                } else {
+                    return false;
+                }
+            }
+            case '}': {
+                if (top == '{') {
+                    stack.pop();
+                    continue;
+                } else {
+                    return false;
+                }
+            }
+        }
+    }
+    return stack.empty();
+}

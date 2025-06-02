@@ -283,6 +283,11 @@ void CountPairs() {
     cout << Solution::countPairs(n, edges);
 }
 
+void ValidParentheses() {
+    string s = "([)";
+    cout << Solution::isValid(s);
+}
+
 int main() {
     // AddBinary();
     //    AccountsMerge();
@@ -318,6 +323,7 @@ int main() {
     // SumNumbers();
     // IsSymmetric();
     // ImplementTrie();
-    CountPairs();
+    // CountPairs();
+    ValidParentheses();
     return 0;
 }

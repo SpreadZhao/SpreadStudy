@@ -4,16 +4,18 @@
 
 #ifndef LEETCODECPP_SOLUTION_H
 #define LEETCODECPP_SOLUTION_H
-#include "../common.h"
+#include <type_traits>
 #include "../Util/CommonUtil.h"
+#include "../common.h"
 
 class Solution {
-public:
+   public:
     static string addBinary(string a, string b);
     // https://leetcode.cn/problems/accounts-merge/description/
-    static vector<vector<string>> accountsMerge(vector<vector<string>>& accounts);
+    static vector<vector<string>> accountsMerge(
+        vector<vector<string>> &accounts);
     // https://leetcode.cn/problems/boats-to-save-people/description/
-    static int numRescueBoats(vector<int>& people, int limit);
+    static int numRescueBoats(vector<int> &people, int limit);
     // https://leetcode.cn/problems/can-place-flowers/description/
     static bool canPlaceFlowers(vector<int> &flowerbed, int n);
     static bool canPlaceFlowers2(vector<int> &flowerbed, int n);
@@ -22,8 +24,10 @@ public:
     // https://leetcode.cn/problems/container-with-most-water/description/
     static int maxArea(vector<int> &height);
     // https://leetcode.cn/problems/find-the-difference-of-two-arrays/
-    static vector<vector<int>> findDifference(vector<int> &nums1, vector<int> &nums2);
-    static vector<vector<int>> findDifference2(vector<int> &nums1, vector<int> &nums2);
+    static vector<vector<int>> findDifference(vector<int> &nums1,
+                                              vector<int> &nums2);
+    static vector<vector<int>> findDifference2(vector<int> &nums1,
+                                               vector<int> &nums2);
     // https://leetcode.cn/problems/invert-binary-tree/description/
     static TreeNode *invertTree(TreeNode *root);
     // https://leetcode.cn/problems/number-of-ways-to-form-a-target-string-given-a-dictionary/description/
@@ -50,8 +54,10 @@ public:
     static int lengthOfLongestSubstring(string s);
     static int lengthOfLongestSubstring2(string s);
     // https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-search-tree/description/
-    static TreeNode *lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode *q);
-    static TreeNode *lowestCommonAncestor2(TreeNode *root, TreeNode *p, TreeNode *q);
+    static TreeNode *lowestCommonAncestor(TreeNode *root, TreeNode *p,
+                                          TreeNode *q);
+    static TreeNode *lowestCommonAncestor2(TreeNode *root, TreeNode *p,
+                                           TreeNode *q);
     // https://leetcode.cn/problems/maximum-depth-of-binary-tree/description/
     static int maxDepth(TreeNode *root);
     static int maxDepth2(TreeNode *root);
@@ -86,9 +92,14 @@ public:
     static TreeNode *sortedListToBST(ListNode *head);
     static TreeNode *sortedListToBST2(ListNode *head);
     // https://leetcode.cn/problems/successful-pairs-of-spells-and-potions/description/
-    static vector<int> successfulPairs(vector<int> &spells, vector<int> &potions, long long success);
-    static vector<int> successfulPairs2(vector<int> &spells, vector<int> &potions, long long success);
-    static vector<int> successfulPairs3(vector<int> &spells, vector<int> &potions, long long success);
+    static vector<int> successfulPairs(vector<int> &spells,
+                                       vector<int> &potions, long long success);
+    static vector<int> successfulPairs2(vector<int> &spells,
+                                        vector<int> &potions,
+                                        long long success);
+    static vector<int> successfulPairs3(vector<int> &spells,
+                                        vector<int> &potions,
+                                        long long success);
     // https://leetcode.cn/problems/spiral-matrix/description/
     static vector<int> spiralOrder(vector<vector<int>> &matrix);
     // https://leetcode.cn/problems/3sum/description/
@@ -107,7 +118,7 @@ public:
 
     // https://leetcode.cn/problems/implement-trie-prefix-tree/description/
     class Trie {
-    public:
+       public:
         Trie();
 
         void insert(string word);
@@ -116,18 +127,21 @@ public:
 
         bool startsWith(string prefix);
 
-    private:
+       private:
         class TrieNode {
-        public:
+           public:
             bool is_last = false;
             map<char, TrieNode *> children;
         };
 
-        TrieNode *roots[26] { nullptr };
+        TrieNode *roots[26]{ nullptr };
     };
 
     // https://leetcode.cn/problems/count-unreachable-pairs-of-nodes-in-an-undirected-graph/
     static long long countPairs(int n, vector<vector<int>> &edges);
+
+    // https:// leetcode.cn/problems/valid-parentheses/description/
+    static bool isValid(string s);
 };
 
-#endif //LEETCODECPP_SOLUTION_H
+#endif  // LEETCODECPP_SOLUTION_H
