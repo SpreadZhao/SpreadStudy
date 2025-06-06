@@ -8,6 +8,8 @@
 #include <cstring>
 #include <set>
 #include <stack>
+#include <string>
+#include <type_traits>
 
 #include "../Util/UnionFind.h"
 
@@ -1439,10 +1441,8 @@ void Solution::Trie::insert(string word) {
         auto &children = curr->children;
         if (children.find(ch) == children.end()) {
             children[ch] = new TrieNode();
-            curr = children[ch];
-        } else {
-            curr = children[ch];
         }
+        curr = children[ch];
     }
     curr->is_last = true;
 }
@@ -1529,4 +1529,45 @@ bool Solution::isValid(string s) {
         }
     }
     return stack.empty();
+}
+
+Solution::WordDictionary::WordDictionary() { this->root = new TrieNode(); }
+
+void Solution::WordDictionary::addWord(string word) {
+    TrieNode *curr = this->root;
+    for (char ch : word) {
+        auto &children = curr->children;
+        if (children.find(ch) == children.end()) {
+            children[ch] = new TrieNode();
+        }
+        curr = children[ch];
+    }
+    curr->is_last = true;
+}
+
+bool Solution::WordDictionary::search(string word) {
+    return searchFrom(word, 0, root);
+}
+
+bool Solution::WordDictionary::searchFrom(string word, int index,
+                                          TrieNode *node) {
+    if (index == word.size()) {
+        return node->is_last;
+    }
+    char ch = word[index];
+    auto &children = node->children;
+    if (ch != '.') {
+        if (children.find(ch) != children.end() &&
+            searchFrom(word, index + 1, children[ch])) {
+            return true;
+        }
+    } else {
+        for (char c = 'a'; c <= 'z'; c++) {
+            if (children.find(c) != children.end() &&
+                searchFrom(word, index + 1, children[c])) {
+                return true;
+            }
+        }
+    }
+    return false;
 }

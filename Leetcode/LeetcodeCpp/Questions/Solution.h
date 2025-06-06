@@ -4,7 +4,9 @@
 
 #ifndef LEETCODECPP_SOLUTION_H
 #define LEETCODECPP_SOLUTION_H
+#include <map>
 #include <type_traits>
+
 #include "../Util/CommonUtil.h"
 #include "../common.h"
 
@@ -142,6 +144,23 @@ class Solution {
 
     // https:// leetcode.cn/problems/valid-parentheses/description/
     static bool isValid(string s);
+
+    // https://leetcode.cn/problems/design-add-and-search-words-data-structure/description/
+    class WordDictionary {
+       public:
+        WordDictionary();
+        void addWord(string word);
+        bool search(string word);
+
+       private:
+        class TrieNode {
+           public:
+            map<char, TrieNode *> children;
+            bool is_last = false;
+        };
+        TrieNode *root;
+        bool searchFrom(string word, int startIndex, TrieNode *start);
+    };
 };
 
 #endif  // LEETCODECPP_SOLUTION_H

@@ -288,6 +288,21 @@ void ValidParentheses() {
     cout << Solution::isValid(s);
 }
 
+void SearchWord() {
+    Solution::WordDictionary *dictionary = new Solution::WordDictionary();
+    // dictionary->addWord("bad");
+    // dictionary->addWord("dad");
+    // dictionary->addWord("mad");
+    // cout << dictionary->search("pad");
+    // cout << dictionary->search("bad");
+    // cout << dictionary->search(".ad");
+    // cout << dictionary->search("b..");
+    dictionary->addWord("a");
+    dictionary->addWord("a");
+    cout << dictionary->search("a");
+    cout << dictionary->search("aa");
+}
+
 int main() {
     // AddBinary();
     //    AccountsMerge();
@@ -324,6 +339,7 @@ int main() {
     // IsSymmetric();
     // ImplementTrie();
     // CountPairs();
-    ValidParentheses();
+    // ValidParentheses();
+    SearchWord();
     return 0;
 }
