@@ -1,4 +1,3 @@
-
 pub fn reference() {
     // let s1 = String::from("hello");
     // let r = &s1;
@@ -14,24 +13,13 @@ pub fn reference() {
     let r2 = &mut s;
     println!("{}", r2);
     // println!("{}, {}", r1, r2);
-    
+
     let r1 = &s;
     let r2 = &s;
     println!("{}, {}", r1, r2);
     let r3 = &mut s;
     // println!("{}, {}", r1, r2);
     println!("{}", r3);
-
-}
-
-fn first_word(s: &String) -> &str {
-    let bytes = s.as_bytes();
-    for (i, &item) in bytes.iter().enumerate() {
-        if item == b' ' {
-            return &s[0..i];
-        }
-    }
-    &s[..]
 }
 
 // fn dangle() -> &String {
