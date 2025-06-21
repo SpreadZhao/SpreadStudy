@@ -303,6 +303,12 @@ void SearchWord() {
     cout << dictionary->search("aa");
 }
 
+void Zigzag() {
+    string s = "AB";
+    int numRows = 1;
+    cout << Solution::convert(s, numRows);
+}
+
 int main() {
     // AddBinary();
     //    AccountsMerge();
@@ -340,6 +346,7 @@ int main() {
     // ImplementTrie();
     // CountPairs();
     // ValidParentheses();
-    SearchWord();
+    // SearchWord();
+    Zigzag();
     return 0;
 }

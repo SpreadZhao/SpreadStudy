@@ -6,10 +6,12 @@
 #include <limits.h>
 
 #include <cstring>
+#include <queue>
 #include <set>
 #include <stack>
 #include <string>
 #include <type_traits>
+#include <vector>
 
 #include "../Util/UnionFind.h"
 
@@ -1570,4 +1572,43 @@ bool Solution::WordDictionary::searchFrom(string word, int index,
         }
     }
     return false;
+}
+
+string Solution::convert(string s, int numRows) {
+    if (numRows == 1) {
+        return s;
+    }
+    vector<queue<char>> queues(numRows);
+    for (int i = 0; i < queues.size(); i++) {
+        queues[i] = queue<char>();
+    }
+    int currQueueIndex = 0;
+    bool forward = true;
+    for (char ch : s) {
+        queues[currQueueIndex].push(ch);
+        if (forward) {
+            if (currQueueIndex == numRows - 1) {
+                forward = false;
+                currQueueIndex--;
+            } else {
+                currQueueIndex++;
+            }
+        } else {
+            if (currQueueIndex == 0) {
+                forward = true;
+                currQueueIndex++;
+            } else {
+                currQueueIndex--;
+            }
+        }
+    }
+    string res = "";
+    for (queue<char> queue : queues) {
+        while (!queue.empty()) {
+            char ch = queue.front();
+            res += ch;
+            queue.pop();
+        }
+    }
+    return res;
 }

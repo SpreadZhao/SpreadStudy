@@ -5,6 +5,7 @@
 #ifndef LEETCODECPP_SOLUTION_H
 #define LEETCODECPP_SOLUTION_H
 #include <map>
+#include <string>
 #include <type_traits>
 
 #include "../Util/CommonUtil.h"
@@ -161,6 +162,10 @@ class Solution {
         TrieNode *root;
         bool searchFrom(string word, int startIndex, TrieNode *start);
     };
+
+    // https://leetcode.cn/problems/zigzag-conversion/
+    static string convert(string s, int numRow);
+
 };
 
 #endif  // LEETCODECPP_SOLUTION_H
