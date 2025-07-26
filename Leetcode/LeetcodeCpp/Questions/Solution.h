@@ -7,6 +7,7 @@
 #include <map>
 #include <string>
 #include <type_traits>
+#include <vector>
 
 #include "../Util/CommonUtil.h"
 #include "../common.h"
@@ -109,6 +110,7 @@ class Solution {
     static vector<vector<int>> threeSum(vector<int> &nums);
     static vector<vector<int>> threeSum2(vector<int> &nums);
     static vector<vector<int>> threeSum3(vector<int> &nums);
+    static vector<vector<int>> threeSum4(vector<int> &nums);
     // https://leetcode.cn/problems/two-sum/description/
     static vector<int> twoSum(vector<int> &nums, int target);
     static vector<int> twoSum2(vector<int> &nums, int target);

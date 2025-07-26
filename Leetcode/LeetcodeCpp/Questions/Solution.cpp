@@ -5,6 +5,7 @@
 
 #include <limits.h>
 
+#include <algorithm>
 #include <cstring>
 #include <queue>
 #include <set>
@@ -1302,6 +1303,38 @@ vector<vector<int>> Solution::threeSum3(vector<int> &nums) {
                 k--;
             }
         }
+    }
+    return res;
+}
+
+vector<vector<int>> Solution::threeSum4(vector<int> &nums) {
+    sort(nums.begin(), nums.end());
+    vector<vector<int>> res;
+    int i = 0;
+    while (i < nums.size() - 2) {
+        int j = i + 1, k = nums.size() - 1;
+        while (j < k) {
+            int sum = nums[i] + nums[j] + nums[k];
+            if (sum == 0) {
+                res.push_back({ nums[i], nums[j], nums[k] });
+                while (j < k && nums[j] == nums[j + 1]) {
+                    j++;
+                }
+                while (j < k && nums[k] == nums[k - 1]) {
+                    k--;
+                }
+                j++;
+                k--;
+            } else if (sum > 0) {
+                k--;
+            } else {
+                j++;
+            }
+        }
+        while (i < nums.size() - 2 && nums[i] == nums[i + 1]) {
+            i++;
+        }
+        i++;
     }
     return res;
 }
