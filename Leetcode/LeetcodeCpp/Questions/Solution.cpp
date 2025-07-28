@@ -1173,6 +1173,20 @@ vector<int> Solution::successfulPairs3(vector<int> &spells,
     return res;
 }
 
+vector<int> Solution::successfulPairs4(vector<int> &spells,
+                                       vector<int> &potions,
+                                       long long success) {
+    vector<int> res;
+    sort(potions.begin(), potions.end());
+    for (auto spell : spells) {
+        long long target = success / spell - (success % spell == 0 ? 1 : 0);
+        auto it = upper_bound(potions.begin(), potions.end(), target);
+        int count = potions.size() - (it - potions.begin());
+        res.push_back(count);
+    }
+    return res;
+}
+
 vector<int> Solution::spiralOrder(vector<vector<int>> &matrix) {
     vector<int> res;
     int i = 0, j = 0, k = 0;

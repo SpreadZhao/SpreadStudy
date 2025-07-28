@@ -243,7 +243,7 @@ void SuccessfulPairs() {
     long long success4 = 1065;
     long long success5 = 320;
     CommonUtil::printVectorInt(
-        Solution::successfulPairs3(spells5, potions5, success5));
+        Solution::successfulPairs4(spells5, potions5, success5));
 }
 
 void SpiralMatrix() {
@@ -338,7 +338,7 @@ int main() {
     // SimplifyPath();
     // SingleNonDuplicate();
     // SortedListToBLT();
-    // SuccessfulPairs();
+    SuccessfulPairs();
     // SpiralMatrix();
     // ThreeSum();
     // SumNumbers();
@@ -347,6 +347,6 @@ int main() {
     // CountPairs();
     // ValidParentheses();
     // SearchWord();
-    Zigzag();
+    // Zigzag();
     return 0;
 }

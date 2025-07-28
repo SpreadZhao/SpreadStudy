@@ -104,6 +104,9 @@ class Solution {
     static vector<int> successfulPairs3(vector<int> &spells,
                                         vector<int> &potions,
                                         long long success);
+    static vector<int> successfulPairs4(vector<int> &spells,
+                                        vector<int> &potions,
+                                        long long success);
     // https://leetcode.cn/problems/spiral-matrix/description/
     static vector<int> spiralOrder(vector<vector<int>> &matrix);
     // https://leetcode.cn/problems/3sum/description/
@@ -167,7 +170,6 @@ class Solution {
 
     // https://leetcode.cn/problems/zigzag-conversion/
     static string convert(string s, int numRow);
-
 };
 
 #endif  // LEETCODECPP_SOLUTION_H
