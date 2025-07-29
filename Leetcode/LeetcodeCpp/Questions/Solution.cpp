@@ -6,6 +6,7 @@
 #include <limits.h>
 
 #include <algorithm>
+#include <cstddef>
 #include <cstring>
 #include <queue>
 #include <set>
@@ -625,6 +626,19 @@ TreeNode *Solution::lowestCommonAncestor2(TreeNode *root, TreeNode *p,
         }
     }
     return curr;
+}
+
+TreeNode *Solution::lowestCommonAncestor3(TreeNode *root, TreeNode *p,
+                                          TreeNode *q) {
+    if (root == nullptr || root == p || root == q) {
+        return root;
+    }
+    auto *left = lowestCommonAncestor3(root->left, p, q);
+    auto *right = lowestCommonAncestor3(root->right, p, q);
+    if (left != nullptr && right != nullptr) {
+        return root;
+    }
+    return left != nullptr ? left : right;
 }
 
 int Solution::maxDepth(TreeNode *root) {

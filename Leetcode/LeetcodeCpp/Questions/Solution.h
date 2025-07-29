@@ -62,6 +62,9 @@ class Solution {
                                           TreeNode *q);
     static TreeNode *lowestCommonAncestor2(TreeNode *root, TreeNode *p,
                                            TreeNode *q);
+    // https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/description/
+    static TreeNode *lowestCommonAncestor3(TreeNode *root, TreeNode *p,
+                                           TreeNode *q);
     // https://leetcode.cn/problems/maximum-depth-of-binary-tree/description/
     static int maxDepth(TreeNode *root);
     static int maxDepth2(TreeNode *root);
