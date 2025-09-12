@@ -8,6 +8,9 @@
 #include <algorithm>
 #include <cstddef>
 #include <cstring>
+#include <iterator>
+#include <list>
+#include <map>
 #include <queue>
 #include <set>
 #include <stack>
@@ -1672,4 +1675,37 @@ string Solution::convert(string s, int numRows) {
         }
     }
     return res;
+}
+
+Solution::LRUCache::LRUCache(int capacity) { this->max_size = capacity; }
+
+int Solution::LRUCache::get(int key) {
+    if (!exist(key)) {
+        return -1;
+    }
+    auto node_it = this->origin_data[key];
+    ordered_data.splice(ordered_data.end(), ordered_data, node_it);
+    return node_it->value;
+}
+
+void Solution::LRUCache::put(int key, int value) {
+    if (!exist(key)) {
+        Node node{};
+        node.value = value;
+        node.key = key;
+        const int size = this->origin_data.size();
+        if (size >= max_size) {
+            // remove first elem
+            int first_key = ordered_data.front().key;
+            ordered_data.pop_front();
+            origin_data.erase(first_key);
+        }
+        ordered_data.emplace_back(node);
+        origin_data[key] = prev(ordered_data.end());
+    } else {
+        auto node_it = origin_data[key];
+        node_it->key = key;
+        node_it->value = value;
+        ordered_data.splice(ordered_data.end(), ordered_data, node_it);
+    }
 }

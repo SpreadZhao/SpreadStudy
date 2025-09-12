@@ -4,9 +4,12 @@
 
 #ifndef LEETCODECPP_SOLUTION_H
 #define LEETCODECPP_SOLUTION_H
+#include <list>
 #include <map>
+#include <set>
 #include <string>
 #include <type_traits>
+#include <unordered_map>
 #include <vector>
 
 #include "../Util/CommonUtil.h"
@@ -173,6 +176,35 @@ class Solution {
 
     // https://leetcode.cn/problems/zigzag-conversion/
     static string convert(string s, int numRow);
+
+    // https://leetcode.cn/problems/lru-cache/description/
+    class LRUCache {
+       private:
+        class Node {
+           public:
+            int value;
+            int key;
+        };
+
+       public:
+        LRUCache(int capacity);
+
+        int get(int key);
+
+        void put(int key, int value);
+
+       private:
+        list<Node> ordered_data;
+        unordered_map<int, list<Node>::iterator> origin_data;
+        int max_size;
+
+        bool exist(int key) {
+            if (origin_data.find(key) == origin_data.end()) {
+                return false;
+            }
+            return true;
+        }
+    };
 };
 
 #endif  // LEETCODECPP_SOLUTION_H

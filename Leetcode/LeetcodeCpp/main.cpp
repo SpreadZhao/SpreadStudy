@@ -309,6 +309,10 @@ void Zigzag() {
     cout << Solution::convert(s, numRows);
 }
 
+void LRUCache() {
+    Solution::LRUCache *cache = new Solution::LRUCache(2);
+}
+
 int main() {
     // AddBinary();
     //    AccountsMerge();
@@ -338,7 +342,7 @@ int main() {
     // SimplifyPath();
     // SingleNonDuplicate();
     // SortedListToBLT();
-    SuccessfulPairs();
+    // SuccessfulPairs();
     // SpiralMatrix();
     // ThreeSum();
     // SumNumbers();
