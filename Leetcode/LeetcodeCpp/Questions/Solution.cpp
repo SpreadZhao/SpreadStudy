@@ -1709,3 +1709,100 @@ void Solution::LRUCache::put(int key, int value) {
         ordered_data.splice(ordered_data.end(), ordered_data, node_it);
     }
 }
+
+void Solution::LRUCache2::move_to_tail(Node *node) {
+    if (node == nullptr) {
+        return;
+    }
+    if (origin_data.find(node->key) == origin_data.end()) {
+        return;
+    }
+    if (tail == node) {
+        return;
+    }
+    if (origin_data.size() <= 1) {
+        return;
+    }
+    if (head == node) {
+        head = head->next;
+        head->prev = nullptr;
+        node->prev = tail;
+        node->next = nullptr;
+        tail->next = node;
+        tail = node;
+        return;
+    }
+    node->prev->next = node->next;
+    node->next->prev = node->prev;
+    node->next = nullptr;
+    node->prev = tail;
+    tail->next = node;
+    tail = node;
+}
+void Solution::LRUCache2::erase_head() {
+    if (origin_data.empty() || head == nullptr || tail == nullptr) {
+        return;
+    }
+    int key = head->key;
+    if (head == tail) {
+        delete head;
+        head = nullptr;
+        tail = nullptr;
+    } else {
+        Node *new_head = head->next;
+        delete head;
+        head = new_head;
+        head->prev = nullptr;
+    }
+    origin_data.erase(key);
+}
+
+void Solution::LRUCache2::insert_to_tail(Node *node) {
+    if (node == nullptr) {
+        return;
+    }
+    if (origin_data.find(node->key) != origin_data.end()) {
+        move_to_tail(node);
+        return;
+    }
+    if (origin_data.empty()) {
+        head = node;
+        tail = node;
+    } else {
+        tail->next = node;
+        node->prev = tail;
+        tail = node;
+    }
+    origin_data[node->key] = node;
+}
+
+Solution::LRUCache2::LRUCache2(int capacity) {
+    this->max_size = capacity;
+    this->head = nullptr;
+    this->tail = nullptr;
+}
+
+int Solution::LRUCache2::get(int key) {
+    if (origin_data.empty() || origin_data.find(key) == origin_data.end()) {
+        return -1;
+    }
+    auto *node = origin_data.at(key);
+    move_to_tail(node);
+    return node->value;
+}
+
+void Solution::LRUCache2::put(int key, int value) {
+    if (origin_data.find(key) == origin_data.end()) {
+        Node *node = new Node(key, value);
+        node->prev = tail;
+        node->next = nullptr;
+        if (origin_data.size() >= max_size) {
+            erase_head();
+        }
+        insert_to_tail(node);
+    } else {
+        Node *node = origin_data.at(key);
+        node->value = value;
+        move_to_tail(node);
+    }
+}

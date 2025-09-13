@@ -205,6 +205,30 @@ class Solution {
             return true;
         }
     };
+
+    class LRUCache2 {
+       class Node {
+       public:
+           int key;
+           int value;
+           Node *next = nullptr;
+           Node *prev = nullptr;
+           Node(int key, int value) : key(key), value(value) {}
+       };
+
+        void move_to_tail(Node *node);
+        void erase_head();
+        void insert_to_tail(Node *node);
+
+        Node *head;
+        Node *tail;
+        unordered_map<int, Node *> origin_data;
+        int max_size;
+    public:
+        LRUCache2(int capacity);
+        int get(int key);
+        void put(int key, int value);
+    };
 };
 
 #endif  // LEETCODECPP_SOLUTION_H

@@ -310,7 +310,13 @@ void Zigzag() {
 }
 
 void LRUCache() {
-    Solution::LRUCache *cache = new Solution::LRUCache(2);
+    // Solution::LRUCache *cache = new Solution::LRUCache(2);
+    Solution::LRUCache2 cache = Solution::LRUCache2(2);
+    cache.put(1, 1);
+    cache.put(2, 2);
+    cout << cache.get(1);
+    cache.put(3, 3);
+    cout << cache.get(2);
 }
 
 int main() {
@@ -352,5 +358,6 @@ int main() {
     // ValidParentheses();
     // SearchWord();
     // Zigzag();
+    LRUCache();
     return 0;
 }
