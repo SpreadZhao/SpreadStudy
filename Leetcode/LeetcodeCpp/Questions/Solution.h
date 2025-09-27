@@ -229,6 +229,9 @@ class Solution {
         int get(int key);
         void put(int key, int value);
     };
+
+    // https://leetcode.cn/problems/merge-two-sorted-lists/
+    static ListNode *mergeTwoLists(ListNode *list1, ListNode *list2);
 };
 
 #endif  // LEETCODECPP_SOLUTION_H

@@ -319,6 +319,12 @@ void LRUCache() {
     cout << cache.get(2);
 }
 
+void MergeTwoSortedLists() {
+    ListNode *list1 = CommonUtil::newList(vector<int>{ 1, 2, 4 });
+    ListNode *list2 = CommonUtil::newList(vector<int>{ 1, 3, 4 });
+    Solution::mergeTwoLists(list1, list2);
+}
+
 int main() {
     // AddBinary();
     //    AccountsMerge();
@@ -358,6 +364,7 @@ int main() {
     // ValidParentheses();
     // SearchWord();
     // Zigzag();
-    LRUCache();
+    // LRUCache();
+    MergeTwoSortedLists();
     return 0;
 }

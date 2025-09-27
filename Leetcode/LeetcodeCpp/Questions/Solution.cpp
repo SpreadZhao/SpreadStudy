@@ -1806,3 +1806,40 @@ void Solution::LRUCache2::put(int key, int value) {
         move_to_tail(node);
     }
 }
+
+void insertToTail(ListNode **head, ListNode **tail, ListNode *node) {
+    if (*head == nullptr || *tail == nullptr) {
+        *head = node;
+        *tail = node;
+        return;
+    }
+    (*tail)->next = node;
+    (*tail) = node;
+}
+
+ListNode *Solution::mergeTwoLists(ListNode *list1, ListNode *list2) {
+    ListNode *p1 = list1;
+    ListNode *p2 = list2;
+    ListNode *head = nullptr;
+    ListNode *tail = nullptr;
+    while (true) {
+        ListNode *inserted;
+        if (p1 == nullptr && p2 != nullptr) {
+            inserted = p2;
+        } else if (p1 != nullptr && p2 == nullptr) {
+            inserted = p1;
+        } else if (p1 == nullptr) {
+            // both null
+            break;
+        } else {
+            inserted = p1->val <= p2->val ? p1 : p2;
+        }
+        insertToTail(&head, &tail, inserted);
+        if (p1 != nullptr && p1 == inserted) {
+            p1 = p1->next;
+        } else if (p2 != nullptr && p2 == inserted) {
+            p2 = p2->next;
+        }
+    }
+    return head;
+}
