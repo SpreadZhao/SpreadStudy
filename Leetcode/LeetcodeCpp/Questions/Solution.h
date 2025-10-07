@@ -232,6 +232,7 @@ class Solution {
 
     // https://leetcode.cn/problems/merge-two-sorted-lists/
     static ListNode *mergeTwoLists(ListNode *list1, ListNode *list2);
+    static ListNode *insertionSortList(ListNode* head);
 };
 
 #endif  // LEETCODECPP_SOLUTION_H

@@ -325,6 +325,12 @@ void MergeTwoSortedLists() {
     Solution::mergeTwoLists(list1, list2);
 }
 
+void InsertionSortList() {
+    ListNode *list = CommonUtil::newList(vector<int>{ 4, 2, 1, 3 });
+    ListNode *sorted = Solution::insertionSortList(list);
+    CommonUtil::printLinkedList(sorted);
+}
+
 int main() {
     // AddBinary();
     //    AccountsMerge();
@@ -365,6 +371,7 @@ int main() {
     // SearchWord();
     // Zigzag();
     // LRUCache();
-    MergeTwoSortedLists();
+    // MergeTwoSortedLists();
+    InsertionSortList();
     return 0;
 }

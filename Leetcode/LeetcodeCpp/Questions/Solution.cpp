@@ -1843,3 +1843,50 @@ ListNode *Solution::mergeTwoLists(ListNode *list1, ListNode *list2) {
     }
     return head;
 }
+
+void extractNode(ListNode *prev, ListNode *node) {
+    prev->next = node->next;
+    node->next = nullptr;
+}
+
+ListNode *insertOneNode(ListNode *dummyHead, ListNode *lastNode, ListNode *node) {
+    ListNode *p = dummyHead->next;
+    ListNode *prev = dummyHead;
+    // try insert before p
+    while (p != nullptr && p != lastNode) {
+        if (p->val >= node->val) {
+            break;
+        }
+        p = p->next;
+        prev = prev->next;
+    }
+    if (p->val >= node->val) {
+        // before
+        node->next = p;
+        prev->next = node;
+    } else {
+        // after
+        node->next = p->next;
+        p->next = node;
+    }
+    if (lastNode->val >= node->val) {
+        return lastNode;
+    }
+    return node;
+}
+
+ListNode *Solution::insertionSortList(ListNode *head) {
+    if (head == nullptr || head->next == nullptr) {
+        return head;
+    }
+    ListNode dummyHead(-1);
+    dummyHead.next = head;
+    ListNode *end = head;
+    ListNode *node = end->next;
+    while (node != nullptr) {
+        extractNode(end, node);
+        end = insertOneNode(&dummyHead, end, node);
+        node = end->next;
+    }
+    return dummyHead.next;
+}
