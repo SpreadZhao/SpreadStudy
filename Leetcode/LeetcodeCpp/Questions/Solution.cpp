@@ -1890,3 +1890,47 @@ ListNode *Solution::insertionSortList(ListNode *head) {
     }
     return dummyHead.next;
 }
+
+ListNode *findMiddle(ListNode *head) {
+    if (head == nullptr || head->next == nullptr) {
+        return head;
+    }
+    ListNode *slow = head;
+    ListNode *fast = head;
+    while (fast != nullptr && fast->next != nullptr) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    return slow;
+}
+
+/**
+ * assert head has at least two nodes
+ */
+pair<ListNode *, ListNode *> split(ListNode *head) {
+    ListNode *mid = findMiddle(head);
+    if (mid->next == nullptr) {
+        // 2 nodes
+        head->next = nullptr;
+        return {head, mid};
+    }
+    ListNode *head2 = mid->next;
+    mid->next = nullptr;
+    return {head, head2};       // head2 must not be null
+}
+
+ListNode *mergeSort(ListNode *head) {
+    if (head == nullptr || head->next == nullptr) {
+        return head;
+    }
+    // at least has two nodes
+    // split to two sub lists
+    auto [head1, head2] = split(head);
+    ListNode *list1 = mergeSort(head1);
+    ListNode *list2 = mergeSort(head2);
+    return Solution::mergeTwoLists(list1, list2);
+}
+
+ListNode *Solution::sortList(ListNode *head) {
+    return mergeSort(head);
+}

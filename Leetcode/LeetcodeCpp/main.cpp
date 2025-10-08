@@ -331,6 +331,11 @@ void InsertionSortList() {
     CommonUtil::printLinkedList(sorted);
 }
 
+void SortList() {
+    ListNode *list = CommonUtil::newList(vector<int>{ 4, 2, 1, 3 });
+    CommonUtil::printLinkedList(Solution::sortList(list));
+}
+
 int main() {
     // AddBinary();
     //    AccountsMerge();
@@ -372,6 +377,7 @@ int main() {
     // Zigzag();
     // LRUCache();
     // MergeTwoSortedLists();
-    InsertionSortList();
+    // InsertionSortList();
+    SortList();
     return 0;
 }

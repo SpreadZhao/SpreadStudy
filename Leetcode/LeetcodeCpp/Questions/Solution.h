@@ -232,7 +232,10 @@ class Solution {
 
     // https://leetcode.cn/problems/merge-two-sorted-lists/
     static ListNode *mergeTwoLists(ListNode *list1, ListNode *list2);
+    // https://leetcode.cn/problems/insertion-sort-list/description/
     static ListNode *insertionSortList(ListNode* head);
+    // https://leetcode.cn/problems/sort-list/
+    static ListNode *sortList(ListNode *head);
 };
 
 #endif  // LEETCODECPP_SOLUTION_H
