@@ -1934,3 +1934,80 @@ ListNode *mergeSort(ListNode *head) {
 ListNode *Solution::sortList(ListNode *head) {
     return mergeSort(head);
 }
+
+pair<ListNode *, ListNode *> mergeLists(ListNode *list1, ListNode *list2) {
+    ListNode *p1 = list1;
+    ListNode *p2 = list2;
+    ListNode *head = nullptr;
+    ListNode *tail = nullptr;
+    while (true) {
+        ListNode *inserted;
+        if (p1 == nullptr && p2 != nullptr) {
+            inserted = p2;
+        } else if (p1 != nullptr && p2 == nullptr) {
+            inserted = p1;
+        } else if (p1 == nullptr) {
+            // both null
+            break;
+        } else {
+            inserted = p1->val <= p2->val ? p1 : p2;
+        }
+        insertToTail(&head, &tail, inserted);
+        if (p1 != nullptr && p1 == inserted) {
+            p1 = p1->next;
+        } else if (p2 != nullptr && p2 == inserted) {
+            p2 = p2->next;
+        }
+    }
+    return {head, tail};
+}
+
+ListNode *Solution::sortList2(ListNode *head) {
+    if (head == nullptr || head->next == nullptr) {
+        return head;
+    }
+    int len = 0;
+    for (ListNode *p = head; p != nullptr; p = p->next) {
+        len++;
+    }
+    ListNode dummyHead(-1, head);
+    for (int step = 1; step < len; step *= 2) {
+        // split the whole list into ordered sub lists with length of [step]
+        ListNode *curr = dummyHead.next;
+        ListNode *prev = &dummyHead;
+        while (curr != nullptr) {
+            ListNode *left = curr;
+            int leftSize = 0;
+            // move node for step - 1 times,
+            // thus has [step] nodes
+            while (curr != nullptr && leftSize < step - 1) {
+                leftSize++;
+                curr = curr->next;
+            }
+            if (curr == nullptr) {
+                prev->next = left;
+                break;
+            }
+            ListNode *right = curr->next;
+            curr->next = nullptr;
+            curr = right;
+            int rightSize = 0;
+            while (curr != nullptr && rightSize < step - 1) {
+                rightSize++;
+                curr = curr->next;
+            }
+            ListNode *next;
+            if (curr == nullptr) {
+                next = nullptr;
+            } else {
+                next = curr->next;
+                curr->next = nullptr;
+            }
+            auto [sub_h, sub_t] = mergeLists(left, right);
+            prev->next = sub_h;
+            prev = sub_t;
+            curr = next;
+        }
+    }
+    return dummyHead.next;
+}

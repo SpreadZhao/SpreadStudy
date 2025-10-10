@@ -236,6 +236,7 @@ class Solution {
     static ListNode *insertionSortList(ListNode* head);
     // https://leetcode.cn/problems/sort-list/
     static ListNode *sortList(ListNode *head);
+    static ListNode *sortList2(ListNode *head);
 };
 
 #endif  // LEETCODECPP_SOLUTION_H

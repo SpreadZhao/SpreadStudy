@@ -332,8 +332,8 @@ void InsertionSortList() {
 }
 
 void SortList() {
-    ListNode *list = CommonUtil::newList(vector<int>{ 4, 2, 1, 3 });
-    CommonUtil::printLinkedList(Solution::sortList(list));
+    ListNode *list = CommonUtil::newList(vector<int>{ -1, 5, 3, 4, 0 });
+    CommonUtil::printLinkedList(Solution::sortList2(list));
 }
 
 int main() {
