@@ -237,6 +237,9 @@ class Solution {
     // https://leetcode.cn/problems/sort-list/
     static ListNode *sortList(ListNode *head);
     static ListNode *sortList2(ListNode *head);
+    // https://leetcode.cn/problems/kth-largest-element-in-an-array/
+    static int findKthLargest(vector<int> &nums, int k);
+    
 };
 
 #endif  // LEETCODECPP_SOLUTION_H

@@ -2011,3 +2011,14 @@ ListNode *Solution::sortList2(ListNode *head) {
     }
     return dummyHead.next;
 }
+
+int Solution::findKthLargest(vector<int> &nums, int k) {
+    MaxHeap heap(nums.size());
+    for (auto &num : nums) {
+        heap.insert(num);
+    }
+    for (int i = 1; i < k; i++) {
+        heap.pop();
+    }
+    return heap.top();
+}

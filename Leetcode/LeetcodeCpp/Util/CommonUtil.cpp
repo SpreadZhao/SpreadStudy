@@ -2,6 +2,7 @@
 // Created by SpreadZhao on 2024/8/4.
 //
 #include "CommonUtil.h"
+#include <ios>
 
 bool CommonUtil::isEven(int n) { return n % 2 == 0; }
 
@@ -170,4 +171,109 @@ long long CommonUtil::quickPairSum(const vector<long long>& nums) {
         squaredSum += num * num;
     }
     return (sum * sum - squaredSum) / 2;
+}
+
+void MaxHeap::init() {
+
+}
+
+int MaxHeap::parent(int index) {
+    int pi = index / 2;
+    return valid(pi) ? pi : -1;
+}
+
+int MaxHeap::leftChild(int index) {
+    int li = index * 2;
+    return valid(li) ? li : -1;
+}
+
+int MaxHeap::rightChild(int index) {
+    int ri = index * 2 + 1;
+    return valid(ri) ? ri : -1;
+}
+
+void MaxHeap::swap(int index1, int index2) {
+    if (!valid(index1) || !valid(index2)) {
+        return;
+    }
+    const int temp = arr_[index1];
+    arr_[index1] = arr_[index2];
+    arr_[index2] = temp;
+}
+
+bool MaxHeap::valid(int index) {
+    return index >= 1 && index < size_;
+}
+
+void MaxHeap::insert(int num) {
+    if (size_ == max_size_) {
+        return;
+    }
+    int insert_index = size_;
+    arr_[insert_index] = num;
+    size_++;
+    move_up(insert_index);
+}
+
+void MaxHeap::pop() {
+    if (size_ == 1) {
+        return;
+    }
+    swap(1, size_ - 1);
+    arr_.pop_back();
+    size_--;
+    move_down(1);
+}
+
+int MaxHeap::top() {
+    if (size_ == 1) {
+        return -1;
+    }
+    return arr_[1];
+}
+
+void MaxHeap::move_up(int index) {
+    if (!valid(index)) {
+        return;
+    }
+    int i = index;
+    while (valid(i)) {
+        int pi = parent(i);
+        if (!valid(pi) || arr_[i] <= arr_[pi]) {
+            break;
+        }
+        swap(i, pi);
+        i = pi;
+    }
+}
+
+void MaxHeap::move_down(int index) {
+    if (!valid(index)) {
+        return;
+    }
+    int i = index;
+    while (valid(i)) {
+        int maybe_child_index = max_of_three(i);
+        if (i == maybe_child_index) {
+            break;
+        }
+        swap(i, maybe_child_index);
+        i = maybe_child_index;
+    }
+}
+
+int MaxHeap::max_of_three(int parent) {
+    if (!valid(parent)) {
+        return -1;
+    }
+    int max_index = parent;
+    int left_index = leftChild(parent);
+    int right_index = rightChild(parent);
+    if (valid(left_index) && arr_[left_index] > arr_[max_index]) {
+        max_index = left_index;
+    }
+    if (valid(right_index) && arr_[right_index] > arr_[max_index]) {
+        max_index = right_index;
+    }
+    return max_index;
 }

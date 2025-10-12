@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "Questions/Solution.h"
+#include "Util/CommonUtil.h"
 
 Solution solution;
 
@@ -336,6 +337,26 @@ void SortList() {
     CommonUtil::printLinkedList(Solution::sortList2(list));
 }
 
+void TestMaxHeap() {
+    MaxHeap heap(5);
+    heap.insert(5);
+    heap.insert(8);
+    heap.insert(1);
+    heap.insert(4);
+    heap.insert(3);
+    for (int i = 0; i < 5; i++) {
+        int top = heap.top();
+        cout << "top: " << top << endl;
+        heap.pop();
+    }
+}
+
+void KthLargest() {
+    vector<int> nums = { 3, 2, 3, 1, 2, 4, 5, 5, 6 };
+    int kl = Solution::findKthLargest(nums, 4);
+    cout << kl;
+}
+
 int main() {
     // AddBinary();
     //    AccountsMerge();
@@ -378,6 +399,8 @@ int main() {
     // LRUCache();
     // MergeTwoSortedLists();
     // InsertionSortList();
-    SortList();
+    // SortList();
+    // TestMaxHeap();
+    KthLargest();
     return 0;
 }
