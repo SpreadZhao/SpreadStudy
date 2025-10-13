@@ -32,14 +32,15 @@ struct ListNode {
 
 class MaxHeap {
    public:
-    MaxHeap(const int size) : size_(1), max_size_(size + 1), arr_(max_size_) {
-        init();
+    MaxHeap(const int size) : size_(1), max_size_(size + 1), arr_(max_size_) {}
+    MaxHeap(const vector<int> &nums) : size_(nums.size() + 1), max_size_(size_) {
+        init(nums);
     }
 
     int size_;
     int max_size_;
     vector<int> arr_;
-    void init();
+    void init(const vector<int> &);
     // parent index
     int parent(int index);
     // left child index

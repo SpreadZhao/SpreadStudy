@@ -3,6 +3,8 @@
 //
 #include "CommonUtil.h"
 #include <ios>
+#include <iterator>
+#include <vector>
 
 bool CommonUtil::isEven(int n) { return n % 2 == 0; }
 
@@ -173,8 +175,14 @@ long long CommonUtil::quickPairSum(const vector<long long>& nums) {
     return (sum * sum - squaredSum) / 2;
 }
 
-void MaxHeap::init() {
-
+void MaxHeap::init(const vector<int> &nums) {
+    arr_.resize(size_);
+    for (int i = 0; i < nums.size(); i++) {
+        arr_[i + 1] = nums[i];
+    }
+    for (int i = (size_ - 1) / 2; i >= 1; i--) {
+        move_down(i);
+    }
 }
 
 int MaxHeap::parent(int index) {
