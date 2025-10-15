@@ -1849,7 +1849,8 @@ void extractNode(ListNode *prev, ListNode *node) {
     node->next = nullptr;
 }
 
-ListNode *insertOneNode(ListNode *dummyHead, ListNode *lastNode, ListNode *node) {
+ListNode *insertOneNode(ListNode *dummyHead, ListNode *lastNode,
+                        ListNode *node) {
     ListNode *p = dummyHead->next;
     ListNode *prev = dummyHead;
     // try insert before p
@@ -1912,11 +1913,11 @@ pair<ListNode *, ListNode *> split(ListNode *head) {
     if (mid->next == nullptr) {
         // 2 nodes
         head->next = nullptr;
-        return {head, mid};
+        return { head, mid };
     }
     ListNode *head2 = mid->next;
     mid->next = nullptr;
-    return {head, head2};       // head2 must not be null
+    return { head, head2 };  // head2 must not be null
 }
 
 ListNode *mergeSort(ListNode *head) {
@@ -1931,9 +1932,7 @@ ListNode *mergeSort(ListNode *head) {
     return Solution::mergeTwoLists(list1, list2);
 }
 
-ListNode *Solution::sortList(ListNode *head) {
-    return mergeSort(head);
-}
+ListNode *Solution::sortList(ListNode *head) { return mergeSort(head); }
 
 pair<ListNode *, ListNode *> mergeLists(ListNode *list1, ListNode *list2) {
     ListNode *p1 = list1;
@@ -1959,7 +1958,7 @@ pair<ListNode *, ListNode *> mergeLists(ListNode *list1, ListNode *list2) {
             p2 = p2->next;
         }
     }
-    return {head, tail};
+    return { head, tail };
 }
 
 ListNode *Solution::sortList2(ListNode *head) {
@@ -2018,4 +2017,41 @@ int Solution::findKthLargest(vector<int> &nums, int k) {
         heap.pop();
     }
     return heap.top();
+}
+
+int partition(vector<int> &nums, int low, int high) {
+    int pivot_index = low + rand() % (high - low + 1);
+    swap(nums[low], nums[pivot_index]);  // 随机化
+    int pivot = nums[low];
+    while (low < high) {
+        while (low < high && nums[high] >= pivot) high--;
+        if (low < high) {
+            CommonUtil::vector_swap(nums, low, high);
+        }
+        while (low < high && nums[low] <= pivot) low++;
+        if (low < high) {
+            CommonUtil::vector_swap(nums, low, high);
+        }
+    }
+    return low;
+}
+
+void quickSelect(vector<int> &nums, int k, int low, int high) {
+    if (low >= high) {
+        return;
+    }
+    int target_index = nums.size() - k;
+    int pivot_index = partition(nums, low, high);
+    if (pivot_index == target_index) {
+        return;
+    } else if (pivot_index < target_index) {
+        quickSelect(nums, k, pivot_index + 1, high);
+    } else {
+        quickSelect(nums, k, low, pivot_index - 1);
+    }
+}
+
+int Solution::findKthLargest2(vector<int> &nums, int k) {
+    quickSelect(nums, k, 0, nums.size() - 1);
+    return nums[nums.size() - k];
 }

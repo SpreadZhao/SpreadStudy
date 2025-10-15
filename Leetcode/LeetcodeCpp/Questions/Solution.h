@@ -239,6 +239,7 @@ class Solution {
     static ListNode *sortList2(ListNode *head);
     // https://leetcode.cn/problems/kth-largest-element-in-an-array/
     static int findKthLargest(vector<int> &nums, int k);
+    static int findKthLargest2(vector<int> &nums, int k);
     
 };
 

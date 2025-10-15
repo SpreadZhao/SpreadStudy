@@ -84,6 +84,7 @@ class CommonUtil {
     static void printVectorInt(const vector<int> &vec);
     static ListNode *newList(const vector<int> &nums);
     static long long quickPairSum(const vector<long long> &nums);
+    static void vector_swap(vector<int> &nums, int index1, int index2);
 };
 
 #endif  // LEETCODECPP_COMMONUTIL_H

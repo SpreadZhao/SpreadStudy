@@ -353,7 +353,8 @@ void TestMaxHeap() {
 
 void KthLargest() {
     vector<int> nums = { 3, 2, 3, 1, 2, 4, 5, 5, 6 };
-    int kl = Solution::findKthLargest(nums, 4);
+    vector<int> nums2 = { 3, 2, 1, 5, 6, 4 };
+    int kl = Solution::findKthLargest2(nums2, 2);
     cout << kl;
 }
 
