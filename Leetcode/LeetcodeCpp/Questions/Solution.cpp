@@ -2055,3 +2055,24 @@ int Solution::findKthLargest2(vector<int> &nums, int k) {
     quickSelect(nums, k, 0, nums.size() - 1);
     return nums[nums.size() - k];
 }
+
+int Solution::maxSubArray(vector<int> &nums) {
+    if (nums.size() == 1) {
+        return nums.at(0);
+    }
+    int pre = nums[0];
+    int max = pre;
+    for (int i = 1; i < nums.size(); i++) {
+        if (pre < 0) {
+            // new start
+            pre = nums[i];
+        } else {
+            // pre = std::max(pre, pre + nums[i]);
+            pre += nums[i];
+        }
+        if (pre > max) {
+            max = pre;
+        }
+    }
+    return max;
+}
