@@ -16,6 +16,7 @@
 #include <stack>
 #include <string>
 #include <type_traits>
+#include <utility>
 #include <vector>
 
 #include "../Util/UnionFind.h"
@@ -2019,7 +2020,7 @@ int Solution::findKthLargest(vector<int> &nums, int k) {
     return heap.top();
 }
 
-int partition(vector<int> &nums, int low, int high) {
+int partitionForQuickSelect(vector<int> &nums, int low, int high) {
     int pivot_index = low + rand() % (high - low + 1);
     swap(nums[low], nums[pivot_index]);  // 随机化
     int pivot = nums[low];
@@ -2041,7 +2042,7 @@ void quickSelect(vector<int> &nums, int k, int low, int high) {
         return;
     }
     int target_index = nums.size() - k;
-    int pivot_index = partition(nums, low, high);
+    int pivot_index = partitionForQuickSelect(nums, low, high);
     if (pivot_index == target_index) {
         return;
     } else if (pivot_index < target_index) {
@@ -2075,4 +2076,38 @@ int Solution::maxSubArray(vector<int> &nums) {
         }
     }
     return max;
+}
+
+int partition(vector<int> &nums, int left, int right) {
+    int pivot = nums[left];
+    while (left < right) {
+        while (left < right && nums[right] >= pivot) {
+            right--;
+        }
+        if (left < right) {
+            CommonUtil::vector_swap(nums, left, right);
+        }
+        while (left < right && nums[left] <= pivot) {
+            left++;
+        }
+        if (left < right) {
+            CommonUtil::vector_swap(nums, left, right);
+        }
+    }
+    return left;
+}
+
+void quickSort(vector<int> &nums, int left, int right) {
+    if (left >= right) {
+        // 1 or 0 elem, return
+        return;
+    }
+    int pivot_index = partition(nums, left, right);
+    quickSort(nums, left, pivot_index - 1);
+    quickSort(nums, pivot_index + 1, right);
+}
+
+vector<int> Solution::sortArray(vector<int> &nums) {
+    quickSort(nums, 0, nums.size() - 1);
+    return nums;
 }

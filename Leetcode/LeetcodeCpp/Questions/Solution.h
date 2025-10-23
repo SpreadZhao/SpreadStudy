@@ -242,6 +242,8 @@ class Solution {
     static int findKthLargest2(vector<int> &nums, int k);
     // https://leetcode.cn/problems/maximum-subarray
     static int maxSubArray(vector<int> &nums);
+    // https://leetcode.cn/problems/sort-an-array
+    static vector<int> sortArray(vector<int> &nums);
     
 };
 
