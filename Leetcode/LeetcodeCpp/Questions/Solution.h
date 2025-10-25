@@ -244,6 +244,8 @@ class Solution {
     static int maxSubArray(vector<int> &nums);
     // https://leetcode.cn/problems/sort-an-array
     static vector<int> sortArray(vector<int> &nums);
+    // https://leetcode.cn/problems/search-in-rotated-sorted-array/description/
+    static int search(vector<int> &nums, int target);
     
 };
 

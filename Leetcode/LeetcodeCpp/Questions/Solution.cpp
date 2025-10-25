@@ -2111,3 +2111,45 @@ vector<int> Solution::sortArray(vector<int> &nums) {
     quickSort(nums, 0, nums.size() - 1);
     return nums;
 }
+
+inline bool isSubarraySorted(vector<int> &nums, int first_index, int last_index) {
+    return nums[last_index] >= nums[first_index];
+}
+
+int Solution::search(vector<int> &nums, int target) {
+    int left = 0, right = nums.size() - 1;
+    while (left < right) {
+        int mid = (left + right) / 2;
+        if (target == nums[mid]) {
+            return mid;
+        }
+        if (isSubarraySorted(nums, left, mid)) {
+            // left is sorted
+            if (target == nums[left]) {
+                return left;
+            }
+            if (target > nums[left] && target < nums[mid]) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        } else {
+            // right is sorted
+            if (target == nums[right]) {
+                return right;
+            }
+            if (target == nums[mid + 1]) {
+                return mid + 1;
+            }
+            if (target > nums[mid + 1] && target < nums[right]) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+    }
+    if (left == right) {
+        return nums[left] == target ? left : -1;
+    }
+    return -1;
+}
