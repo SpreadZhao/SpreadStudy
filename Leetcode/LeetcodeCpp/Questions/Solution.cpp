@@ -7,6 +7,7 @@
 
 #include <algorithm>
 #include <cstddef>
+#include <cstdlib>
 #include <cstring>
 #include <iterator>
 #include <list>
@@ -57,15 +58,15 @@ string Solution::addBinary(string a, string b) {
 }
 
 vector<vector<string>> Solution::accountsMerge(
-    vector<vector<string>> &accounts) {
+    vector<vector<string>>& accounts) {
     map<string, int> emailToIndex;
     map<string, string> emailToName;
     int emailsCount = 0;
-    for (auto &account : accounts) {
-        string &name = account[0];
+    for (auto& account : accounts) {
+        string& name = account[0];
         int size = account.size();
         for (int i = 1; i < size; i++) {
-            string &email = account[i];
+            string& email = account[i];
             if (!emailToIndex.count(email)) {
                 emailToIndex[email] = emailsCount++;
                 emailToName[email] = name;
@@ -73,30 +74,30 @@ vector<vector<string>> Solution::accountsMerge(
         }
     }
     UnionFind uf(emailsCount);
-    for (auto &account : accounts) {
-        string &firstEmail = account[1];
+    for (auto& account : accounts) {
+        string& firstEmail = account[1];
         int firstIndex = emailToIndex[firstEmail];
         int size = account.size();
         for (int i = 2; i < size; i++) {
-            string &nextEmail = account[i];
+            string& nextEmail = account[i];
             int nextIndex = emailToIndex[nextEmail];
             uf.unionSet(firstIndex, nextIndex);
         }
     }
     map<int, vector<string>> indexToEmails;
-    for (auto &[email, _] : emailToIndex) {
+    for (auto& [email, _] : emailToIndex) {
         int index = uf.find(emailToIndex[email]);
-        vector<string> &account = indexToEmails[index];
+        vector<string>& account = indexToEmails[index];
         account.emplace_back(email);
         indexToEmails[index] = account;
     }
     vector<vector<string>> merged;
-    for (auto &[_, emails] : indexToEmails) {
+    for (auto& [_, emails] : indexToEmails) {
         sort(emails.begin(), emails.end());
-        string &name = emailToName[emails[0]];
+        string& name = emailToName[emails[0]];
         vector<string> account;
         account.emplace_back(name);
-        for (auto &email : emails) {
+        for (auto& email : emails) {
             account.emplace_back(email);
         }
         merged.emplace_back(account);
@@ -104,7 +105,7 @@ vector<vector<string>> Solution::accountsMerge(
     return merged;
 }
 
-int Solution::numRescueBoats(vector<int> &people, int limit) {
+int Solution::numRescueBoats(vector<int>& people, int limit) {
     int i = 0, j = people.size() - 1;
     std::sort(people.begin(), people.end());
     int numOfBoats = 0;
@@ -126,7 +127,7 @@ int Solution::numRescueBoats(vector<int> &people, int limit) {
     return numOfBoats;
 }
 
-int findNext1(vector<int> &flowerbed, int start) {
+int findNext1(vector<int>& flowerbed, int start) {
     for (int i = start + 1; i < flowerbed.size(); ++i) {
         int flower = flowerbed.at(i);
         if (flower == 1) {
@@ -136,7 +137,7 @@ int findNext1(vector<int> &flowerbed, int start) {
     return -1;
 }
 
-bool Solution::canPlaceFlowers(vector<int> &flowerbed, int n) {
+bool Solution::canPlaceFlowers(vector<int>& flowerbed, int n) {
     int zeroCount = 0, lastIndexOf1 = 0, indexOf1 = 0, flowerCount = 0;
     // Find first 1
     int first1Index = findNext1(flowerbed, -1);
@@ -177,7 +178,7 @@ bool Solution::canPlaceFlowers(vector<int> &flowerbed, int n) {
     return flowerCount >= n;
 }
 
-int findNext12(vector<int> &flowerbed, int start) {
+int findNext12(vector<int>& flowerbed, int start) {
     for (int i = start + 1; i < flowerbed.size(); ++i) {
         int flower = flowerbed.at(i);
         if (flower == 1) {
@@ -187,7 +188,7 @@ int findNext12(vector<int> &flowerbed, int start) {
     return flowerbed.size();
 }
 
-bool Solution::canPlaceFlowers2(vector<int> &flowerbed, int n) {
+bool Solution::canPlaceFlowers2(vector<int>& flowerbed, int n) {
     int i = -1, j = -1, flowerCount = 0;
     // https://stackoverflow.com/questions/16250058/why-is-1-a-size-false-even-though-stdvectors-size-is-positive
     while (i == -1 || i < flowerbed.size()) {
@@ -201,7 +202,7 @@ bool Solution::canPlaceFlowers2(vector<int> &flowerbed, int n) {
     return flowerCount >= n;
 }
 
-int Solution::makeConnected(int n, vector<vector<int>> &connections) {
+int Solution::makeConnected(int n, vector<vector<int>>& connections) {
     if (connections.size() < n - 1) {
         return -1;
     }
@@ -209,7 +210,7 @@ int Solution::makeConnected(int n, vector<vector<int>> &connections) {
     return response.islandNum - 1;
 }
 
-int Solution::maxArea(vector<int> &height) {
+int Solution::maxArea(vector<int>& height) {
     int i = 0, j = height.size() - 1;
     int maxVolume = 0;
     while (i < j) {
@@ -226,13 +227,13 @@ int Solution::maxArea(vector<int> &height) {
     return maxVolume;
 }
 
-bool contains(vector<int> &nums, int target) {
+bool contains(vector<int>& nums, int target) {
     const auto res = find(nums.begin(), nums.end(), target);
     return res != nums.end();
 }
 
-vector<vector<int>> Solution::findDifference(vector<int> &nums1,
-                                             vector<int> &nums2) {
+vector<vector<int>> Solution::findDifference(vector<int>& nums1,
+                                             vector<int>& nums2) {
     vector<int> list1;
     vector<int> list2;
     for (auto num : nums1) {
@@ -245,11 +246,11 @@ vector<vector<int>> Solution::findDifference(vector<int> &nums1,
             list2.emplace_back(num);
         }
     }
-    return vector<vector<int>>{ list1, list2 };
+    return vector<vector<int>>{list1, list2};
 }
 
-vector<vector<int>> Solution::findDifference2(vector<int> &nums1,
-                                              vector<int> &nums2) {
+vector<vector<int>> Solution::findDifference2(vector<int>& nums1,
+                                              vector<int>& nums2) {
     unordered_set<int> set1, set2;
     for (int num : nums1) {
         set1.insert(num);
@@ -271,11 +272,11 @@ vector<vector<int>> Solution::findDifference2(vector<int> &nums1,
     return res;
 }
 
-TreeNode *Solution::invertTree(TreeNode *root) {
+TreeNode* Solution::invertTree(TreeNode* root) {
     if (root == nullptr) {
         return root;
     }
-    TreeNode *temp = root->left;
+    TreeNode* temp = root->left;
     root->left = root->right;
     root->right = temp;
     invertTree(root->left);
@@ -283,7 +284,7 @@ TreeNode *Solution::invertTree(TreeNode *root) {
     return root;
 }
 
-int Solution::numWays(vector<string> &words, string target) {
+int Solution::numWays(vector<string>& words, string target) {
     constexpr int ALPHABET = 26;
     constexpr int MOD = 1e9 + 7;
     const size_t k = words[0].size();
@@ -312,7 +313,7 @@ int Solution::numWays(vector<string> &words, string target) {
     return dp[m][k];
 }
 
-vector<bool> Solution::kidsWithCandies(vector<int> &candies, int extraCandies) {
+vector<bool> Solution::kidsWithCandies(vector<int>& candies, int extraCandies) {
     auto maxCandies = max_element(candies.begin(), candies.end());
     vector<bool> res;
     if (maxCandies != candies.end()) {
@@ -324,7 +325,7 @@ vector<bool> Solution::kidsWithCandies(vector<int> &candies, int extraCandies) {
     return res;
 }
 
-int Solution::lengthOfLIS(vector<int> &nums) {
+int Solution::lengthOfLIS(vector<int>& nums) {
     const size_t size = nums.size();
     int dp[size];
     memset(dp, 0, sizeof(dp));
@@ -343,7 +344,7 @@ int Solution::lengthOfLIS(vector<int> &nums) {
     return res;
 }
 
-int Solution::lengthOfLIS2(vector<int> &nums) {
+int Solution::lengthOfLIS2(vector<int>& nums) {
     int len = 1, n = nums.size();
     if (n == 0) {
         return 0;
@@ -382,7 +383,7 @@ static const vector<string> digitsToLetters = {
     "wxyz"  // 9
 };
 
-void putCh(vector<string> &res, string digits, string letters, int digitIndex) {
+void putCh(vector<string>& res, string digits, string letters, int digitIndex) {
     if (digitIndex >= digits.size()) {
         res.emplace_back(letters);
         return;
@@ -401,12 +402,12 @@ vector<string> Solution::letterCombinations(string digits) {
     return letters;
 }
 
-vector<vector<int>> Solution::levelOrder(TreeNode *root) {
+vector<vector<int>> Solution::levelOrder(TreeNode* root) {
     vector<vector<int>> res;
     if (root == nullptr) {
         return res;
     }
-    queue<TreeNode *> nodes;
+    queue<TreeNode*> nodes;
     nodes.push(root);
     while (!nodes.empty()) {
         int currLevelSize = nodes.size();
@@ -426,7 +427,7 @@ vector<vector<int>> Solution::levelOrder(TreeNode *root) {
     return res;
 }
 
-ListNode *Solution::getIntersectionNode(ListNode *headA, ListNode *headB) {
+ListNode* Solution::getIntersectionNode(ListNode* headA, ListNode* headB) {
     if (headA == nullptr || headB == nullptr) {
         return nullptr;
     }
@@ -451,7 +452,7 @@ ListNode *Solution::getIntersectionNode(ListNode *headA, ListNode *headB) {
     return p1;
 }
 
-ListNode *Solution::getIntersectionNode2(ListNode *headA, ListNode *headB) {
+ListNode* Solution::getIntersectionNode2(ListNode* headA, ListNode* headB) {
     if (headA == nullptr || headB == nullptr) {
         return nullptr;
     }
@@ -471,7 +472,7 @@ ListNode *Solution::getIntersectionNode2(ListNode *headA, ListNode *headB) {
     return p1;
 }
 
-string Solution::longestCommonPrefix(vector<string> &strs) {
+string Solution::longestCommonPrefix(vector<string>& strs) {
     string res = "";
     sort(strs.begin(), strs.end());
     string first = strs[0];
@@ -583,11 +584,11 @@ int Solution::lengthOfLongestSubstring2(string s) {
     return res;
 }
 
-TreeNode *Solution::lowestCommonAncestor(TreeNode *root, TreeNode *p,
-                                         TreeNode *q) {
-    TreeNode *curr = root;
+TreeNode* Solution::lowestCommonAncestor(TreeNode* root, TreeNode* p,
+                                         TreeNode* q) {
+    TreeNode* curr = root;
     int target = p->val;
-    set<TreeNode *> route;
+    set<TreeNode*> route;
     while (curr->val != target) {
         route.insert(curr);
         if (curr->val < target) {
@@ -598,7 +599,7 @@ TreeNode *Solution::lowestCommonAncestor(TreeNode *root, TreeNode *p,
     }
     route.insert(curr);
     curr = root;
-    TreeNode *prev = nullptr;
+    TreeNode* prev = nullptr;
     target = q->val;
     while (curr->val != target) {
         if (!route.count(curr)) {
@@ -617,9 +618,9 @@ TreeNode *Solution::lowestCommonAncestor(TreeNode *root, TreeNode *p,
     return prev;
 }
 
-TreeNode *Solution::lowestCommonAncestor2(TreeNode *root, TreeNode *p,
-                                          TreeNode *q) {
-    TreeNode *curr = root;
+TreeNode* Solution::lowestCommonAncestor2(TreeNode* root, TreeNode* p,
+                                          TreeNode* q) {
+    TreeNode* curr = root;
     while (true) {
         if (curr->val < p->val && curr->val < q->val) {
             curr = curr->right;
@@ -632,20 +633,20 @@ TreeNode *Solution::lowestCommonAncestor2(TreeNode *root, TreeNode *p,
     return curr;
 }
 
-TreeNode *Solution::lowestCommonAncestor3(TreeNode *root, TreeNode *p,
-                                          TreeNode *q) {
+TreeNode* Solution::lowestCommonAncestor3(TreeNode* root, TreeNode* p,
+                                          TreeNode* q) {
     if (root == nullptr || root == p || root == q) {
         return root;
     }
-    auto *left = lowestCommonAncestor3(root->left, p, q);
-    auto *right = lowestCommonAncestor3(root->right, p, q);
+    auto* left = lowestCommonAncestor3(root->left, p, q);
+    auto* right = lowestCommonAncestor3(root->right, p, q);
     if (left != nullptr && right != nullptr) {
         return root;
     }
     return left != nullptr ? left : right;
 }
 
-int Solution::maxDepth(TreeNode *root) {
+int Solution::maxDepth(TreeNode* root) {
     if (root == nullptr) {
         return 0;
     }
@@ -657,18 +658,18 @@ int Solution::maxDepth(TreeNode *root) {
     return depth;
 }
 
-int Solution::maxDepth2(TreeNode *root) {
+int Solution::maxDepth2(TreeNode* root) {
     if (root == nullptr) {
         return 0;
     }
-    queue<TreeNode *> q;
+    queue<TreeNode*> q;
     q.push(root);
     int depth = 0;
     while (!q.empty()) {
         depth++;
         const size_t size = q.size();
         for (size_t i = 0; i < size; i++) {
-            TreeNode *curr = q.front();
+            TreeNode* curr = q.front();
             if (curr->left != nullptr) {
                 q.push(curr->left);
             }
@@ -681,7 +682,7 @@ int Solution::maxDepth2(TreeNode *root) {
     return depth;
 }
 
-int Solution::minimizeArrayValueError(vector<int> &nums) {
+int Solution::minimizeArrayValueError(vector<int>& nums) {
     int minMax = nums[0];
     for (int i = 1; i < nums.size(); i++) {
         if (nums[i] > minMax) {
@@ -703,7 +704,7 @@ int Solution::minimizeArrayValueError(vector<int> &nums) {
     return minMax;
 }
 
-int Solution::minimizeArrayValue(vector<int> &nums) {
+int Solution::minimizeArrayValue(vector<int>& nums) {
     long minMax = nums[0];
     long sum = minMax;
     for (int i = 1; i < nums.size(); i++) {
@@ -719,7 +720,7 @@ int Solution::minimizeArrayValue(vector<int> &nums) {
     return static_cast<int>(minMax);
 }
 
-static void dfs_minScore(int &minDis, vector<bool> &visited, int curr,
+static void dfs_minScore(int& minDis, vector<bool>& visited, int curr,
                          unordered_map<int, vector<pair<int, int>>> edgeMap) {
     visited[curr - 1] = true;
     for (auto neighbor : edgeMap[curr]) {
@@ -734,7 +735,7 @@ static void dfs_minScore(int &minDis, vector<bool> &visited, int curr,
     }
 }
 
-int Solution::minScore(int n, vector<vector<int>> &roads) {
+int Solution::minScore(int n, vector<vector<int>>& roads) {
     // build map for edges
     unordered_map<int, vector<pair<int, int>>> edgeMap;
     for (auto road : roads) {
@@ -815,7 +816,7 @@ bool Solution::isPalindrome2(int x) {
     return y == x;
 }
 
-void pickOne(vector<vector<int>> &result, vector<int> &curr, vector<int> &nums,
+void pickOne(vector<vector<int>>& result, vector<int>& curr, vector<int>& nums,
              int num) {
     if (!contains(curr, num)) {
         curr.push_back(num);
@@ -831,7 +832,7 @@ void pickOne(vector<vector<int>> &result, vector<int> &curr, vector<int> &nums,
     }
 }
 
-vector<vector<int>> Solution::permute(vector<int> &nums) {
+vector<vector<int>> Solution::permute(vector<int>& nums) {
     vector<vector<int>> result;
     vector<int> curr;
     for (auto num : nums) {
@@ -857,15 +858,15 @@ int Solution::reverse(int x) {
     return reversed;
 }
 
-ListNode *Solution::reverseList(ListNode *head) {
+ListNode* Solution::reverseList(ListNode* head) {
     if (head == nullptr) {
         return head;
     }
-    auto *newHead = new ListNode(head->val);
-    ListNode *p = head->next;
+    auto* newHead = new ListNode(head->val);
+    ListNode* p = head->next;
     while (p != nullptr) {
         const int value = p->val;
-        auto *node = new ListNode(value);
+        auto* node = new ListNode(value);
         node->next = newHead;
         newHead = node;
         p = p->next;
@@ -873,11 +874,11 @@ ListNode *Solution::reverseList(ListNode *head) {
     return newHead;
 }
 
-ListNode *Solution::reverseList2(ListNode *head) {
-    ListNode *prev = nullptr;
-    ListNode *curr = head;
+ListNode* Solution::reverseList2(ListNode* head) {
+    ListNode* prev = nullptr;
+    ListNode* curr = head;
     while (curr != nullptr) {
-        ListNode *next = curr->next;
+        ListNode* next = curr->next;
         curr->next = prev;
         prev = curr;
         curr = next;
@@ -885,23 +886,23 @@ ListNode *Solution::reverseList2(ListNode *head) {
     return prev;
 }
 
-ListNode *Solution::reverseBetween(ListNode *head, int left, int right) {
+ListNode* Solution::reverseBetween(ListNode* head, int left, int right) {
     if (head == nullptr || left == right) {
         return head;
     }
     // TODO: Why it can be const?
-    ListNode *leftNode = head;
-    ListNode *leftPrev = nullptr;
+    ListNode* leftNode = head;
+    ListNode* leftPrev = nullptr;
     REPEAT(left - 1) {
         if (i == left - 2) {
             leftPrev = leftNode;
         }
         leftNode = leftNode->next;
     }
-    ListNode *prev = leftNode;
-    ListNode *curr = prev->next;
+    ListNode* prev = leftNode;
+    ListNode* curr = prev->next;
     REPEAT(right - left) {
-        ListNode *next = curr->next;
+        ListNode* next = curr->next;
         curr->next = prev;
         prev = curr;
         curr = next;
@@ -916,7 +917,7 @@ ListNode *Solution::reverseBetween(ListNode *head, int left, int right) {
     return head;
 }
 
-int Solution::searchInsert(vector<int> &nums, int target) {
+int Solution::searchInsert(vector<int>& nums, int target) {
     int i = 0, j = nums.size() - 1;
     while (i < j) {
         const int mid = (i + j) / 2;
@@ -977,7 +978,7 @@ string Solution::simplifyPath(string path) {
 }
 
 string Solution::simplifyPath2(string path) {
-    auto split = [](const string &s, char delim) -> vector<string> {
+    auto split = [](const string& s, char delim) -> vector<string> {
         vector<string> res;
         string cur;
         for (char ch : s) {
@@ -993,7 +994,7 @@ string Solution::simplifyPath2(string path) {
     };
     vector<string> names = split(path, '/');
     vector<string> stack;
-    for (string &name : names) {
+    for (string& name : names) {
         if (name == ".." && !stack.empty()) {
             stack.pop_back();
         } else if (!name.empty() && name != "." && name != "..") {
@@ -1004,14 +1005,14 @@ string Solution::simplifyPath2(string path) {
     if (stack.empty()) {
         res = "/";
     } else {
-        for (string &name : stack) {
+        for (string& name : stack) {
             res += "/" + name;
         }
     }
     return res;
 }
 
-int Solution::singleNonDuplicate(vector<int> &nums) {
+int Solution::singleNonDuplicate(vector<int>& nums) {
     int low = 0, high = nums.size() - 1;
     while (low <= high) {
         int mid = (low + high) / 2;
@@ -1042,7 +1043,7 @@ int Solution::singleNonDuplicate(vector<int> &nums) {
     return nums[low];
 }
 
-static TreeNode *cutRecursively(const vector<int> &nums, int low, int high) {
+static TreeNode* cutRecursively(const vector<int>& nums, int low, int high) {
     if (low == high) {
         return new TreeNode(nums[low]);
     }
@@ -1050,17 +1051,17 @@ static TreeNode *cutRecursively(const vector<int> &nums, int low, int high) {
         return nullptr;
     }
     int mid = (low + high) / 2;
-    auto *curr = new TreeNode(nums[mid]);
+    auto* curr = new TreeNode(nums[mid]);
     curr->left = cutRecursively(nums, low, mid - 1);
     curr->right = cutRecursively(nums, mid + 1, high);
     return curr;
 }
 
-TreeNode *Solution::sortedListToBST(ListNode *head) {
+TreeNode* Solution::sortedListToBST(ListNode* head) {
     if (head == nullptr) {
         return nullptr;
     }
-    const auto *curr = head;
+    const auto* curr = head;
     vector<int> nums;
     while (curr) {
         nums.push_back(curr->val);
@@ -1069,9 +1070,9 @@ TreeNode *Solution::sortedListToBST(ListNode *head) {
     return cutRecursively(nums, 0, nums.size() - 1);
 }
 
-static ListNode *getMedian(ListNode *low, ListNode *high) {
-    ListNode *fast = low;
-    ListNode *slow = low;
+static ListNode* getMedian(ListNode* low, ListNode* high) {
+    ListNode* fast = low;
+    ListNode* slow = low;
     while (fast != high && fast->next != high) {
         fast = fast->next->next;
         slow = slow->next;
@@ -1079,25 +1080,25 @@ static ListNode *getMedian(ListNode *low, ListNode *high) {
     return slow;
 }
 
-static TreeNode *cutRecursive2(ListNode *low, ListNode *high) {
+static TreeNode* cutRecursive2(ListNode* low, ListNode* high) {
     if (low == high) {
         return nullptr;
     }
-    ListNode *mid = getMedian(low, high);
-    TreeNode *root = new TreeNode(mid->val);
+    ListNode* mid = getMedian(low, high);
+    TreeNode* root = new TreeNode(mid->val);
     root->left = cutRecursive2(low, mid);
     root->right = cutRecursive2(mid->next, high);
     return root;
 }
 
-TreeNode *Solution::sortedListToBST2(ListNode *head) {
+TreeNode* Solution::sortedListToBST2(ListNode* head) {
     if (head == nullptr) {
         return nullptr;
     }
     return cutRecursive2(head, nullptr);
 }
 
-vector<int> Solution::successfulPairs(vector<int> &spells, vector<int> &potions,
+vector<int> Solution::successfulPairs(vector<int>& spells, vector<int>& potions,
                                       long long success) {
     vector<int> res;
     for (auto spell : spells) {
@@ -1113,8 +1114,8 @@ vector<int> Solution::successfulPairs(vector<int> &spells, vector<int> &potions,
     return res;
 }
 
-vector<int> Solution::successfulPairs2(vector<int> &spells,
-                                       vector<int> &potions,
+vector<int> Solution::successfulPairs2(vector<int>& spells,
+                                       vector<int>& potions,
                                        long long success) {
     vector<int> res;
     sort(potions.begin(), potions.end());
@@ -1133,8 +1134,8 @@ vector<int> Solution::successfulPairs2(vector<int> &spells,
     return res;
 }
 
-vector<int> Solution::successfulPairs3(vector<int> &spells,
-                                       vector<int> &potions,
+vector<int> Solution::successfulPairs3(vector<int>& spells,
+                                       vector<int>& potions,
                                        long long success) {
     vector<int> res;
     sort(potions.begin(), potions.end());
@@ -1191,8 +1192,8 @@ vector<int> Solution::successfulPairs3(vector<int> &spells,
     return res;
 }
 
-vector<int> Solution::successfulPairs4(vector<int> &spells,
-                                       vector<int> &potions,
+vector<int> Solution::successfulPairs4(vector<int>& spells,
+                                       vector<int>& potions,
                                        long long success) {
     vector<int> res;
     sort(potions.begin(), potions.end());
@@ -1205,7 +1206,7 @@ vector<int> Solution::successfulPairs4(vector<int> &spells,
     return res;
 }
 
-vector<int> Solution::spiralOrder(vector<vector<int>> &matrix) {
+vector<int> Solution::spiralOrder(vector<vector<int>>& matrix) {
     vector<int> res;
     int i = 0, j = 0, k = 0;
     int count = 0;
@@ -1258,7 +1259,7 @@ vector<int> Solution::spiralOrder(vector<vector<int>> &matrix) {
     }
 }
 
-static int next(const vector<int> &nums, int curr) {
+static int next(const vector<int>& nums, int curr) {
     if (curr >= nums.size() - 1) {
         return curr + 1;
     }
@@ -1269,7 +1270,7 @@ static int next(const vector<int> &nums, int curr) {
     return next;
 }
 
-vector<vector<int>> Solution::threeSum(vector<int> &nums) {
+vector<vector<int>> Solution::threeSum(vector<int>& nums) {
     // timeover
     vector<vector<int>> res;
     sort(nums.begin(), nums.end());
@@ -1281,7 +1282,7 @@ vector<vector<int>> Solution::threeSum(vector<int> &nums) {
                     break;
                 }
                 if (sum == 0) {
-                    res.push_back({ nums[i], nums[j], nums[k] });
+                    res.push_back({nums[i], nums[j], nums[k]});
                     break;
                 }
             }
@@ -1290,7 +1291,7 @@ vector<vector<int>> Solution::threeSum(vector<int> &nums) {
     return res;
 }
 
-vector<vector<int>> Solution::threeSum2(vector<int> &nums) {
+vector<vector<int>> Solution::threeSum2(vector<int>& nums) {
     // error
     vector<vector<int>> res;
     sort(nums.begin(), nums.end());
@@ -1299,7 +1300,7 @@ vector<vector<int>> Solution::threeSum2(vector<int> &nums) {
         while (j < k) {
             const int sum = nums[i] + nums[j] + nums[k];
             if (sum == 0) {
-                res.push_back({ nums[i], nums[j], nums[k] });
+                res.push_back({nums[i], nums[j], nums[k]});
                 j++;
                 k--;
             } else if (sum > 0) {
@@ -1312,7 +1313,7 @@ vector<vector<int>> Solution::threeSum2(vector<int> &nums) {
     return res;
 }
 
-vector<vector<int>> Solution::threeSum3(vector<int> &nums) {
+vector<vector<int>> Solution::threeSum3(vector<int>& nums) {
     sort(nums.begin(), nums.end());
     vector<vector<int>> res;
     for (int i = 0; i < nums.size(); i++) {
@@ -1324,7 +1325,7 @@ vector<vector<int>> Solution::threeSum3(vector<int> &nums) {
         while (j < k) {
             const int sum = nums[j] + nums[k];
             if (sum == target) {
-                res.push_back({ nums[i], nums[j], nums[k] });
+                res.push_back({nums[i], nums[j], nums[k]});
                 j++;
                 k--;
                 while (j < k && nums[j] == nums[j - 1]) j++;
@@ -1339,7 +1340,7 @@ vector<vector<int>> Solution::threeSum3(vector<int> &nums) {
     return res;
 }
 
-vector<vector<int>> Solution::threeSum4(vector<int> &nums) {
+vector<vector<int>> Solution::threeSum4(vector<int>& nums) {
     sort(nums.begin(), nums.end());
     vector<vector<int>> res;
     int i = 0;
@@ -1348,7 +1349,7 @@ vector<vector<int>> Solution::threeSum4(vector<int> &nums) {
         while (j < k) {
             int sum = nums[i] + nums[j] + nums[k];
             if (sum == 0) {
-                res.push_back({ nums[i], nums[j], nums[k] });
+                res.push_back({nums[i], nums[j], nums[k]});
                 while (j < k && nums[j] == nums[j + 1]) {
                     j++;
                 }
@@ -1371,19 +1372,19 @@ vector<vector<int>> Solution::threeSum4(vector<int> &nums) {
     return res;
 }
 
-vector<int> Solution::twoSum(vector<int> &nums, int target) {
+vector<int> Solution::twoSum(vector<int>& nums, int target) {
     vector<vector<int>> nums2 = {};
     for (int i = 0; i < nums.size(); i++) {
-        nums2.push_back({ nums[i], i });
+        nums2.push_back({nums[i], i});
     }
     sort(
         nums2.begin(), nums2.end(),
-        [](const vector<int> &a, const vector<int> &b) { return a[0] < b[0]; });
+        [](const vector<int>& a, const vector<int>& b) { return a[0] < b[0]; });
     int i = 0, j = nums.size() - 1;
     while (i < j) {
         const int sum = nums2[i][0] + nums2[j][0];
         if (sum == target) {
-            return { nums2[i][1], nums2[j][1] };
+            return {nums2[i][1], nums2[j][1]};
         }
         if (sum > target)
             j--;
@@ -1393,19 +1394,19 @@ vector<int> Solution::twoSum(vector<int> &nums, int target) {
     return {};
 }
 
-vector<int> Solution::twoSum2(vector<int> &nums, int target) {
+vector<int> Solution::twoSum2(vector<int>& nums, int target) {
     unordered_map<int, int> numToIndex;
     for (int i = 0; i < nums.size(); i++) {
         auto it = numToIndex.find(target - nums[i]);
         if (it != numToIndex.end()) {
-            return { it->second, i };
+            return {it->second, i};
         }
         numToIndex[nums[i]] = i;
     }
     return {};
 }
 
-int Solution::threeSumCloset(vector<int> &nums, int target) {
+int Solution::threeSumCloset(vector<int>& nums, int target) {
     sort(nums.begin(), nums.end());
     int diff = INT_MAX;
     int res = INT_MAX;
@@ -1436,7 +1437,7 @@ int Solution::threeSumCloset(vector<int> &nums, int target) {
     return res;
 }
 
-static int addThis(int sum, TreeNode *curr) {
+static int addThis(int sum, TreeNode* curr) {
     if (curr == nullptr) {
         // In case that root is null
         return sum;
@@ -1455,9 +1456,9 @@ static int addThis(int sum, TreeNode *curr) {
     return res;
 }
 
-int Solution::sumNumbers(TreeNode *root) { return addThis(0, root); }
+int Solution::sumNumbers(TreeNode* root) { return addThis(0, root); }
 
-static bool traverse(TreeNode *curr1, TreeNode *curr2) {
+static bool traverse(TreeNode* curr1, TreeNode* curr2) {
     if (curr1 == nullptr && curr2 == nullptr) {
         return true;
     }
@@ -1474,7 +1475,7 @@ static bool traverse(TreeNode *curr1, TreeNode *curr2) {
            traverse(curr1->right, curr2->left);
 }
 
-bool Solution::isSymmetric(TreeNode *root) {
+bool Solution::isSymmetric(TreeNode* root) {
     if (root == nullptr) {
         return true;
     }
@@ -1497,7 +1498,7 @@ void Solution::Trie::insert(string word) {
         return;
     }
     // find root
-    TrieNode *curr = this->roots[word[0] - 'a'];
+    TrieNode* curr = this->roots[word[0] - 'a'];
     if (curr == nullptr) {
         curr = new TrieNode();
         this->roots[word[0] - 'a'] = curr;
@@ -1505,7 +1506,7 @@ void Solution::Trie::insert(string word) {
     // now curr == root
     for (size_t i = 1; i < word.size(); i++) {
         char ch = word[i];
-        auto &children = curr->children;
+        auto& children = curr->children;
         if (children.find(ch) == children.end()) {
             children[ch] = new TrieNode();
         }
@@ -1517,7 +1518,7 @@ bool Solution::Trie::search(string word) {
     if (word.empty()) {
         return false;
     }
-    TrieNode *curr = this->roots[word[0] - 'a'];
+    TrieNode* curr = this->roots[word[0] - 'a'];
     if (curr == nullptr) {
         return false;
     }
@@ -1536,7 +1537,7 @@ bool Solution::Trie::startsWith(string prefix) {
     if (prefix.empty()) {
         return false;
     }
-    TrieNode *curr = this->roots[prefix[0] - 'a'];
+    TrieNode* curr = this->roots[prefix[0] - 'a'];
     if (curr == nullptr) {
         return false;
     }
@@ -1551,7 +1552,7 @@ bool Solution::Trie::startsWith(string prefix) {
     return true;
 }
 
-long long Solution::countPairs(int n, vector<vector<int>> &edges) {
+long long Solution::countPairs(int n, vector<vector<int>>& edges) {
     const CommonUtil::DFSResponse response = CommonUtil::dfs(n, edges);
     const vector<long long> islandSizes = response.islandSizes;
     return CommonUtil::quickPairSum(islandSizes);
@@ -1601,9 +1602,9 @@ bool Solution::isValid(string s) {
 Solution::WordDictionary::WordDictionary() { this->root = new TrieNode(); }
 
 void Solution::WordDictionary::addWord(string word) {
-    TrieNode *curr = this->root;
+    TrieNode* curr = this->root;
     for (char ch : word) {
-        auto &children = curr->children;
+        auto& children = curr->children;
         if (children.find(ch) == children.end()) {
             children[ch] = new TrieNode();
         }
@@ -1617,12 +1618,12 @@ bool Solution::WordDictionary::search(string word) {
 }
 
 bool Solution::WordDictionary::searchFrom(string word, int index,
-                                          TrieNode *node) {
+                                          TrieNode* node) {
     if (index == word.size()) {
         return node->is_last;
     }
     char ch = word[index];
-    auto &children = node->children;
+    auto& children = node->children;
     if (ch != '.') {
         if (children.find(ch) != children.end() &&
             searchFrom(word, index + 1, children[ch])) {
@@ -1711,7 +1712,7 @@ void Solution::LRUCache::put(int key, int value) {
     }
 }
 
-void Solution::LRUCache2::move_to_tail(Node *node) {
+void Solution::LRUCache2::move_to_tail(Node* node) {
     if (node == nullptr) {
         return;
     }
@@ -1750,7 +1751,7 @@ void Solution::LRUCache2::erase_head() {
         head = nullptr;
         tail = nullptr;
     } else {
-        Node *new_head = head->next;
+        Node* new_head = head->next;
         delete head;
         head = new_head;
         head->prev = nullptr;
@@ -1758,7 +1759,7 @@ void Solution::LRUCache2::erase_head() {
     origin_data.erase(key);
 }
 
-void Solution::LRUCache2::insert_to_tail(Node *node) {
+void Solution::LRUCache2::insert_to_tail(Node* node) {
     if (node == nullptr) {
         return;
     }
@@ -1787,14 +1788,14 @@ int Solution::LRUCache2::get(int key) {
     if (origin_data.empty() || origin_data.find(key) == origin_data.end()) {
         return -1;
     }
-    auto *node = origin_data.at(key);
+    auto* node = origin_data.at(key);
     move_to_tail(node);
     return node->value;
 }
 
 void Solution::LRUCache2::put(int key, int value) {
     if (origin_data.find(key) == origin_data.end()) {
-        Node *node = new Node(key, value);
+        Node* node = new Node(key, value);
         node->prev = tail;
         node->next = nullptr;
         if (origin_data.size() >= max_size) {
@@ -1802,13 +1803,13 @@ void Solution::LRUCache2::put(int key, int value) {
         }
         insert_to_tail(node);
     } else {
-        Node *node = origin_data.at(key);
+        Node* node = origin_data.at(key);
         node->value = value;
         move_to_tail(node);
     }
 }
 
-void insertToTail(ListNode **head, ListNode **tail, ListNode *node) {
+void insertToTail(ListNode** head, ListNode** tail, ListNode* node) {
     if (*head == nullptr || *tail == nullptr) {
         *head = node;
         *tail = node;
@@ -1818,13 +1819,13 @@ void insertToTail(ListNode **head, ListNode **tail, ListNode *node) {
     (*tail) = node;
 }
 
-ListNode *Solution::mergeTwoLists(ListNode *list1, ListNode *list2) {
-    ListNode *p1 = list1;
-    ListNode *p2 = list2;
-    ListNode *head = nullptr;
-    ListNode *tail = nullptr;
+ListNode* Solution::mergeTwoLists(ListNode* list1, ListNode* list2) {
+    ListNode* p1 = list1;
+    ListNode* p2 = list2;
+    ListNode* head = nullptr;
+    ListNode* tail = nullptr;
     while (true) {
-        ListNode *inserted;
+        ListNode* inserted;
         if (p1 == nullptr && p2 != nullptr) {
             inserted = p2;
         } else if (p1 != nullptr && p2 == nullptr) {
@@ -1845,15 +1846,15 @@ ListNode *Solution::mergeTwoLists(ListNode *list1, ListNode *list2) {
     return head;
 }
 
-void extractNode(ListNode *prev, ListNode *node) {
+void extractNode(ListNode* prev, ListNode* node) {
     prev->next = node->next;
     node->next = nullptr;
 }
 
-ListNode *insertOneNode(ListNode *dummyHead, ListNode *lastNode,
-                        ListNode *node) {
-    ListNode *p = dummyHead->next;
-    ListNode *prev = dummyHead;
+ListNode* insertOneNode(ListNode* dummyHead, ListNode* lastNode,
+                        ListNode* node) {
+    ListNode* p = dummyHead->next;
+    ListNode* prev = dummyHead;
     // try insert before p
     while (p != nullptr && p != lastNode) {
         if (p->val >= node->val) {
@@ -1877,14 +1878,14 @@ ListNode *insertOneNode(ListNode *dummyHead, ListNode *lastNode,
     return node;
 }
 
-ListNode *Solution::insertionSortList(ListNode *head) {
+ListNode* Solution::insertionSortList(ListNode* head) {
     if (head == nullptr || head->next == nullptr) {
         return head;
     }
     ListNode dummyHead(-1);
     dummyHead.next = head;
-    ListNode *end = head;
-    ListNode *node = end->next;
+    ListNode* end = head;
+    ListNode* node = end->next;
     while (node != nullptr) {
         extractNode(end, node);
         end = insertOneNode(&dummyHead, end, node);
@@ -1893,12 +1894,12 @@ ListNode *Solution::insertionSortList(ListNode *head) {
     return dummyHead.next;
 }
 
-ListNode *findMiddle(ListNode *head) {
+ListNode* findMiddle(ListNode* head) {
     if (head == nullptr || head->next == nullptr) {
         return head;
     }
-    ListNode *slow = head;
-    ListNode *fast = head;
+    ListNode* slow = head;
+    ListNode* fast = head;
     while (fast != nullptr && fast->next != nullptr) {
         slow = slow->next;
         fast = fast->next->next;
@@ -1909,39 +1910,39 @@ ListNode *findMiddle(ListNode *head) {
 /**
  * assert head has at least two nodes
  */
-pair<ListNode *, ListNode *> split(ListNode *head) {
-    ListNode *mid = findMiddle(head);
+pair<ListNode*, ListNode*> split(ListNode* head) {
+    ListNode* mid = findMiddle(head);
     if (mid->next == nullptr) {
         // 2 nodes
         head->next = nullptr;
-        return { head, mid };
+        return {head, mid};
     }
-    ListNode *head2 = mid->next;
+    ListNode* head2 = mid->next;
     mid->next = nullptr;
-    return { head, head2 };  // head2 must not be null
+    return {head, head2};  // head2 must not be null
 }
 
-ListNode *mergeSort(ListNode *head) {
+ListNode* mergeSort(ListNode* head) {
     if (head == nullptr || head->next == nullptr) {
         return head;
     }
     // at least has two nodes
     // split to two sub lists
     auto [head1, head2] = split(head);
-    ListNode *list1 = mergeSort(head1);
-    ListNode *list2 = mergeSort(head2);
+    ListNode* list1 = mergeSort(head1);
+    ListNode* list2 = mergeSort(head2);
     return Solution::mergeTwoLists(list1, list2);
 }
 
-ListNode *Solution::sortList(ListNode *head) { return mergeSort(head); }
+ListNode* Solution::sortList(ListNode* head) { return mergeSort(head); }
 
-pair<ListNode *, ListNode *> mergeLists(ListNode *list1, ListNode *list2) {
-    ListNode *p1 = list1;
-    ListNode *p2 = list2;
-    ListNode *head = nullptr;
-    ListNode *tail = nullptr;
+pair<ListNode*, ListNode*> mergeLists(ListNode* list1, ListNode* list2) {
+    ListNode* p1 = list1;
+    ListNode* p2 = list2;
+    ListNode* head = nullptr;
+    ListNode* tail = nullptr;
     while (true) {
-        ListNode *inserted;
+        ListNode* inserted;
         if (p1 == nullptr && p2 != nullptr) {
             inserted = p2;
         } else if (p1 != nullptr && p2 == nullptr) {
@@ -1959,24 +1960,24 @@ pair<ListNode *, ListNode *> mergeLists(ListNode *list1, ListNode *list2) {
             p2 = p2->next;
         }
     }
-    return { head, tail };
+    return {head, tail};
 }
 
-ListNode *Solution::sortList2(ListNode *head) {
+ListNode* Solution::sortList2(ListNode* head) {
     if (head == nullptr || head->next == nullptr) {
         return head;
     }
     int len = 0;
-    for (ListNode *p = head; p != nullptr; p = p->next) {
+    for (ListNode* p = head; p != nullptr; p = p->next) {
         len++;
     }
     ListNode dummyHead(-1, head);
     for (int step = 1; step < len; step *= 2) {
         // split the whole list into ordered sub lists with length of [step]
-        ListNode *curr = dummyHead.next;
-        ListNode *prev = &dummyHead;
+        ListNode* curr = dummyHead.next;
+        ListNode* prev = &dummyHead;
         while (curr != nullptr) {
-            ListNode *left = curr;
+            ListNode* left = curr;
             int leftSize = 0;
             // move node for step - 1 times,
             // thus has [step] nodes
@@ -1988,7 +1989,7 @@ ListNode *Solution::sortList2(ListNode *head) {
                 prev->next = left;
                 break;
             }
-            ListNode *right = curr->next;
+            ListNode* right = curr->next;
             curr->next = nullptr;
             curr = right;
             int rightSize = 0;
@@ -1996,7 +1997,7 @@ ListNode *Solution::sortList2(ListNode *head) {
                 rightSize++;
                 curr = curr->next;
             }
-            ListNode *next;
+            ListNode* next;
             if (curr == nullptr) {
                 next = nullptr;
             } else {
@@ -2012,7 +2013,7 @@ ListNode *Solution::sortList2(ListNode *head) {
     return dummyHead.next;
 }
 
-int Solution::findKthLargest(vector<int> &nums, int k) {
+int Solution::findKthLargest(vector<int>& nums, int k) {
     MaxHeap heap(nums);
     for (int i = 1; i < k; i++) {
         heap.pop();
@@ -2020,7 +2021,7 @@ int Solution::findKthLargest(vector<int> &nums, int k) {
     return heap.top();
 }
 
-int partitionForQuickSelect(vector<int> &nums, int low, int high) {
+int partitionForQuickSelect(vector<int>& nums, int low, int high) {
     int pivot_index = low + rand() % (high - low + 1);
     swap(nums[low], nums[pivot_index]);  // 随机化
     int pivot = nums[low];
@@ -2037,7 +2038,7 @@ int partitionForQuickSelect(vector<int> &nums, int low, int high) {
     return low;
 }
 
-void quickSelect(vector<int> &nums, int k, int low, int high) {
+void quickSelect(vector<int>& nums, int k, int low, int high) {
     if (low >= high) {
         return;
     }
@@ -2052,12 +2053,12 @@ void quickSelect(vector<int> &nums, int k, int low, int high) {
     }
 }
 
-int Solution::findKthLargest2(vector<int> &nums, int k) {
+int Solution::findKthLargest2(vector<int>& nums, int k) {
     quickSelect(nums, k, 0, nums.size() - 1);
     return nums[nums.size() - k];
 }
 
-int Solution::maxSubArray(vector<int> &nums) {
+int Solution::maxSubArray(vector<int>& nums) {
     if (nums.size() == 1) {
         return nums.at(0);
     }
@@ -2078,7 +2079,7 @@ int Solution::maxSubArray(vector<int> &nums) {
     return max;
 }
 
-int partition(vector<int> &nums, int left, int right) {
+int partition(vector<int>& nums, int left, int right) {
     int pivot = nums[left];
     while (left < right) {
         while (left < right && nums[right] >= pivot) {
@@ -2097,7 +2098,7 @@ int partition(vector<int> &nums, int left, int right) {
     return left;
 }
 
-void quickSort(vector<int> &nums, int left, int right) {
+void quickSort(vector<int>& nums, int left, int right) {
     if (left >= right) {
         // 1 or 0 elem, return
         return;
@@ -2107,16 +2108,17 @@ void quickSort(vector<int> &nums, int left, int right) {
     quickSort(nums, pivot_index + 1, right);
 }
 
-vector<int> Solution::sortArray(vector<int> &nums) {
+vector<int> Solution::sortArray(vector<int>& nums) {
     quickSort(nums, 0, nums.size() - 1);
     return nums;
 }
 
-inline bool isSubarraySorted(vector<int> &nums, int first_index, int last_index) {
+inline bool isSubarraySorted(vector<int>& nums, int first_index,
+                             int last_index) {
     return nums[last_index] >= nums[first_index];
 }
 
-int Solution::search(vector<int> &nums, int target) {
+int Solution::search(vector<int>& nums, int target) {
     int left = 0, right = nums.size() - 1;
     while (left < right) {
         int mid = (left + right) / 2;
@@ -2152,4 +2154,93 @@ int Solution::search(vector<int> &nums, int target) {
         return nums[left] == target ? left : -1;
     }
     return -1;
+}
+
+bool isLandIndexConnected(int thisX, int thisY, int otherX, int otherY) {
+    if (thisX == otherX) {
+        return abs(thisY - otherY) == 1;
+    } else if (thisY == otherY) {
+        return abs(thisX - otherX) == 1;
+    }
+    return false;
+}
+
+/**
+ * return if grid[thisX][thisY] and grid[otherX][otherY] is connected
+ */
+bool isLandConnected(const vector<vector<char>>& grid, int thisX, int thisY,
+                     int otherX, int otherY) {
+    if (grid.empty()) {
+        return false;
+    }
+    const int width = grid[0].size();
+    const int height = grid.size();
+    if (thisX < 0 || thisY < 0 || otherX < 0 || otherY < 0 || thisX >= height ||
+        thisY >= width || otherX >= height || otherY >= width) {
+        // overflow case
+        return false;
+    }
+    const int thisChar = grid[thisX][thisY];
+    const int otherChar = grid[otherX][otherY];
+    return thisChar == '1' && thisChar == otherChar &&
+           isLandIndexConnected(thisX, thisY, otherX, otherY);
+}
+
+vector<vector<int>> findConnectedLands(const vector<vector<char>>& grid,
+                                       int startX, int startY) {
+    vector<vector<int>> res;
+    int upX = startX - 1;
+    int upY = startY;
+    int downX = startX + 1;
+    int downY = startY;
+    int leftX = startX;
+    int leftY = startY - 1;
+    int rightX = startX;
+    int rightY = startY + 1;
+    if (isLandConnected(grid, startX, startY, upX, upY)) {
+        res.push_back({upX, upY});
+    }
+    if (isLandConnected(grid, startX, startY, downX, downY)) {
+        res.push_back({downX, downY});
+    }
+    if (isLandConnected(grid, startX, startY, leftX, leftY)) {
+        res.push_back({leftX, leftY});
+    }
+    if (isLandConnected(grid, startX, startY, rightX, rightY)) {
+        res.push_back({rightX, rightY});
+    }
+    return res;
+}
+
+void dfsInIslands(const vector<vector<char>>& grid,
+                  vector<vector<bool>>& visited, int startX, int startY) {
+    if (visited[startX][startY] || grid[startX][startY] != '1') {
+        return;
+    }
+    visited[startX][startY] = true;
+    vector<vector<int>> connectedLands =
+        findConnectedLands(grid, startX, startY);
+    for (auto land : connectedLands) {
+        dfsInIslands(grid, visited, land[0], land[1]);
+    }
+}
+
+int Solution::numIslands(vector<vector<char>>& grid) {
+    if (grid.empty()) {
+        return 0;
+    }
+    const int width = grid[0].size();
+    const int height = grid.size();
+    int num = 0;
+    vector<vector<bool>> visited(grid.size(),
+                                 vector<bool>(grid[0].size(), false));
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            if (grid[i][j] == '1' && !visited[i][j]) {
+                dfsInIslands(grid, visited, i, j);
+                num++;
+            }
+        }
+    }
+    return num;
 }

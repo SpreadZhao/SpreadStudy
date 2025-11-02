@@ -369,6 +369,21 @@ void SearchInSortedArray() {
     cout << Solution::search(nums, 2);
 }
 
+void NumberOfIslands() {
+    vector<vector<char>> grid = {
+        { '1', '1', '1', '1', '0' },
+        { '1', '1', '0', '1', '0' },
+        { '1', '1', '0', '0', '0' },
+        { '0', '0', '0', '0', '0' }
+    };
+    vector<vector<char>> grid2 = {
+        { '1', '1', '1' },
+        { '0', '1', '0' },
+        { '1', '1', '1' }
+    };
+    cout << Solution::numIslands(grid2);
+}
+
 int main() {
     // AddBinary();
     //    AccountsMerge();
@@ -415,6 +430,7 @@ int main() {
     // TestMaxHeap();
     // KthLargest();
     // MaximumSubarray();
-    SearchInSortedArray();
+    // SearchInSortedArray();
+    NumberOfIslands();
     return 0;
 }

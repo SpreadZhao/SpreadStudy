@@ -246,6 +246,8 @@ class Solution {
     static vector<int> sortArray(vector<int> &nums);
     // https://leetcode.cn/problems/search-in-rotated-sorted-array/description/
     static int search(vector<int> &nums, int target);
+    // https://leetcode.cn/problems/number-of-islands/description
+    static int numIslands(vector<vector<char>> &grid);
     
 };
 
