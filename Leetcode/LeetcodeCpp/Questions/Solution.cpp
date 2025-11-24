@@ -2244,3 +2244,31 @@ int Solution::numIslands(vector<vector<char>> &grid) {
     }
     return num;
 }
+
+ListNode *Solution::swapPairs(ListNode *head) {
+    if (head == nullptr) {
+        return nullptr;
+    }
+    ListNode *new_head = head->next == nullptr ? head : head->next;
+    ListNode *p1 = head;
+    ListNode *p1_prev = nullptr;
+    ListNode *p2 = head->next;
+    ListNode *p2_next = p2 == nullptr ? nullptr : p2->next;
+    while (true) {
+        if (p1 != nullptr && p2 != nullptr) {
+            if (p1_prev != nullptr) {
+                p1_prev->next = p2;
+            }
+            p2->next = p1;
+            p1->next = p2_next;
+            p1_prev = p1;
+            p1 = p2_next;
+            p2 = p1 == nullptr ? nullptr : p1->next;
+            p2_next = p2 == nullptr ? nullptr : p2->next;
+        } else {
+            // p2 == nullptr
+            break;
+        }
+    }
+    return new_head;
+}

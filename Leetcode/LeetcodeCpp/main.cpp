@@ -384,6 +384,11 @@ void NumberOfIslands() {
     cout << Solution::numIslands(grid2);
 }
 
+void SwapNodesInPairs() {
+    ListNode *list = CommonUtil::newList({1, 2, 3, 4});
+    CommonUtil::printLinkedList(Solution::swapPairs(list));
+}
+
 int main() {
     // AddBinary();
     //    AccountsMerge();
@@ -431,6 +436,7 @@ int main() {
     // KthLargest();
     // MaximumSubarray();
     // SearchInSortedArray();
-    NumberOfIslands();
+    // NumberOfIslands();
+    SwapNodesInPairs();
     return 0;
 }

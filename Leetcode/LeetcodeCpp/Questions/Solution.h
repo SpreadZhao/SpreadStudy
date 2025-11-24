@@ -248,6 +248,8 @@ class Solution {
     static int search(vector<int> &nums, int target);
     // https://leetcode.cn/problems/number-of-islands/description
     static int numIslands(vector<vector<char>> &grid);
+    // https://leetcode.cn/problems/swap-nodes-in-pairs/description
+    static ListNode *swapPairs(ListNode *head);
     
 };
 
