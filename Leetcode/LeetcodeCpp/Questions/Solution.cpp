@@ -2272,3 +2272,62 @@ ListNode *Solution::swapPairs(ListNode *head) {
     }
     return new_head;
 }
+
+ListNode *Solution::swapNodes(ListNode *head, int k) {
+    ListNode *p1 = head;
+    ListNode *p1_prev = nullptr;
+    ListNode *p1_next = nullptr;
+    REPEAT(k - 1) {
+        p1_prev = p1;
+        p1 = p1->next;
+    }
+    p1_next = p1->next;
+    ListNode *tmp = p1;
+    ListNode *p2 = head;
+    ListNode *p2_prev = nullptr;
+    ListNode *p2_next = nullptr;
+    while (tmp->next != nullptr) {
+        tmp = tmp->next;
+        p2_prev = p2;
+        p2 = p2->next;
+    }
+    p2_next = p2->next;
+    ListNode *newhead = head;
+    if (p1 == p2) {
+        return newhead;
+    }
+    if (p1->next == p2) {
+        if (p1_prev != nullptr) {
+            p1_prev->next = p2;
+        } else {
+            newhead = p2;
+        }
+        p2->next = p1;
+        p1->next = p2_next;
+        return newhead;
+    }
+    if (p2->next == p1) {
+        if (p2_prev != nullptr) {
+            p2_prev->next = p1;
+        } else {
+            newhead = p1;
+        }
+        p1->next = p2;
+        p2->next = p1_next;
+        return newhead;
+    }
+    if (p1_prev != nullptr) {
+        p1_prev->next = p2;
+    } else {
+        // swap first and last
+        newhead = p2;
+    }
+    p2->next = p1_next;
+    if (p2_prev != nullptr) {
+        p2_prev->next = p1;
+    } else {
+        newhead = p1;
+    }
+    p1->next = p2_next;
+    return newhead;
+}

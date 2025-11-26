@@ -250,6 +250,8 @@ class Solution {
     static int numIslands(vector<vector<char>> &grid);
     // https://leetcode.cn/problems/swap-nodes-in-pairs/description
     static ListNode *swapPairs(ListNode *head);
+    // https://leetcode.cn/problems/swapping-nodes-in-a-linked-list/description/
+    static ListNode *swapNodes(ListNode *head, int k);
     
 };
 

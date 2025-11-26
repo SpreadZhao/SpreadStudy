@@ -389,6 +389,12 @@ void SwapNodesInPairs() {
     CommonUtil::printLinkedList(Solution::swapPairs(list));
 }
 
+void SwapNodes() {
+    ListNode *list = CommonUtil::newList({100,24,24,36,18,52,95,61,54,88,86,79,11,1,31,26});
+    int k = 16;
+    CommonUtil::printLinkedList(Solution::swapNodes(list, k));
+}
+
 int main() {
     // AddBinary();
     //    AccountsMerge();
@@ -437,6 +443,7 @@ int main() {
     // MaximumSubarray();
     // SearchInSortedArray();
     // NumberOfIslands();
-    SwapNodesInPairs();
+    // SwapNodesInPairs();
+    SwapNodes();
     return 0;
 }
