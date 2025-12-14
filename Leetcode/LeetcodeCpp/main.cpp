@@ -395,6 +395,11 @@ void SwapNodes() {
     CommonUtil::printLinkedList(Solution::swapNodes(list, k));
 }
 
+void ReverseEven() {
+    ListNode *head = CommonUtil::newList({5, 2, 6, 3, 9, 1, 7, 3, 8, 4});
+    CommonUtil::printLinkedList(Solution::reverseEvenLengthGroups(head));
+}
+
 int main() {
     // AddBinary();
     //    AccountsMerge();
@@ -444,6 +449,7 @@ int main() {
     // SearchInSortedArray();
     // NumberOfIslands();
     // SwapNodesInPairs();
-    SwapNodes();
+    // SwapNodes();
+    ReverseEven();
     return 0;
 }

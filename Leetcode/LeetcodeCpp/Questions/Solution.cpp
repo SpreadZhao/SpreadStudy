@@ -2331,3 +2331,63 @@ ListNode *Solution::swapNodes(ListNode *head, int k) {
     p1->next = p2_next;
     return newhead;
 }
+
+void reverseSubList(ListNode *start_prev, ListNode *start, ListNode *end) {
+    if ((start_prev != nullptr && start_prev->next != start) ||
+        start == nullptr || end == nullptr) {
+        return;
+    }
+    ListNode *end_next = end->next;
+    // extract the sub list
+    if (start_prev != nullptr) {
+        start_prev->next = nullptr;
+    }
+    end->next = nullptr;
+
+    // reverse sublist
+    ListNode *p_prev = nullptr;
+    ListNode *p = start;
+    ListNode *p_next = start->next;
+    while (p != nullptr) {
+        p->next = p_prev;
+        p_prev = p;
+        p = p_next;
+        if (p_next != nullptr) {
+            p_next = p_next->next;
+        }
+    }
+
+    // concat
+    if (start_prev != nullptr) {
+        start_prev->next = end;
+    }
+    start->next = end_next;
+}
+
+ListNode *Solution::reverseEvenLengthGroups(ListNode *head) {
+    int group_count = 1;
+    ListNode *p = head;
+    ListNode *group_start_prev = nullptr;
+    while (p != nullptr) {
+        ListNode *group_start = p;
+        ListNode *group_last = p;
+        int group_real_count = 0;
+        for (int i = 0; i < group_count; i++) {
+            if (p != nullptr) {
+                group_last = p;
+                p = p->next;
+                group_real_count++;
+            } else {
+                break;
+            }
+        }
+        if (group_real_count % 2 == 0) {
+            reverseSubList(group_start_prev, group_start, group_last);
+            group_start_prev = group_start;
+        } else {
+            group_start_prev = group_last;
+        }
+        group_count++;
+    }
+    return head;
+}

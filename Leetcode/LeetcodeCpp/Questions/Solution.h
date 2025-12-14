@@ -252,7 +252,8 @@ class Solution {
     static ListNode *swapPairs(ListNode *head);
     // https://leetcode.cn/problems/swapping-nodes-in-a-linked-list/description/
     static ListNode *swapNodes(ListNode *head, int k);
-    
+    // https://leetcode.cn/problems/reverse-nodes-in-even-length-groups/description/
+    static ListNode *reverseEvenLengthGroups(ListNode *head);
 };
 
 #endif  // LEETCODECPP_SOLUTION_H
