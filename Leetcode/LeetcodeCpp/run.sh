@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -e  # 遇到错误就退出
 set -o pipefail
