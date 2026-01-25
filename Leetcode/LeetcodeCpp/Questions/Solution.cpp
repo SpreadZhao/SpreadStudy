@@ -2391,3 +2391,33 @@ ListNode *Solution::reverseEvenLengthGroups(ListNode *head) {
     }
     return head;
 }
+
+ListNode *Solution::reverseKGroup(ListNode *head, int k) {
+    ListNode *group_start_prev = nullptr;
+    ListNode *group_start = head;
+    ListNode *newhead = head;
+    bool first_reverse = true;
+    while (true) {
+        if (group_start == nullptr) {
+            return newhead;
+        }
+        ListNode *group_end = group_start;
+        REPEAT(k - 1) {
+            if (group_end == nullptr) {
+                return newhead;
+            }
+            group_end = group_end->next;
+        }
+        if (group_end == nullptr) {
+            return newhead;
+        }
+        // now we have ensured that group_end point to a non-null node
+        reverseSubList(group_start_prev, group_start, group_end);
+        if (first_reverse) {
+            first_reverse = false;
+            newhead = group_end;
+        }
+        group_start_prev = group_start;
+        group_start = group_start->next;
+    }
+}

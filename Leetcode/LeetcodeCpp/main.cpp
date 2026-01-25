@@ -400,6 +400,11 @@ void ReverseEven() {
     CommonUtil::printLinkedList(Solution::reverseEvenLengthGroups(head));
 }
 
+void ReverseKGroup() {
+    ListNode *head = CommonUtil::newList({1, 2, 3, 4, 5});
+    CommonUtil::printLinkedList(Solution::reverseKGroup(head, 3));
+}
+
 int main() {
     // AddBinary();
     //    AccountsMerge();
@@ -450,6 +455,7 @@ int main() {
     // NumberOfIslands();
     // SwapNodesInPairs();
     // SwapNodes();
-    ReverseEven();
+    // ReverseEven();
+    ReverseKGroup();
     return 0;
 }

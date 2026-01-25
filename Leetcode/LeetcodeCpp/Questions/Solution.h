@@ -254,6 +254,8 @@ class Solution {
     static ListNode *swapNodes(ListNode *head, int k);
     // https://leetcode.cn/problems/reverse-nodes-in-even-length-groups/description/
     static ListNode *reverseEvenLengthGroups(ListNode *head);
+    // https://leetcode.cn/problems/reverse-nodes-in-k-group/description/
+    static ListNode *reverseKGroup(ListNode *head, int k);
 };
 
 #endif  // LEETCODECPP_SOLUTION_H
