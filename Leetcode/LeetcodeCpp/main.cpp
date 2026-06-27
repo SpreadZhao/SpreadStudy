@@ -405,6 +405,13 @@ void ReverseKGroup() {
     CommonUtil::printLinkedList(Solution::reverseKGroup(head, 3));
 }
 
+void Hanoi() {
+    vector<string> steps = Solution::hanoi(3);
+    for (const string &step : steps) {
+        cout << step << endl;
+    }
+}
+
 int main() {
     // AddBinary();
     //    AccountsMerge();
@@ -456,6 +463,7 @@ int main() {
     // SwapNodesInPairs();
     // SwapNodes();
     // ReverseEven();
-    ReverseKGroup();
+    // ReverseKGroup();
+    Hanoi();
     return 0;
 }

@@ -256,6 +256,7 @@ class Solution {
     static ListNode *reverseEvenLengthGroups(ListNode *head);
     // https://leetcode.cn/problems/reverse-nodes-in-k-group/description/
     static ListNode *reverseKGroup(ListNode *head, int k);
+    static vector<string> hanoi(int n);
 };
 
 #endif  // LEETCODECPP_SOLUTION_H

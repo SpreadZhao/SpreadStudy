@@ -2421,3 +2421,9 @@ ListNode *Solution::reverseKGroup(ListNode *head, int k) {
         group_start = group_start->next;
     }
 }
+
+vector<string> Solution::hanoi(int n) {
+    vector<string> steps;
+    // TODO: move n disks from A to C, using B as the helper pillar.
+    return steps;
+}
